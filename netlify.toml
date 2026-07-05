@@ -1,0 +1,24 @@
+# Deploy the built site from preview/ (same as localhost:7777 via server.js).
+# The lead form posts to /api/lead → netlify/functions/lead.js
+
+[build]
+  publish = "preview"
+  functions = "netlify/functions"
+  command = "node build.js"
+
+[functions]
+  node_bundler = "esbuild"
+
+[[redirects]]
+  from = "/api/lead"
+  to = "/.netlify/functions/lead"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), camera=(), microphone=(), interest-cohort=()"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data:; media-src 'self' https://d8j0ntlcm91z4.cloudfront.net https://assets.mixkit.co https://videos.pexels.com; connect-src 'self' https://unpkg.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self'"

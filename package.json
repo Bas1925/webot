@@ -1,0 +1,14 @@
+{
+  "name": "webot-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Webot agency site + lead-capture backend (MongoDB)",
+  "scripts": {
+    "start": "node server.js",
+    "build": "node build.js"
+  },
+  "dependencies": {
+    "mongodb": "^6.12.0",
+    "nodemailer": "^6.9.16"
+  }
+}

@@ -1,0 +1,66 @@
+NEURALKINETICS — PAGE 2 HERO VIDEO BRIEF
+=======================================
+
+DROP-IN FILE (after render):
+  preview/assets/robot-head.mp4
+
+SPECS:
+  - Duration: 6 seconds
+  - Seamless loop (ending frame matches beginning)
+  - 4K HDR preferred (1080p minimum)
+  - 60fps
+  - Pure white infinity studio background
+  - Head only — no body, hands, pedestal, text, or logos
+
+REFERENCE IMAGE:
+  Place your uploaded robot head reference here:
+  preview/assets/robot-head-reference.png
+  (Use as image-to-video / style reference in Luma, Runway, Sora, etc.)
+
+---
+
+PROMPT
+
+Reference Image: Use the uploaded robot head as the exact design reference. Preserve the same proportions, facial geometry, white matte shell, glossy black visor, blue LED eyes, and premium industrial design. Do not redesign or stylize it.
+
+A close-up cinematic hero shot of a futuristic minimalist humanoid robot head centered in frame against a seamless pure white infinity studio background. The robot features smooth matte white composite panels, polished piano-black visor, subtle blue illuminated eyes, precision-machined mechanical seams, premium industrial detailing, and photorealistic materials.
+
+The shot begins with the robot looking slightly downward. Over the course of the shot, the camera performs a slow, elegant dolly-in while the robot smoothly raises its head and makes direct eye contact with the viewer. The motion is subtle, confident, and highly refined, with tiny natural servo corrections and micro-movements around the neck joints.
+
+Soft diffused studio lighting with large overhead softboxes creates gentle reflections across the glossy visor while maintaining clean white highlights on the matte shell. High-end commercial lighting with realistic global illumination, ray-traced reflections, soft contact shadows, and premium product-photography quality.
+
+Mood: futuristic, intelligent, trustworthy, premium, minimal.
+
+Camera: 85mm lens, shallow depth of field, smooth cinematic dolly-in, perfectly stabilized.
+
+Composition: centered, symmetrical, luxury technology commercial aesthetic similar to Apple, Nothing, or Figure AI product films.
+
+No text, no logos, no background objects, no floating particles, no hands, no body, no pedestal.
+
+Ultra-photorealistic CGI, 4K HDR, 60fps, physically based rendering, cinematic color grading, extremely detailed materials, clean white environment.
+
+Duration: 6 seconds.
+
+Ending frame should match the beginning closely for a seamless looping animation.
+
+---
+
+NEGATIVE PROMPT
+
+Cartoon, anime, low poly, exaggerated facial features, humans, body, shoulders, hands, cables, wires, logos, text, watermark, dirt, scratches, excessive glow, blinking lights, flickering, camera shake, busy background, dark background, noise, grain, distortion, asymmetrical face, low quality, unrealistic reflections, oversaturated colors, motion blur, extra mechanical parts, sci-fi clutter.
+
+---
+
+TOOL SETTINGS (recommended)
+
+Luma / Runway / Sora:
+  - Mode: Image-to-Video (attach robot-head-reference.png)
+  - Aspect ratio: 1:1 (matches framed canvas on Page 2)
+  - Duration: 6s
+  - Loop: enable if available; otherwise trim in post so first/last frames align
+  - Motion strength: low–medium (subtle head raise + dolly-in only)
+
+After export:
+  1. Save as preview/assets/robot-head.mp4
+  2. Refresh http://localhost:7777/neuralkinetics.html
+  3. Scroll to "The Neural Core Architecture" — video appears in the framed canvas

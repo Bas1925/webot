@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Webot — What you get at every tier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink:      #14151A;
+    --ink-2:    #2c2f35;
+    --muted:    #6B6F76;
+    --faint:    #9a9ea6;
+    --line:     #ECEAE3;
+    --line-2:   #F0EFEA;
+    --cream:    #FBFAF6;
+    --cream-2:  #F4F2EC;
+    --white:    #FFFFFF;
+
+    --blue:  #3B4FFF;
+    --blue-d:#2638f0;
+    --coral: #FF6B57;
+    --green: #0f6b4f;
+    --green-2:#19a87a;
+    --amber: #FFC542;
+
+    --r-sm: 10px;
+    --r:    16px;
+    --r-lg: 22px;
+    --sh-sm: 0 8px 24px -14px rgba(20,21,26,.22);
+    --sh:    0 18px 50px -26px rgba(20,21,26,.28);
+    --sh-lg: 0 34px 80px -34px rgba(20,21,26,.36);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; color: var(--ink);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background:
+      radial-gradient(1000px 560px at 82% -6%, rgba(59,79,255,.06), transparent 60%),
+      radial-gradient(760px 480px at 6% 8%, rgba(255,107,87,.05), transparent 60%),
+      var(--cream);
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: clamp(52px,8vh,104px) clamp(18px,5vw,44px) clamp(60px,9vh,120px); }
+
+  /* ---------- header ---------- */
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 12.5px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--blue);
+    background: rgba(59,79,255,.08); padding: 7px 14px; border-radius: 999px;
+  }
+  .eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green-2); box-shadow: 0 0 0 3px rgba(25,168,122,.18); }
+  .head { text-align: center; max-width: 720px; margin: 0 auto; }
+  h1 { font-family: 'Sora', sans-serif; font-weight: 800; font-size: clamp(30px,5.2vw,54px); line-height: 1.05; letter-spacing: -.03em; margin: 20px 0 0; }
+  h1 .g { background: linear-gradient(100deg,var(--blue),var(--coral)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .sub { color: var(--muted); font-size: clamp(15px,2vw,18px); line-height: 1.6; margin: 18px auto 0; max-width: 600px; }
+
+  /* ---------- tier row ---------- */
+  .rows { margin-top: clamp(40px,6vh,72px); display: flex; flex-direction: column; gap: clamp(26px,4vh,44px); }
+  .row {
+    display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(22px,4vw,52px); align-items: center;
+    background: var(--white); border: 1px solid var(--line); border-radius: var(--r-lg);
+    padding: clamp(22px,3vw,38px); box-shadow: var(--sh);
+    transition: transform .45s cubic-bezier(.2,.7,.2,1), box-shadow .45s, border-color .45s;
+  }
+  .row:hover { transform: translateY(-4px); box-shadow: var(--sh-lg); border-color: #E4E1D8; }
+  .row.flip { grid-template-columns: 1.15fr 0.85fr; }
+  .row.flip .info { order: 2; }
+  .row.featured { border-color: rgba(255,107,87,.3); }
+  @media (max-width: 900px) { .row, .row.flip { grid-template-columns: 1fr; } .row.flip .info { order: 0; } }
+
+  .phase { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+  .phase .pip { width: 20px; height: 20px; border-radius: 6px; display: grid; place-items: center; color: #fff; font-size: 11px; }
+  .plan { font-family: 'Sora', sans-serif; font-weight: 800; font-size: clamp(24px,3vw,32px); letter-spacing: -.02em; margin: 12px 0 0; }
+  .tagline { font-size: 15.5px; font-weight: 600; margin: 10px 0 0; }
+  .desc { color: var(--muted); font-size: 14px; line-height: 1.6; margin: 8px 0 0; }
+  .feats { list-style: none; margin: 18px 0 0; padding: 0; display: flex; flex-direction: column; gap: 9px; }
+  .feats li { display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px; color: var(--ink-2); }
+  .feats .tk { flex: none; margin-top: 1px; width: 18px; height: 18px; border-radius: 5px; display: grid; place-items: center; font-size: 10px; font-weight: 800; }
+  .cta { display: inline-flex; align-items: center; gap: 9px; margin-top: 22px; font-size: 14.5px; font-weight: 600; color: #fff; text-decoration: none; padding: 12px 22px; border-radius: 999px; transition: transform .2s, box-shadow .3s, background .3s; }
+  .cta .ar { transition: transform .25s; } .cta:hover .ar { transform: translateX(3px); }
+
+  /* accent theming per tier */
+  .t-blue  { --a: var(--blue);  --a-soft: rgba(59,79,255,.1); --a-text:#3B4FFF; }
+  .t-coral { --a: var(--coral); --a-soft: rgba(255,107,87,.12);--a-text:#e2503b; }
+  .t-green { --a: var(--green-2);--a-soft: rgba(25,168,122,.12);--a-text:#0f6b4f; }
+  .t-blue .pip,.t-green .pip { background: var(--a); } .t-coral .pip { background: var(--coral); }
+  .phase, .t-blue .phase{ color: var(--a-text);}
+  .tk { background: var(--a-soft); color: var(--a-text); }
+  .cta { background: var(--a); box-shadow: 0 12px 28px -12px var(--a); }
+  .cta:hover { transform: translateY(-2px); box-shadow: 0 18px 36px -12px var(--a); }
+
+  /* ---------- shared mock frame (auto-scaled screenshot) ---------- */
+  .fitframe { position: relative; width: 100%; overflow: hidden; }
+  .fitmock  { position: absolute; top: 0; left: 0; width: calc(var(--w)*1px); height: calc(var(--h)*1px); transform-origin: top left; }
+
+  /* browser + phone chrome */
+  .browser { position: absolute; border-radius: 14px; background: var(--white); border: 1px solid var(--line); box-shadow: var(--sh); overflow: hidden; }
+  .bbar { height: 34px; display: flex; align-items: center; gap: 7px; padding: 0 12px; background: var(--cream-2); border-bottom: 1px solid var(--line); }
+  .dot { width: 9px; height: 9px; border-radius: 50%; }
+  .dot.r{background:#ff5f57}.dot.y{background:#febc2e}.dot.g{background:#28c840}
+  .url { margin-left: 8px; height: 19px; flex: 1; border-radius: 999px; background: #fff; border: 1px solid var(--line); display: flex; align-items: center; padding: 0 10px; font-size: 10.5px; color: var(--faint); gap: 6px; }
+  .url svg { width: 9px; height: 9px; }
+
+  .float-badge { position: absolute; z-index: 6; display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 700; color: #fff; padding: 8px 13px; border-radius: 999px; box-shadow: 0 12px 26px -8px rgba(15,107,79,.6); }
+  .float-badge .live { width: 8px; height: 8px; border-radius: 50%; background: #7dffbe; box-shadow: 0 0 0 3px rgba(125,255,190,.3); animation: pulse 1.8s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.7)} }
+
+  /* ===== CARD 1 — LAUNCH landing ===== */
+  .lp-nav { display: flex; align-items: center; justify-content: space-between; padding: 13px 22px; }
+  .lp-logo { font-family: 'Sora'; font-weight: 800; font-size: 15px; letter-spacing: .12em; }
+  .lp-links { display: flex; gap: 16px; font-size: 11px; color: var(--muted); font-weight: 500; }
+  .lp-navcta { font-size: 11px; font-weight: 600; color: #fff; background: var(--ink); padding: 7px 14px; border-radius: 999px; }
+  .lp-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 8px 22px 22px; align-items: center; }
+  .lp-kicker { font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--coral); font-weight: 700; }
+  .lp-h1 { font-family: 'Sora'; font-weight: 800; font-size: 34px; line-height: 1.02; letter-spacing: -.02em; margin: 12px 0 0; }
+  .lp-p { font-size: 12px; color: var(--muted); line-height: 1.6; margin: 12px 0 0; max-width: 240px; }
+  .lp-btns { display: flex; gap: 10px; margin-top: 18px; }
+  .lp-b1 { font-size: 11.5px; font-weight: 600; color: #fff; background: var(--ink); padding: 10px 18px; border-radius: 999px; }
+  .lp-b2 { font-size: 11.5px; font-weight: 600; color: var(--ink); border: 1px solid var(--line); padding: 10px 16px; border-radius: 999px; }
+  .lp-img { height: 232px; border-radius: 16px; position: relative; overflow: hidden; background: linear-gradient(150deg,#f4ede6,#efe4dc 55%,#e9d9cf); box-shadow: inset 0 0 0 1px rgba(20,21,26,.05); }
+  .lp-bottle { position: absolute; left: 50%; top: 52%; transform: translate(-50%,-50%); width: 66px; height: 128px; border-radius: 12px 12px 16px 16px; background: linear-gradient(160deg,#2f3a34,#1c2420); box-shadow: 0 20px 40px -16px rgba(0,0,0,.5); }
+  .lp-bottle::before { content:''; position:absolute; left:50%; top:-13px; transform:translateX(-50%); width:26px; height:16px; border-radius:5px; background:#242c27; }
+  .lp-bottle::after { content:'AURÉLIE'; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); color:#e8ddd0; font-family:'Sora'; font-size:8px; letter-spacing:.12em; }
+  .lp-tag { position:absolute; top:14px; left:14px; font-size:9px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--green); background:#fff; padding:5px 9px; border-radius:999px; box-shadow:var(--sh-sm); }
+  .lp-trust { display:flex; gap:18px; padding: 0 22px 18px; opacity:.6; }
+  .lp-trust span { font-family:'Sora'; font-weight:700; font-size:12px; letter-spacing:.08em; color:var(--faint); }
+
+  /* ===== CARD 2 — GROWTH ecommerce ===== */
+  .sh-nav { display:flex; align-items:center; justify-content:space-between; padding:11px 18px; border-bottom:1px solid var(--line-2); }
+  .sh-logo { font-family:'Sora'; font-weight:800; font-size:13px; }
+  .sh-icons { display:flex; align-items:center; gap:12px; color:var(--muted); }
+  .sh-cart { position:relative; }
+  .sh-cart .cbadge { position:absolute; top:-6px; right:-7px; background:var(--coral); color:#fff; font-size:8px; font-weight:700; width:13px; height:13px; border-radius:50%; display:grid; place-items:center; }
+  .sh-av { width:20px; height:20px; border-radius:50%; background:linear-gradient(135deg,var(--blue),#7c8cff); }
+  .sh-body { display:grid; grid-template-columns: 150px 1fr; gap:16px; padding:16px 18px; }
+  .sh-gal { display:flex; flex-direction:column; gap:8px; }
+  .sh-main { height:150px; border-radius:12px; background:linear-gradient(160deg,#efe7df,#e4d6ca); position:relative; overflow:hidden; }
+  .sh-cup { position:absolute; left:50%; top:54%; transform:translate(-50%,-50%); width:60px; height:60px; border-radius:50%; background:radial-gradient(circle at 40% 35%,#5b3d2b,#2e1d13); box-shadow:0 14px 26px -10px rgba(0,0,0,.5); }
+  .sh-cup::after{content:'';position:absolute;inset:9px;border-radius:50%;background:#3a2618;box-shadow:inset 0 3px 6px rgba(0,0,0,.5)}
+  .sh-thumbs { display:flex; gap:6px; }
+  .sh-thumbs i { flex:1; height:34px; border-radius:8px; background:#ece4db; border:1px solid var(--line); }
+  .sh-thumbs i.on { border-color:var(--coral); box-shadow:0 0 0 1px var(--coral); }
+  .sh-cat { font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--coral); font-weight:700; }
+  .sh-title { font-family:'Sora'; font-weight:700; font-size:17px; margin:6px 0 0; }
+  .sh-rate { font-size:10px; color:var(--faint); margin-top:5px; } .sh-rate b{color:var(--amber)}
+  .sh-price { font-family:'Sora'; font-weight:800; font-size:20px; margin:10px 0 0; } .sh-price s{ color:var(--faint); font-weight:500; font-size:12px; margin-left:6px; }
+  .sh-desc { font-size:11px; color:var(--muted); line-height:1.55; margin:8px 0 0; }
+  .sh-actions { display:flex; gap:8px; margin-top:12px; }
+  .sh-qty { display:flex; align-items:center; border:1px solid var(--line); border-radius:999px; font-size:12px; font-weight:600; overflow:hidden; }
+  .sh-qty span { padding:0 8px; color:var(--muted); } .sh-qty b{ padding:8px 10px; }
+  .sh-add { flex:1; background:var(--coral); color:#fff; font-size:12px; font-weight:700; border-radius:999px; display:flex; align-items:center; justify-content:center; gap:7px; }
+
+  /* cart drawer */
+  .cart { position:absolute; z-index:5; width:186px; background:#fff; border:1px solid var(--line); border-radius:14px; box-shadow:var(--sh); padding:13px; }
+  .cart h5 { margin:0; font-family:'Sora'; font-size:12px; display:flex; justify-content:space-between; }
+  .cart h5 span{ color:var(--faint); font-weight:500; }
+  .citem { display:flex; gap:9px; align-items:center; margin-top:11px; }
+  .citem .im { width:30px; height:30px; border-radius:8px; flex:none; }
+  .citem .nm { font-size:10.5px; font-weight:600; } .citem .mt { font-size:9.5px; color:var(--faint); }
+  .citem .pr { margin-left:auto; font-size:10.5px; font-weight:700; }
+  .cart .sub { display:flex; justify-content:space-between; margin-top:12px; padding-top:10px; border-top:1px solid var(--line-2); font-size:11px; font-weight:700; }
+  .cart .co { margin-top:10px; text-align:center; background:var(--ink); color:#fff; font-size:11px; font-weight:600; padding:9px; border-radius:9px; }
+
+  /* phone */
+  .phone { position:absolute; z-index:7; width:132px; height:270px; border-radius:26px; background:#14151A; padding:8px; box-shadow:0 40px 70px -30px rgba(0,0,0,.55); }
+  .phone .scr { width:100%; height:100%; border-radius:19px; background:#fff; overflow:hidden; position:relative; }
+  .phone .notch { position:absolute; top:7px; left:50%; transform:translateX(-50%); width:44px; height:5px; border-radius:3px; background:#14151A; z-index:2; }
+  .ph-top { padding:16px 12px 8px; display:flex; justify-content:space-between; align-items:center; }
+  .ph-top .l{ font-family:'Sora'; font-weight:800; font-size:11px; } .ph-top .m{ color:var(--muted); font-size:12px; }
+  .ph-hero { margin:0 12px; height:96px; border-radius:12px; background:linear-gradient(160deg,#efe7df,#e4d6ca); position:relative; overflow:hidden; }
+  .ph-hero .cup{ position:absolute; left:50%; top:52%; transform:translate(-50%,-50%); width:44px; height:44px; border-radius:50%; background:radial-gradient(circle at 40% 35%,#5b3d2b,#2e1d13); }
+  .ph-cat{ font-size:8px; letter-spacing:.1em; text-transform:uppercase; color:var(--coral); font-weight:700; margin:10px 12px 0; }
+  .ph-tt{ font-family:'Sora'; font-weight:700; font-size:12px; margin:3px 12px 0; }
+  .ph-pr{ font-family:'Sora'; font-weight:800; font-size:13px; margin:6px 12px 0; }
+  .ph-add{ margin:9px 12px 0; background:var(--coral); color:#fff; font-size:10px; font-weight:700; text-align:center; padding:8px; border-radius:9px; }
+
+  /* AI panel */
+  .ai { position:absolute; z-index:8; width:212px; background:#fff; border:1px solid var(--line); border-radius:14px; box-shadow:var(--sh-lg); padding:13px; }
+  .ai-h { display:flex; align-items:center; gap:8px; }
+  .ai-ic { width:24px; height:24px; border-radius:7px; background:linear-gradient(135deg,var(--blue),#8b57ff); display:grid; place-items:center; color:#fff; font-size:12px; box-shadow:0 6px 14px -6px rgba(59,79,255,.7); }
+  .ai-h .t { font-family:'Sora'; font-weight:700; font-size:11px; line-height:1.1; }
+  .ai-h .s { font-size:8.5px; color:var(--green-2); font-weight:600; display:flex; align-items:center; gap:4px; }
+  .ai-h .s::before{ content:''; width:5px; height:5px; border-radius:50%; background:var(--green-2); }
+  .ai-body { margin-top:11px; background:var(--cream); border:1px solid var(--line-2); border-radius:9px; padding:9px; }
+  .ai-line { height:6px; border-radius:3px; background:linear-gradient(90deg,#dfe3ff,#eef0ff); margin-bottom:6px; }
+  .ai-type { font-size:9.5px; color:var(--ink-2); line-height:1.5; }
+  .ai-type .cap { display:inline-block; width:1.5px; height:10px; background:var(--blue); margin-left:1px; vertical-align:-1px; animation: caret .9s steps(1) infinite; }
+  @keyframes caret { 50%{opacity:0} }
+  /* "typing" illusion via a compositor-only clip sweep — no layout thrash */
+  .ai-reveal { color:var(--blue); font-weight:600; animation: reveal 3.4s ease-in-out infinite; }
+  @keyframes reveal { 0%{clip-path: inset(0 100% 0 0)} 45%,100%{clip-path: inset(0 0 0 0)} }
+  .ai-foot { display:flex; gap:6px; margin-top:9px; }
+  .ai-chip { font-size:8.5px; font-weight:600; color:var(--blue); background:rgba(59,79,255,.08); padding:4px 8px; border-radius:999px; }
+
+  /* ===== CARD 3 — SCALE dashboard ===== */
+  .db { position:absolute; inset:0; border-radius:16px; overflow:hidden; background:var(--white); border:1px solid var(--line); box-shadow:var(--sh); display:grid; grid-template-columns:52px 1fr; }
+  .db-side { background:#14151A; padding:14px 0; display:flex; flex-direction:column; align-items:center; gap:16px; }
+  .db-side .lg { width:26px; height:26px; border-radius:8px; background:linear-gradient(135deg,var(--blue),#7c8cff); display:grid; place-items:center; color:#fff; font-family:'Sora'; font-weight:800; font-size:12px; }
+  .db-side .nv { display:flex; flex-direction:column; gap:13px; margin-top:4px; }
+  .db-side .ic { width:20px; height:20px; border-radius:6px; display:grid; place-items:center; color:#7a7e88; font-size:12px; }
+  .db-side .ic.on { background:rgba(59,79,255,.22); color:#fff; }
+  .db-main { padding:14px 16px; overflow:hidden; }
+  .db-top { display:flex; align-items:center; justify-content:space-between; }
+  .db-top .ti { font-family:'Sora'; font-weight:800; font-size:15px; } .db-top .ti small{ display:block; font-family:'Inter'; font-weight:400; font-size:10px; color:var(--faint); margin-top:2px; }
+  .db-top .rt { display:flex; align-items:center; gap:9px; }
+  .db-search { width:120px; height:26px; border-radius:999px; background:var(--cream); border:1px solid var(--line); display:flex; align-items:center; padding:0 10px; font-size:10px; color:var(--faint); gap:6px; }
+  .db-bell { width:26px; height:26px; border-radius:8px; background:var(--cream); border:1px solid var(--line); display:grid; place-items:center; color:var(--muted); font-size:12px; position:relative; }
+  .db-bell::after{ content:''; position:absolute; top:6px; right:6px; width:5px; height:5px; border-radius:50%; background:var(--coral); }
+  .db-me { width:26px; height:26px; border-radius:50%; background:linear-gradient(135deg,var(--green-2),#37c99a); }
+  .db-kpis { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:13px; }
+  .kpi { border:1px solid var(--line); border-radius:11px; padding:11px; background:var(--white); }
+  .kpi .lb { font-size:9.5px; color:var(--muted); font-weight:600; display:flex; align-items:center; gap:6px; }
+  .kpi .lb .d{ width:6px;height:6px;border-radius:50%; }
+  .kpi .vl { font-family:'Sora'; font-weight:800; font-size:19px; margin:6px 0 0; }
+  .kpi .dl { font-size:9px; font-weight:700; margin-top:3px; } .kpi .up{ color:var(--green-2);} .kpi .dn{ color:var(--coral);}
+  .db-grid { display:grid; grid-template-columns:1.6fr 1fr; gap:10px; margin-top:10px; }
+  .panel { border:1px solid var(--line); border-radius:11px; padding:12px; background:var(--white); }
+  .panel .ph { display:flex; justify-content:space-between; align-items:center; }
+  .panel .ph .h { font-family:'Sora'; font-weight:700; font-size:11.5px; }
+  .panel .ph .m { font-size:9px; color:var(--faint); }
+  .chart { margin-top:8px; }
+  .chart svg { width:100%; height:96px; display:block; }
+  .cpath { stroke-dasharray: 620; stroke-dashoffset: 620; animation: draw 2.4s ease forwards; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  .cx { display:flex; justify-content:space-between; margin-top:6px; font-size:8px; color:var(--faint); }
+  .donut { display:flex; align-items:center; gap:12px; margin-top:6px; }
+  .donut svg{ width:74px; height:74px; flex:none; }
+  .dleg { display:flex; flex-direction:column; gap:6px; font-size:9.5px; color:var(--ink-2); }
+  .dleg i{ display:inline-block; width:8px; height:8px; border-radius:2px; margin-right:6px; }
+  .db-grid2 { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:10px; }
+  .rowitem { display:flex; align-items:center; gap:8px; padding:6px 0; border-top:1px solid var(--line-2); }
+  .rowitem:first-of-type{ border-top:0; }
+  .rowitem .ix { width:22px; height:22px; border-radius:6px; flex:none; display:grid; place-items:center; font-size:10px; font-weight:700; }
+  .rowitem .nm{ font-size:9.5px; font-weight:600; } .rowitem .mt{ font-size:8.5px; color:var(--faint); }
+  .rowitem .rg{ margin-left:auto; font-size:8.5px; font-weight:700; }
+  .stock { font-size:8px; font-weight:700; padding:3px 7px; border-radius:999px; margin-left:auto; }
+  .stock.ok{ background:rgba(25,168,122,.14); color:var(--green);} .stock.low{ background:rgba(255,197,66,.2); color:#9a6d00;} .stock.out{ background:rgba(255,107,87,.14); color:#e2503b;}
+  .bars { display:flex; align-items:flex-end; gap:5px; height:52px; margin-top:8px; }
+  .bars i{ flex:1; border-radius:4px 4px 0 0; background:linear-gradient(180deg,var(--blue),#8b97ff); opacity:.85; }
+  .msg { display:flex; gap:8px; padding:7px 0; border-top:1px solid var(--line-2); } .msg:first-of-type{border-top:0}
+  .msg .av{ width:22px;height:22px;border-radius:50%;flex:none } .msg .nm{ font-size:9.5px; font-weight:600 } .msg .tx{ font-size:8.5px; color:var(--muted); }
+  .msg .un{ margin-left:auto; width:6px; height:6px; border-radius:50%; background:var(--coral); align-self:center; }
+
+  .note { text-align:center; margin-top:30px; font-size:12.5px; color:var(--faint); }
+  @media (prefers-reduced-motion: reduce){ *{animation:none!important} }
+</style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="head">
+      <span class="eyebrow"><span class="dot"></span>What you actually get</span>
+      <h1>Real products, <span class="g">not slideware.</span></h1>
+      <p class="sub">A preview of the calibre of work delivered at each phase — every pixel built by the same senior team.</p>
+    </div>
+
+    <div class="rows">
+
+      <!-- ============ CARD 1 — LAUNCH ============ -->
+      <section class="row t-blue">
+        <div class="info">
+          <span class="phase"><span class="pip">1</span>Phase 1 · Launch</span>
+          <h2 class="plan">A website ready to sell</h2>
+          <p class="tagline">A polished, production-ready business site.</p>
+          <p class="desc">Conversion-focused architecture and a custom design mapped to your brand — live and driving enquiries in about two weeks.</p>
+          <ul class="feats">
+            <li><span class="tk">✓</span>Custom landing &amp; core pages</li>
+            <li><span class="tk">✓</span>Mobile-first, SEO-ready build</li>
+            <li><span class="tk">✓</span>Strong, measurable calls-to-action</li>
+          </ul>
+          <a class="cta" href="#">Request an Estimate <span class="ar">→</span></a>
+        </div>
+
+        <div class="fitframe">
+          <div class="fitmock" style="--w:600;--h:430">
+            <!-- floating badge -->
+            <div class="float-badge" style="top:16px; right:10px; background:linear-gradient(100deg,var(--green),var(--green-2));"><span class="live"></span>Live in 2 Weeks</div>
+            <!-- browser -->
+            <div class="browser" style="left:0; top:34px; width:560px; height:380px;">
+              <div class="bbar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+                <span class="url"><svg viewBox="0 0 24 24" fill="none" stroke="#9a9ea6" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>aurelie.studio</span>
+              </div>
+              <div class="lp-nav">
+                <div class="lp-logo">AURÉLIE</div>
+                <div class="lp-links"><span>Shop</span><span>Rituals</span><span>About</span><span>Journal</span></div>
+                <div class="lp-navcta">Book a facial</div>
+              </div>
+              <div class="lp-hero">
+                <div>
+                  <div class="lp-kicker">Clean skincare</div>
+                  <div class="lp-h1">Skincare,<br>distilled.</div>
+                  <p class="lp-p">Six essentials. Nothing you don't need. Formulated in small batches for skin that behaves.</p>
+                  <div class="lp-btns"><span class="lp-b1">Shop the ritual</span><span class="lp-b2">The story</span></div>
+                </div>
+                <div class="lp-img">
+                  <span class="lp-tag">Bestseller</span>
+                  <div class="lp-bottle"></div>
+                </div>
+              </div>
+              <div class="lp-trust"><span>VOGUE</span><span>ELLE</span><span>GOOP</span><span>KINFOLK</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ CARD 2 — GROWTH ============ -->
+      <section class="row flip featured t-coral">
+        <div class="info">
+          <span class="phase"><span class="pip">2</span>Phase 2 · Growth</span>
+          <h2 class="plan">Web, mobile &amp; AI in sync</h2>
+          <p class="tagline">A complete digital product ecosystem.</p>
+          <p class="desc">A storefront, a native mobile experience and AI doing real work — one connected product, engineered to scale with your revenue.</p>
+          <ul class="feats">
+            <li><span class="tk">✓</span>Ecommerce web app + iOS/Android</li>
+            <li><span class="tk">✓</span>Cart, accounts &amp; secure checkout</li>
+            <li><span class="tk">✓</span>AI where it moves the numbers</li>
+          </ul>
+          <a class="cta" href="#">Scope Your Product <span class="ar">→</span></a>
+        </div>
+
+        <div class="fitframe">
+          <div class="fitmock" style="--w:600;--h:470">
+            <!-- browser store -->
+            <div class="browser" style="left:0; top:40px; width:470px; height:396px;">
+              <div class="bbar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+                <span class="url"><svg viewBox="0 0 24 24" fill="none" stroke="#9a9ea6" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>shop.roastandco.com/beans/ethiopia</span>
+              </div>
+              <div class="sh-nav">
+                <div class="sh-logo">ROAST&amp;CO</div>
+                <div class="sh-icons">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4-4"/></svg>
+                  <span class="sh-cart"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg><span class="cbadge">3</span></span>
+                  <span class="sh-av"></span>
+                </div>
+              </div>
+              <div class="sh-body">
+                <div class="sh-gal">
+                  <div class="sh-main"><div class="sh-cup"></div></div>
+                  <div class="sh-thumbs"><i class="on"></i><i></i><i></i></div>
+                </div>
+                <div>
+                  <div class="sh-cat">Single origin</div>
+                  <div class="sh-title">Ethiopia Guji</div>
+                  <div class="sh-rate"><b>★★★★★</b> 4.9 · 212 reviews</div>
+                  <div class="sh-price">$24.00 <s>$30.00</s></div>
+                  <p class="sh-desc">Bright &amp; floral with jasmine, stone fruit and a clean honeyed finish. Roasted to order.</p>
+                  <div class="sh-actions">
+                    <div class="sh-qty"><span>–</span><b>1</b><span>+</span></div>
+                    <div class="sh-add"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>Add to Cart</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- cart drawer -->
+            <div class="cart" style="right:6px; top:16px;">
+              <h5>Your cart <span>3 items</span></h5>
+              <div class="citem"><span class="im" style="background:linear-gradient(160deg,#5b3d2b,#2e1d13)"></span><div><div class="nm">Ethiopia Guji</div><div class="mt">Whole bean · 250g</div></div><span class="pr">$24</span></div>
+              <div class="citem"><span class="im" style="background:linear-gradient(160deg,#7a5236,#3a2618)"></span><div><div class="nm">Colombia Huila</div><div class="mt">Ground · 250g</div></div><span class="pr">$21</span></div>
+              <div class="sub"><span>Subtotal</span><span>$68.00</span></div>
+              <div class="co">Checkout →</div>
+            </div>
+
+            <!-- phone -->
+            <div class="phone" style="right:2px; top:150px;">
+              <div class="scr"><span class="notch"></span>
+                <div class="ph-top"><span class="l">ROAST&amp;CO</span><span class="m">≡</span></div>
+                <div class="ph-hero"><div class="cup"></div></div>
+                <div class="ph-cat">Single origin</div>
+                <div class="ph-tt">Ethiopia Guji</div>
+                <div class="ph-pr">$24.00</div>
+                <div class="ph-add">Add to Cart</div>
+              </div>
+            </div>
+
+            <!-- AI panel -->
+            <div class="ai" style="left:8px; bottom:0;">
+              <div class="ai-h">
+                <div class="ai-ic">✦</div>
+                <div><div class="t">AI Product Description Generator</div><div class="s">generating…</div></div>
+              </div>
+              <div class="ai-body">
+                <div class="ai-type">Bright &amp; floral with notes of <span class="ai-reveal">jasmine, stone fruit</span><span class="cap"></span></div>
+              </div>
+              <div class="ai-foot"><span class="ai-chip">Tone: Premium</span><span class="ai-chip">SEO ✓</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ CARD 3 — SCALE ============ -->
+      <section class="row t-green">
+        <div class="info">
+          <span class="phase"><span class="pip">3</span>Phase 3 · Scale</span>
+          <h2 class="plan">Your business, one platform</h2>
+          <p class="tagline">A complete business operating system.</p>
+          <p class="desc">Revenue, orders, inventory, customers, team and integrations — every moving part of the business in a single connected dashboard.</p>
+          <ul class="feats">
+            <li><span class="tk">✓</span>Custom admin &amp; analytics</li>
+            <li><span class="tk">✓</span>Integrations, APIs &amp; automations</li>
+            <li><span class="tk">✓</span>Dedicated team, SLAs &amp; monitoring</li>
+          </ul>
+          <a class="cta" href="#">Partner With Us <span class="ar">→</span></a>
+        </div>
+
+        <div class="fitframe">
+          <div class="fitmock" style="--w:600;--h:452">
+            <div class="db">
+              <div class="db-side">
+                <div class="lg">W</div>
+                <div class="nv">
+                  <div class="ic on">▦</div>
+                  <div class="ic">◫</div>
+                  <div class="ic">◧</div>
+                  <div class="ic">◈</div>
+                  <div class="ic">☰</div>
+                  <div class="ic">⚙</div>
+                </div>
+              </div>
+              <div class="db-main">
+                <div class="db-top">
+                  <div class="ti">Overview <small>Welcome back, Layla</small></div>
+                  <div class="rt">
+                    <div class="db-search"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#9a9ea6" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4-4"/></svg>Search</div>
+                    <div class="db-bell">◔</div>
+                    <div class="db-me"></div>
+                  </div>
+                </div>
+
+                <div class="db-kpis">
+                  <div class="kpi"><div class="lb"><span class="d" style="background:var(--blue)"></span>Revenue</div><div class="vl">$128,540</div><div class="dl up">▲ 18.2% vs last mo</div></div>
+                  <div class="kpi"><div class="lb"><span class="d" style="background:var(--green-2)"></span>Active users</div><div class="vl">4,208</div><div class="dl up">▲ 6.4%</div></div>
+                  <div class="kpi"><div class="lb"><span class="d" style="background:var(--coral)"></span>Orders</div><div class="vl">1,932</div><div class="dl dn">▼ 2.1%</div></div>
+                </div>
+
+                <div class="db-grid">
+                  <div class="panel">
+                    <div class="ph"><div class="h">Revenue growth</div><div class="m">Last 6 months</div></div>
+                    <div class="chart">
+                      <svg viewBox="0 0 300 96" preserveAspectRatio="none">
+                        <defs>
+                          <linearGradient id="ga" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0" stop-color="rgba(59,79,255,.28)"/><stop offset="1" stop-color="rgba(59,79,255,0)"/>
+                          </linearGradient>
+                        </defs>
+                        <path d="M0,78 L45,66 L90,70 L135,48 L180,52 L225,30 L300,14 L300,96 L0,96 Z" fill="url(#ga)"/>
+                        <path class="cpath" d="M0,78 L45,66 L90,70 L135,48 L180,52 L225,30 L300,14" fill="none" stroke="#3B4FFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="300" cy="14" r="3.4" fill="#3B4FFF"/>
+                      </svg>
+                    </div>
+                    <div class="cx"><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span></div>
+                  </div>
+                  <div class="panel">
+                    <div class="ph"><div class="h">Traffic by channel</div></div>
+                    <div class="donut">
+                      <svg viewBox="0 0 42 42">
+                        <circle cx="21" cy="21" r="15.9" fill="none" stroke="#ECEAE3" stroke-width="6"/>
+                        <circle cx="21" cy="21" r="15.9" fill="none" stroke="#3B4FFF" stroke-width="6" stroke-dasharray="46 54" stroke-dashoffset="25" stroke-linecap="round"/>
+                        <circle cx="21" cy="21" r="15.9" fill="none" stroke="#19a87a" stroke-width="6" stroke-dasharray="30 70" stroke-dashoffset="-21" stroke-linecap="round"/>
+                        <circle cx="21" cy="21" r="15.9" fill="none" stroke="#FF6B57" stroke-width="6" stroke-dasharray="18 82" stroke-dashoffset="-51" stroke-linecap="round"/>
+                      </svg>
+                      <div class="dleg"><span><i style="background:var(--blue)"></i>Organic 46%</span><span><i style="background:var(--green-2)"></i>Direct 30%</span><span><i style="background:var(--coral)"></i>Social 18%</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="db-grid2">
+                  <div class="panel">
+                    <div class="ph"><div class="h">Inventory</div><div class="m">Live</div></div>
+                    <div class="rowitem"><span class="ix" style="background:rgba(59,79,255,.12);color:var(--blue)">☕</span><div><div class="nm">Ethiopia Guji</div><div class="mt">SKU-2201</div></div><span class="stock ok">In stock</span></div>
+                    <div class="rowitem"><span class="ix" style="background:rgba(255,197,66,.18);color:#9a6d00">☕</span><div><div class="nm">Colombia Huila</div><div class="mt">SKU-2202</div></div><span class="stock low">Low · 12</span></div>
+                    <div class="rowitem"><span class="ix" style="background:rgba(255,107,87,.12);color:#e2503b">☕</span><div><div class="nm">Kenya AA</div><div class="mt">SKU-2203</div></div><span class="stock out">Restock</span></div>
+                  </div>
+
+                  <div class="panel">
+                    <div class="ph"><div class="h">Team activity</div></div>
+                    <div class="rowitem"><span class="ix" style="background:linear-gradient(135deg,var(--blue),#7c8cff);color:#fff">M</span><div><div class="nm">Maya shipped 42 orders</div><div class="mt">4 min ago</div></div></div>
+                    <div class="rowitem"><span class="ix" style="background:linear-gradient(135deg,var(--green-2),#37c99a);color:#fff">O</span><div><div class="nm">Omar updated pricing</div><div class="mt">28 min ago</div></div></div>
+                    <div class="ph" style="margin-top:8px"><div class="h" style="font-size:10px">Performance</div></div>
+                    <div class="bars"><i style="height:40%"></i><i style="height:62%"></i><i style="height:50%"></i><i style="height:78%"></i><i style="height:66%"></i><i style="height:92%"></i><i style="height:74%"></i></div>
+                  </div>
+
+                  <div class="panel">
+                    <div class="ph"><div class="h">Messages</div><div class="m">3 new</div></div>
+                    <div class="msg"><span class="av" style="background:linear-gradient(135deg,#ff8f7f,var(--coral))"></span><div><div class="nm">Sara D.</div><div class="tx">Is the Guji back in…</div></div><span class="un"></span></div>
+                    <div class="msg"><span class="av" style="background:linear-gradient(135deg,#7c8cff,var(--blue))"></span><div><div class="nm">Tom R.</div><div class="tx">Bulk order query</div></div><span class="un"></span></div>
+                    <div class="ph" style="margin-top:8px"><div class="h" style="font-size:10px">Integrations</div></div>
+                    <div class="rowitem"><span class="ix" style="background:#635bff;color:#fff">S</span><div><div class="nm">Stripe</div><div class="mt">Connected</div></div><span class="stock ok">Live</span></div>
+                    <div class="rowitem"><span class="ix" style="background:#4a154b;color:#fff">#</span><div><div class="nm">Slack</div><div class="mt">Connected</div></div><span class="stock ok">Live</span></div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <p class="note">Standalone mockup components · light theme matched to the live Webot-Daylight site · not yet wired into the pricing build</p>
+  </main>
+
+<script>
+  // Scale each mockup to fit its frame like a crisp screenshot, and keep it
+  // responsive on resize.
+  // Scale each mock to its frame width. We cache the last width per frame so the
+  // ResizeObserver can't feed back on the height we set inside the callback
+  // (setting height doesn't change width → we no-op and the loop stays quiet).
+  function fitOne(frame) {
+    var mock = frame.querySelector('.fitmock');
+    if (!mock) return;
+    var fw = frame.clientWidth;
+    if (frame._lastW === fw) return;
+    frame._lastW = fw;
+    var w = parseFloat(getComputedStyle(mock).getPropertyValue('--w'));
+    var h = parseFloat(getComputedStyle(mock).getPropertyValue('--h'));
+    var s = fw / w;
+    mock.style.transform = 'scale(' + s + ')';
+    frame.style.height = (h * s) + 'px';
+  }
+  function fitAll() { document.querySelectorAll('.fitframe').forEach(fitOne); }
+  window.addEventListener('resize', fitAll);
+  window.addEventListener('load', fitAll);
+  fitAll();
+  if (window.ResizeObserver) {
+    var ro = new ResizeObserver(function (entries) {
+      // guard against the "loop completed with undelivered notifications" thrash
+      window.requestAnimationFrame(function () { entries.forEach(function (e) { fitOne(e.target); }); });
+    });
+    document.querySelectorAll('.fitframe').forEach(function (f) { ro.observe(f); });
+  }
+</script>
+</body>
+</html>

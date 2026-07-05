@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "webot",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["C:/Users/basel/OneDrive/Desktop/webot/server.js"],
+      "port": 7777
+    }
+  ]
+}

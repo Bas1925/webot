@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NeuralKinetics — Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* --- Global Styles & Typography Reset --- */
+    :root {
+      font-family: 'Inter', sans-serif;
+      background-color: #ffffff;
+      color: #000000;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    *, *::before, *::after {
+      box-sizing: inherit;
+    }
+
+    body {
+      margin: 0;
+      overflow-x: hidden;
+    }
+
+    /* --- Entrance animations (motion/react equivalents) --- */
+    @keyframes nk-fade-down {
+      from { opacity: 0; transform: translateY(-16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes nk-fade-scale {
+      from { opacity: 0; transform: translate(-50%, -50%) scale(1.05); }
+      to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    }
+    @keyframes nk-fade-up {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes nk-fade-up-sm {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes nk-spec-in {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .nk-animate-nav {
+      animation: nk-fade-down 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    .nk-animate-video {
+      animation: nk-fade-scale 1.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    .nk-animate-footer {
+      animation: nk-fade-up 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+    }
+    .nk-animate-subtitle {
+      animation: nk-fade-up-sm 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
+    }
+    .nk-animate-heading {
+      animation: nk-fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.8s both;
+    }
+    .nk-animate-btns {
+      animation: nk-fade-up-sm 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1s both;
+    }
+    .nk-spec-description.animating {
+      animation: nk-spec-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    /* --- Layout Containers --- */
+    .nk-app-container {
+      width: 100%;
+      position: relative;
+    }
+
+    .nk-section {
+      min-height: 100vh;
+      width: 100%;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* --- Fixed Navbar Layout --- */
+    .nk-navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 50;
+      pointer-events: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px;
+    }
+
+    .nk-nav-left, .nk-nav-right {
+      pointer-events: auto;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nk-logo-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #ffffff;
+      padding: 6px 14px 6px 10px;
+      border-radius: 9999px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    .nk-logo-svg {
+      transform: translateY(1px);
+    }
+
+    .nk-brand-text {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      display: none;
+    }
+
+    .nk-menu-pill {
+      background: #000000;
+      border: none;
+      border-radius: 9999px;
+      padding: 4px 12px 4px 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .nk-plus-circle, .nk-dots-circle {
+      width: 28px;
+      height: 28px;
+      background: #ffffff;
+      color: #000000;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nk-dots-circle {
+      background: #000000;
+      color: #ffffff;
+    }
+
+    .nk-menu-text {
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    .nk-tags-pill, .nk-adaptive-pill {
+      background: #F4F4F6;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nk-adaptive-pill {
+      padding: 4px 14px 4px 4px;
+    }
+
+    .nk-tag-label {
+      font-size: 11px;
+      font-weight: 500;
+      color: rgba(0,0,0,0.6);
+    }
+
+    .nk-adaptive-text {
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    .desktop-only {
+      display: none;
+    }
+
+    /* --- Hero Section Background & Footer --- */
+    .nk-video-wrapper {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%;
+      height: 80%;
+      z-index: 0;
+      overflow: hidden;
+      border-radius: 12px;
+      background: #000000;
+    }
+
+    .nk-video-wrapper video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .nk-footer-wrapper {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      z-index: 30;
+      background: linear-gradient(to top, #ffffff 0%, rgba(255,255,255,0.85) 60%, transparent 100%);
+      padding: 64px 24px 32px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .nk-subtitle-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .nk-live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #000000;
+    }
+
+    .nk-subtitle-text {
+      font-size: 13px;
+      color: rgba(0,0,0,0.55);
+    }
+
+    .nk-main-heading {
+      font-size: clamp(2rem, 8vw, 4.5rem);
+      font-weight: 300;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin: 0 0 24px 0;
+    }
+
+    .nk-btn-group {
+      display: flex;
+      gap: 12px;
+    }
+
+    .nk-btn-primary, .nk-btn-secondary {
+      border: none;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 12px 24px;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .nk-btn-primary {
+      background: #000000;
+      color: #ffffff;
+    }
+
+    .nk-btn-secondary {
+      background: transparent;
+      color: #000000;
+      border: 1px solid rgba(0,0,0,0.35);
+    }
+
+    .nk-footer-right {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .nk-outline-tag {
+      font-size: 11px;
+      font-weight: 500;
+      padding: 6px 12px;
+      background: #ffffff;
+      border: 1px solid rgba(0,0,0,0.12);
+      border-radius: 9999px;
+    }
+
+    /* --- Page 2: Product Showcase Section --- */
+    .nk-showcase-section {
+      background: #ffffff;
+      border-top: 1px solid rgba(0,0,0,0.06);
+      padding-top: 100px;
+    }
+
+    .nk-showcase-container {
+      width: 100%;
+      max-width: 1400px;
+      margin: auto;
+      padding: 32px 24px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .nk-section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .nk-section-number {
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(0,0,0,0.3);
+      letter-spacing: 0.05em;
+    }
+
+    .nk-section-title {
+      font-size: clamp(1.5rem, 4vw, 2.25rem);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+
+    .nk-section-description {
+      font-size: 15px;
+      line-height: 1.6;
+      color: rgba(0,0,0,0.6);
+      max-width: 480px;
+      margin: 0 0 32px 0;
+    }
+
+    .nk-spec-selector-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .nk-spec-trigger-pill {
+      background: #F4F4F6;
+      border: 1px solid transparent;
+      padding: 12px 20px;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      width: 100%;
+      max-width: 320px;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .nk-spec-trigger-pill:hover, .nk-spec-trigger-pill.active {
+      background: #000000;
+    }
+
+    .nk-spec-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.3);
+      transition: background 0.25s;
+    }
+
+    .nk-spec-title-text {
+      font-size: 13px;
+      font-weight: 500;
+      color: #000000;
+      transition: color 0.25s;
+    }
+
+    .nk-spec-trigger-pill:hover .nk-spec-dot,
+    .nk-spec-trigger-pill.active .nk-spec-dot {
+      background: #ffffff;
+    }
+
+    .nk-spec-trigger-pill:hover .nk-spec-title-text,
+    .nk-spec-trigger-pill.active .nk-spec-title-text {
+      color: #ffffff;
+    }
+
+    .nk-spec-display-box {
+      min-height: 80px;
+      max-width: 420px;
+      border-left: 2px solid rgba(0,0,0,0.08);
+      padding-left: 16px;
+    }
+
+    .nk-spec-description {
+      font-size: 14px;
+      line-height: 1.5;
+      color: rgba(0,0,0,0.7);
+      margin: 0;
+    }
+
+    .nk-showcase-right {
+      display: flex;
+      justify-content: center;
+    }
+
+    .nk-canvas-frame {
+      position: relative;
+      width: 100%;
+      max-width: 560px;
+      aspect-ratio: 1 / 1;
+      background: #F4F4F6;
+      padding: 24px;
+      border-radius: 8px;
+    }
+
+    .nk-canvas-video-container {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 4px;
+      background: #000000;
+    }
+
+    .nk-canvas-video-container video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .nk-head-poster-fallback {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .nk-frame-corner {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border: 1px solid rgba(0,0,0,0.15);
+    }
+    .top-left { top: 12px; left: 12px; border-right: none; border-bottom: none; }
+    .top-right { top: 12px; right: 12px; border-left: none; border-bottom: none; }
+    .bottom-left { bottom: 12px; left: 12px; border-right: none; border-top: none; }
+    .bottom-right { bottom: 12px; right: 12px; border-left: none; border-top: none; }
+
+    /* --- Responsive Media Queries (768px+) --- */
+    @media (min-width: 768px) {
+      .nk-navbar {
+        padding: 24px 32px;
+      }
+
+      .nk-brand-text {
+        display: inline;
+      }
+
+      .nk-plus-circle, .nk-dots-circle {
+        width: 32px;
+        height: 32px;
+      }
+
+      .desktop-only {
+        display: flex !important;
+      }
+
+      .nk-video-wrapper {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+      }
+
+      .nk-footer-wrapper {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-end;
+        padding: 120px 48px 48px 48px;
+      }
+
+      .nk-main-heading {
+        font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+        margin-bottom: 32px;
+      }
+
+      .nk-showcase-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 64px;
+        padding: 64px 48px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="nk-app-container">
+
+    <!-- NAVBAR -->
+    <nav class="nk-navbar nk-animate-nav">
+      <div class="nk-nav-left">
+          <a href="/" class="nk-logo-group" style="text-decoration:none;color:inherit">
+          <svg class="nk-logo-svg" viewBox="0 0 24 24" width="20" height="20">
+            <rect x="4" y="6" width="6" height="12" rx="2" transform="rotate(-35 7 12)" fill="black" />
+            <rect x="14" y="6" width="6" height="12" rx="2" transform="rotate(-35 17 12)" fill="black" />
+          </svg>
+            <span class="nk-brand-text">NeuralKinetics</span>
+          </a>
+
+        <button class="nk-menu-pill" type="button">
+          <span class="nk-plus-circle">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+              <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
+          </span>
+          <span class="nk-menu-text">Menu</span>
+        </button>
+
+        <div class="nk-tags-pill desktop-only">
+          <span class="nk-tag-label">Advanced Bionics</span>
+          <span class="nk-tag-label">Cognitive AI</span>
+        </div>
+      </div>
+
+      <div class="nk-nav-right desktop-only">
+        <div class="nk-adaptive-pill">
+          <span class="nk-dots-circle">
+            <svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor">
+              <circle cx="6" cy="6" r="3" /><circle cx="18" cy="6" r="3" />
+              <circle cx="6" cy="18" r="3" /><circle cx="18" cy="18" r="3" />
+            </svg>
+          </span>
+          <span class="nk-adaptive-text">Adaptive Systems</span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="nk-section nk-hero-section">
+      <div class="nk-video-wrapper nk-animate-video">
+        <video
+          src="/assets/robot-hero.mp4"
+          autoplay muted playsinline loop preload="auto"
+        ></video>
+      </div>
+
+      <div class="nk-footer-wrapper nk-animate-footer">
+        <div class="nk-footer-left">
+          <div class="nk-subtitle-line nk-animate-subtitle">
+            <span class="nk-live-dot"></span>
+            <span class="nk-subtitle-text">Best digital banking card 2026</span>
+          </div>
+
+          <h1 class="nk-main-heading nk-animate-heading">
+            One Card, Zero<br />Limits. Worldwide.
+          </h1>
+
+          <div class="nk-btn-group nk-animate-btns">
+            <button class="nk-btn-primary" type="button">See Features</button>
+            <button class="nk-btn-secondary" type="button">How It Works</button>
+          </div>
+        </div>
+
+        <div class="nk-footer-right">
+          <span class="nk-outline-tag">Neuromorphic</span>
+          <span class="nk-outline-tag">AGI</span>
+          <span class="nk-outline-tag">Cybernetics</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SHOWCASE SECTION -->
+    <section class="nk-section nk-showcase-section">
+      <div class="nk-showcase-container">
+
+        <div class="nk-showcase-left">
+          <div class="nk-section-header">
+            <span class="nk-section-number">[02]</span>
+            <h2 class="nk-section-title">The Neural Core Architecture</h2>
+          </div>
+
+          <p class="nk-section-description">
+            Transitioning kinetic inputs into structural cognition. The head platform contains our proprietary multi-layered compute engine, linking visual telemetrics with physical response arrays.
+          </p>
+
+          <div class="nk-spec-selector-group" id="spec-triggers">
+            <button type="button" class="nk-spec-trigger-pill active" data-spec="0">
+              <span class="nk-spec-dot"></span>
+              <span class="nk-spec-title-text">Synaptic Core</span>
+            </button>
+            <button type="button" class="nk-spec-trigger-pill" data-spec="1">
+              <span class="nk-spec-dot"></span>
+              <span class="nk-spec-title-text">Optic Matrix</span>
+            </button>
+            <button type="button" class="nk-spec-trigger-pill" data-spec="2">
+              <span class="nk-spec-dot"></span>
+              <span class="nk-spec-title-text">Cranial Shell</span>
+            </button>
+          </div>
+
+          <div class="nk-spec-display-box">
+            <p class="nk-spec-description" id="spec-description">
+              12,000 TFLOPS localized processing cluster mimicking biological neural networks.
+            </p>
+          </div>
+        </div>
+
+        <div class="nk-showcase-right">
+          <div class="nk-canvas-frame">
+            <div class="nk-frame-corner top-left"></div>
+            <div class="nk-frame-corner top-right"></div>
+            <div class="nk-frame-corner bottom-left"></div>
+            <div class="nk-frame-corner bottom-right"></div>
+
+            <div class="nk-canvas-video-container">
+              <!-- Page 2: custom head video — replace robot-head.mp4 after AI render -->
+              <video
+                id="nk-head-video"
+                src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_171521_25968ba2-b594-4b32-aab7-f6b69398a6fa.mp4"
+                poster="/assets/robot-head-reference.png"
+                autoplay muted playsinline loop preload="auto"
+              ></video>
+              <img
+                id="nk-head-poster"
+                class="nk-head-poster-fallback"
+                src="/assets/robot-head-reference.png"
+                alt="Neural core robotic head"
+                hidden
+              />
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const specs = [
+      '12,000 TFLOPS localized processing cluster mimicking biological neural networks.',
+      'High-spectrum spatial telemetry arrays with real-time latency matching human optics.',
+      'Sintered titanium-carbide weave shielding micro-actuator kinetic pathways.'
+    ];
+
+    const descEl = document.getElementById('spec-description');
+    const triggers = document.querySelectorAll('.nk-spec-trigger-pill');
+
+    function setActiveSpec(id) {
+      triggers.forEach((btn) => {
+        btn.classList.toggle('active', Number(btn.dataset.spec) === id);
+      });
+      descEl.classList.remove('animating');
+      void descEl.offsetWidth;
+      descEl.textContent = specs[id];
+      descEl.classList.add('animating');
+    }
+
+    triggers.forEach((btn) => {
+      btn.addEventListener('mouseenter', () => setActiveSpec(Number(btn.dataset.spec)));
+    });
+
+    document.querySelectorAll('video').forEach((video) => {
+      const play = () => video.play().catch(() => {});
+      play();
+      video.addEventListener('loadeddata', play);
+      document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) play();
+      });
+    });
+
+    const headVideo = document.getElementById('nk-head-video');
+    const headPoster = document.getElementById('nk-head-poster');
+
+    function showHeadPoster() {
+      if (!headVideo || !headPoster) return;
+      headVideo.style.display = 'none';
+      headPoster.hidden = false;
+    }
+
+    if (headVideo) {
+      headVideo.addEventListener('error', showHeadPoster);
+    }
+  </script>
+</body>
+</html>
