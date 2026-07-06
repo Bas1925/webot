@@ -239,16 +239,24 @@ sub('<button data-burger="" onclick="{{ toggleMenu }}" aria-label="Open menu"',
 sub('<div style="position:fixed;top:0;right:0;bottom:0;z-index:80;width:min(82vw,320px);',
     '<div class="wb-mobile-sheet" id="wb-mobile-menu" role="dialog" aria-modal="true" aria-label="Menu" style="position:fixed;top:0;right:0;bottom:0;z-index:80;width:min(82vw,320px);', 1);
 
-// mobile top bar: compact EN/AR/HE pill next to the burger, so the language can
-// be switched without opening the menu (the sheet no longer carries a switcher)
-const mobileLangBtn = (click, pressed, label, state, text) =>
-  `<button onclick="{{ ${click} }}" aria-pressed="{{ ${pressed} }}" aria-label="${label}" style="border:0;cursor:pointer;font-family:'Inter';font-weight:700;font-size:12px;letter-spacing:.02em;padding:6px 9px;border-radius:999px;transition:all .2s ease;{{ ${state} }}">${text}</button>`;
+// mobile top bar: globe icon next to the burger opens a small language menu
+// (English / العربية / עברית), so the language can be switched without opening
+// the burger menu. Active language is highlighted; taps outside close it.
+const langOption = (click, pressed, state, label) =>
+  `<button onclick="{{ ${click} }}" role="option" aria-selected="{{ ${pressed} }}" style="border:0;cursor:pointer;text-align:start;font-family:'Inter';font-weight:600;font-size:14.5px;padding:10px 12px;border-radius:10px;transition:background .15s ease;{{ ${state} }}">${label}</button>`;
 sub('<button data-burger="" onclick="{{ toggleMenu }}" aria-label="Open menu" aria-expanded="{{ menuOpen }}" aria-controls="wb-mobile-menu"',
     `<div data-mobile-ui="" style="display:none;align-items:center;gap:10px">
-      <div role="group" aria-label="Language" style="display:flex;align-items:center;background:#fff;border:1px solid #ECEAE3;border-radius:999px;padding:3px;gap:2px">
-        ${mobileLangBtn('setEn', 'enPressed', 'English', 'enBtn', 'EN')}
-        ${mobileLangBtn('setAr', 'arPressed', 'العربية', 'arBtn', 'AR')}
-        ${mobileLangBtn('setHe', 'hePressed', 'עברית', 'heBtn', 'HE')}
+      <div style="position:relative">
+        <button onclick="{{ toggleLangMenu }}" aria-haspopup="listbox" aria-expanded="{{ langMenuOpen }}" aria-label="Language" style="display:flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:11px;border:1px solid #ECEAE3;background:#fff;cursor:pointer;color:#14151A">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3a13.5 13.5 0 0 1 0 18 13.5 13.5 0 0 1 0-18z"></path></svg>
+        </button>
+        <sc-if value="{{ langMenuOpen }}" hint-placeholder-val="{{ false }}">
+          <div role="listbox" aria-label="Language" style="position:absolute;top:calc(100% + 8px);inset-inline-end:0;z-index:90;min-width:150px;display:flex;flex-direction:column;gap:2px;background:#fff;border:1px solid #ECEAE3;border-radius:14px;box-shadow:0 18px 48px -18px rgba(20,21,26,.25);padding:6px">
+            ${langOption('setEn', 'enPressed', 'enRow', 'English')}
+            ${langOption('setAr', 'arPressed', 'arRow', 'العربية')}
+            ${langOption('setHe', 'hePressed', 'heRow', 'עברית')}
+          </div>
+        </sc-if>
       </div>
       <button data-burger="" onclick="{{ toggleMenu }}" aria-label="Open menu" aria-expanded="{{ menuOpen }}" aria-controls="wb-mobile-menu"`, 1);
 sub('</button>\n  </nav>', '</button>\n    </div>\n  </nav>', 1);
