@@ -172,7 +172,7 @@ class Component extends DCLogic {
           errorMsg: `Something went wrong. Please try again, or email hello@webot.studio.`,
           valName: `Please enter your full name (at least 2 characters).`,
           valCountry: `Please select your country from the list.`,
-          valPhone: `Please enter a valid phone number (at least 7 digits).`,
+          valPhone: `Please enter a valid 10-digit phone number (e.g. 0501234567).`,
           valEmail: `Please enter a valid email address.`,
         },
         footer: {
@@ -318,7 +318,7 @@ class Component extends DCLogic {
           errorMsg: `حدث خطأ ما. حاول مرة أخرى أو راسلنا على hello@webot.studio.`,
           valName: `يرجى إدخال اسمك الكامل (حرفان على الأقل).`,
           valCountry: `يرجى اختيار دولتك من القائمة.`,
-          valPhone: `يرجى إدخال رقم هاتف صحيح (7 أرقام على الأقل).`,
+          valPhone: `يرجى إدخال رقم هاتف صحيح من 10 أرقام (مثال: 0501234567).`,
           valEmail: `يرجى إدخال بريد إلكتروني صحيح.`,
         },
         footer: {
@@ -464,7 +464,7 @@ class Component extends DCLogic {
           errorMsg: `משהו השתבש. נסו שוב, או כתבו לנו ל-hello@webot.studio.`,
           valName: `הזינו את שמכם המלא (לפחות 2 תווים).`,
           valCountry: `בחרו את המדינה שלכם מהרשימה.`,
-          valPhone: `הזינו מספר טלפון תקין (לפחות 7 ספרות).`,
+          valPhone: `הזינו מספר טלפון תקין בן 10 ספרות (למשל 0501234567).`,
           valEmail: `הזינו כתובת אימייל תקינה.`,
         },
         footer: {
@@ -814,7 +814,7 @@ class Component extends DCLogic {
       const email = emailEl ? emailEl.value.trim() : '';
 
       if (name.length < 2) return this.setState({ formStatus: 'error', formValidationMsg: t.valName });
-      if (digits(phone) < 7) return this.setState({ formStatus: 'error', formValidationMsg: t.valPhone });
+      if (digits(phone) !== 10) return this.setState({ formStatus: 'error', formValidationMsg: t.valPhone });
       if (!isEmail(email)) return this.setState({ formStatus: 'error', formValidationMsg: t.valEmail });
 
       const fd = new FormData(form);
