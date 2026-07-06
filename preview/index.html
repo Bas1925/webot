@@ -974,7 +974,7 @@
 class Component extends DCLogic {
   state = {
     billing: (this.props.defaultBilling ?? 'oneoff'),
-    faqOpen: 0,
+    faqOpen: -1,   // all FAQ answers start closed
     menuOpen: false,
     langOpen: false,
     lang: Component.initialLang(),
@@ -1073,12 +1073,11 @@ class Component extends DCLogic {
           ],
         },
         work: {
-          kicker: `Selected work`, h2: `Products people actually use.`, sub: `A few recent builds — across healthcare, skincare, retail and premium product sites.`,
+          kicker: `Selected work`, h2: `Products people actually use.`, sub: `A few recent builds — across healthcare, skincare and retail.`,
           items: [
             { tag: `3 languages`, name: `Dr. Samhat`, desc: `A multilingual medical practice site — calm and easy to book.` },
             { tag: `Skincare`, name: `Lalor Clinic`, desc: `A refined skincare brand with a soft, premium feel.` },
             { tag: `Ecommerce · AI · RTL`, name: `Al-Malak`, desc: `Arabic RTL store with an AI gift assistant that helps shoppers choose.` },
-            { tag: `Bionic · Premium`, name: `NeuralKinetics`, desc: `Minimal black-and-white landing with cinematic robot visuals and interactive specs.` },
           ],
         },
         ai: {
@@ -1511,7 +1510,6 @@ class Component extends DCLogic {
       { name: 'Dr. Samhat', mark: 'DS', cover: 'linear-gradient(135deg,#3B4FFF,#6e7bff)', domain: 'drsamhat.com', url: 'https://drsamhat.com', delay: '0' },
       { name: 'Lalor Clinic', mark: 'LC', cover: 'linear-gradient(135deg,#FF6B57,#ff9472)', domain: 'lalor-clinic.com', url: 'https://lalor-clinic.com', delay: '80' },
       { name: 'Al-Malak', mark: 'AM', cover: 'linear-gradient(135deg,#0f6b4f,#19a87a)', domain: 'almalakstudio.com', url: 'https://almalakstudio.com', delay: '160' },
-      { name: 'NeuralKinetics', mark: 'NK', cover: 'linear-gradient(135deg,#14151A,#3a3a3a)', domain: 'Bionic landing demo', url: '/neuralkinetics.html', delay: '240' },
     ];
     const portfolio = T.work.items.map((it, i) => Object.assign({}, pfVisual[i] || {}, it, { name: it.name || (pfVisual[i] && pfVisual[i].name) || '' }));
 
