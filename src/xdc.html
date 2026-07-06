@@ -976,6 +976,8 @@ class Component extends DCLogic {
       const mobile = window.innerWidth < 900;
       if (desktop) desktop.style.display = mobile ? 'none' : 'flex';
       if (burger) burger.style.display = mobile ? 'flex' : 'none';
+      const mobileUi = document.querySelector('[data-mobile-ui]');
+      if (mobileUi) mobileUi.style.display = mobile ? 'flex' : 'none';
       const footerGrid = document.querySelector('footer > div > div');
       if (footerGrid) footerGrid.style.gridTemplateColumns = window.innerWidth < 720 ? '1fr 1fr' : '1.4fr repeat(3,1fr)';
       const track = document.querySelector('[data-process-track]');

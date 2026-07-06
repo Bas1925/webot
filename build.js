@@ -211,10 +211,14 @@ sub('>Pricing</a>', '>{{ navPricing }}</a>', 2);
 sub('>FAQ</a>', '>{{ navFaq }}</a>', 2);
 sub('>Start a project</a>', '>{{ navStart }}</a>', 2);
 
-// Simplify nav: Services · Work · Models (drop Process/Pricing/FAQ from nav)
+// Simplify nav: Services · Work · Models (drop Process/Pricing/FAQ from nav).
+// The desktop nav and the mobile sheet need different link styling — the mobile
+// one keeps the sheet's padding/divider and closes the menu on tap.
 template = template.replace(
   /<a href="#process"[^>]*>\{\{ navProcess \}\}<\/a>\s*<a href="#pricing"[^>]*>\{\{ navPricing \}\}<\/a>\s*<a href="#faq"[^>]*>\{\{ navFaq \}\}<\/a>/g,
-  '<a href="#models" style-hover="color:#3B4FFF" style="transition:color .2s">{{ navModels }}</a>'
+  (m) => m.indexOf('closeMenu') > -1
+    ? '<a href="#models" onclick="{{ closeMenu }}" style="padding:13px 8px;font-size:17px;font-weight:600;border-bottom:1px solid #ECEAE3">{{ navModels }}</a>'
+    : '<a href="#models" style-hover="color:#3B4FFF" style="transition:color .2s">{{ navModels }}</a>'
 );
 
 // language switcher — desktop (before the desktop CTA button)
@@ -231,17 +235,23 @@ sub(desktopCtaAnchor, desktopSwitcher + desktopCtaAnchor, 1);
 sub('<button data-burger="" onclick="{{ toggleMenu }}" aria-label="Open menu"',
     '<button data-burger="" onclick="{{ toggleMenu }}" aria-label="Open menu" aria-expanded="{{ menuOpen }}" aria-controls="wb-mobile-menu"', 1);
 
-// mobile sheet — add flip class, dialog semantics + language switcher (before the mobile CTA button)
+// mobile sheet — add flip class, dialog semantics
 sub('<div style="position:fixed;top:0;right:0;bottom:0;z-index:80;width:min(82vw,320px);',
     '<div class="wb-mobile-sheet" id="wb-mobile-menu" role="dialog" aria-modal="true" aria-label="Menu" style="position:fixed;top:0;right:0;bottom:0;z-index:80;width:min(82vw,320px);', 1);
-const mobileCtaAnchor = '<a href="{{ waLink }}" target="_blank" rel="noopener" onclick="{{ closeMenu }}" style="margin-top:16px;text-align:center;background:#3B4FFF;';
-const mobileSwitcher = `<div role="group" aria-label="Language" style="margin-top:14px;display:flex;gap:8px">
-        <button onclick="{{ setEn }}" aria-pressed="{{ enPressed }}" style="flex:1;border:1px solid #ECEAE3;cursor:pointer;font-family:'Inter';font-weight:600;font-size:14px;padding:11px 6px;border-radius:12px;transition:all .2s ease;{{ enBtnM }}">{{ langEn }}</button>
-        <button onclick="{{ setAr }}" aria-pressed="{{ arPressed }}" style="flex:1;border:1px solid #ECEAE3;cursor:pointer;font-family:'Inter';font-weight:600;font-size:14px;padding:11px 6px;border-radius:12px;transition:all .2s ease;{{ arBtnM }}">{{ langAr }}</button>
-        <button onclick="{{ setHe }}" aria-pressed="{{ hePressed }}" style="flex:1;border:1px solid #ECEAE3;cursor:pointer;font-family:'Inter';font-weight:600;font-size:14px;padding:11px 6px;border-radius:12px;transition:all .2s ease;{{ heBtnM }}">{{ langHe }}</button>
+
+// mobile top bar: compact EN/AR/HE pill next to the burger, so the language can
+// be switched without opening the menu (the sheet no longer carries a switcher)
+const mobileLangBtn = (click, pressed, label, state, text) =>
+  `<button onclick="{{ ${click} }}" aria-pressed="{{ ${pressed} }}" aria-label="${label}" style="border:0;cursor:pointer;font-family:'Inter';font-weight:700;font-size:12px;letter-spacing:.02em;padding:6px 9px;border-radius:999px;transition:all .2s ease;{{ ${state} }}">${text}</button>`;
+sub('<button data-burger="" onclick="{{ toggleMenu }}" aria-label="Open menu" aria-expanded="{{ menuOpen }}" aria-controls="wb-mobile-menu"',
+    `<div data-mobile-ui="" style="display:none;align-items:center;gap:10px">
+      <div role="group" aria-label="Language" style="display:flex;align-items:center;background:#fff;border:1px solid #ECEAE3;border-radius:999px;padding:3px;gap:2px">
+        ${mobileLangBtn('setEn', 'enPressed', 'English', 'enBtn', 'EN')}
+        ${mobileLangBtn('setAr', 'arPressed', 'العربية', 'arBtn', 'AR')}
+        ${mobileLangBtn('setHe', 'hePressed', 'עברית', 'heBtn', 'HE')}
       </div>
-      `;
-sub(mobileCtaAnchor, mobileSwitcher + mobileCtaAnchor, 1);
+      <button data-burger="" onclick="{{ toggleMenu }}" aria-label="Open menu" aria-expanded="{{ menuOpen }}" aria-controls="wb-mobile-menu"`, 1);
+sub('</button>\n  </nav>', '</button>\n    </div>\n  </nav>', 1);
 
 // ---- 4) Hero — full-bleed video hero (ported from the webot-motion concept) ----
 // Replaces the old blob + app-window-mock hero entirely. The copy lives in

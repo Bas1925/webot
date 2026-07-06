@@ -506,9 +506,16 @@
       </div>
       <a href="#contact" style-hover="background:#2638f0;transform:translateY(-1px);box-shadow:0 10px 24px -8px rgba(59,79,255,.6)" style="display:inline-flex;align-items:center;gap:8px;background:#3B4FFF;color:#fff;font-weight:600;font-size:14.5px;padding:11px 19px;border-radius:999px;transition:all .25s ease;box-shadow:0 6px 18px -8px rgba(59,79,255,.5)">{{ navStart }}</a>
     </div>
-    <button data-burger="" onclick="{{ toggleMenu }}" aria-label="Open menu" aria-expanded="{{ menuOpen }}" aria-controls="wb-mobile-menu" style="display:none;align-items:center;justify-content:center;width:42px;height:42px;border-radius:11px;border:1px solid #ECEAE3;background:#fff;cursor:pointer">
+    <div data-mobile-ui="" style="display:none;align-items:center;gap:10px">
+      <div role="group" aria-label="Language" style="display:flex;align-items:center;background:#fff;border:1px solid #ECEAE3;border-radius:999px;padding:3px;gap:2px">
+        <button onclick="{{ setEn }}" aria-pressed="{{ enPressed }}" aria-label="English" style="border:0;cursor:pointer;font-family:'Inter';font-weight:700;font-size:12px;letter-spacing:.02em;padding:6px 9px;border-radius:999px;transition:all .2s ease;{{ enBtn }}">EN</button>
+        <button onclick="{{ setAr }}" aria-pressed="{{ arPressed }}" aria-label="العربية" style="border:0;cursor:pointer;font-family:'Inter';font-weight:700;font-size:12px;letter-spacing:.02em;padding:6px 9px;border-radius:999px;transition:all .2s ease;{{ arBtn }}">AR</button>
+        <button onclick="{{ setHe }}" aria-pressed="{{ hePressed }}" aria-label="עברית" style="border:0;cursor:pointer;font-family:'Inter';font-weight:700;font-size:12px;letter-spacing:.02em;padding:6px 9px;border-radius:999px;transition:all .2s ease;{{ heBtn }}">HE</button>
+      </div>
+      <button data-burger="" onclick="{{ toggleMenu }}" aria-label="Open menu" aria-expanded="{{ menuOpen }}" aria-controls="wb-mobile-menu" style="display:none;align-items:center;justify-content:center;width:42px;height:42px;border-radius:11px;border:1px solid #ECEAE3;background:#fff;cursor:pointer">
       <span style="display:block;width:18px;height:2px;background:#14151A;box-shadow:0 -6px 0 #14151A,0 6px 0 #14151A"></span>
     </button>
+    </div>
   </nav>
 
   <!-- ===== MOBILE SHEET ===== -->
@@ -521,12 +528,7 @@
       </div>
       <a href="#services" onclick="{{ closeMenu }}" style="padding:13px 8px;font-size:17px;font-weight:600;border-bottom:1px solid #ECEAE3">{{ navServices }}</a>
       <a href="#work" onclick="{{ closeMenu }}" style="padding:13px 8px;font-size:17px;font-weight:600;border-bottom:1px solid #ECEAE3">{{ navWork }}</a>
-      <a href="#models" style-hover="color:#3B4FFF" style="transition:color .2s">{{ navModels }}</a>
-      <div role="group" aria-label="Language" style="margin-top:14px;display:flex;gap:8px">
-        <button onclick="{{ setEn }}" aria-pressed="{{ enPressed }}" style="flex:1;border:1px solid #ECEAE3;cursor:pointer;font-family:'Inter';font-weight:600;font-size:14px;padding:11px 6px;border-radius:12px;transition:all .2s ease;{{ enBtnM }}">{{ langEn }}</button>
-        <button onclick="{{ setAr }}" aria-pressed="{{ arPressed }}" style="flex:1;border:1px solid #ECEAE3;cursor:pointer;font-family:'Inter';font-weight:600;font-size:14px;padding:11px 6px;border-radius:12px;transition:all .2s ease;{{ arBtnM }}">{{ langAr }}</button>
-        <button onclick="{{ setHe }}" aria-pressed="{{ hePressed }}" style="flex:1;border:1px solid #ECEAE3;cursor:pointer;font-family:'Inter';font-weight:600;font-size:14px;padding:11px 6px;border-radius:12px;transition:all .2s ease;{{ heBtnM }}">{{ langHe }}</button>
-      </div>
+      <a href="#models" onclick="{{ closeMenu }}" style="padding:13px 8px;font-size:17px;font-weight:600;border-bottom:1px solid #ECEAE3">{{ navModels }}</a>
       <a href="#contact" onclick="{{ closeMenu }}" style="margin-top:16px;text-align:center;background:#3B4FFF;color:#fff;font-weight:600;font-size:16px;padding:14px;border-radius:999px">{{ navStart }}</a>
     </div>
   </sc-if>
@@ -1939,6 +1941,8 @@ class Component extends DCLogic {
       const mobile = window.innerWidth < 900;
       if (desktop) desktop.style.display = mobile ? 'none' : 'flex';
       if (burger) burger.style.display = mobile ? 'flex' : 'none';
+      const mobileUi = document.querySelector('[data-mobile-ui]');
+      if (mobileUi) mobileUi.style.display = mobile ? 'flex' : 'none';
       const footerGrid = document.querySelector('footer > div > div');
       if (footerGrid) footerGrid.style.gridTemplateColumns = window.innerWidth < 720 ? '1fr 1fr' : '1.4fr repeat(3,1fr)';
       const track = document.querySelector('[data-process-track]');
