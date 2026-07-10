@@ -29,10 +29,11 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Webot","description":"Webot designs and builds fast websites, mobile apps and AI features for founders and teams — in English, Arabic and Hebrew, fully RTL-ready.","url":"https://werbot.netlify.app/","image":"https://werbot.netlify.app/assets/4a97f629-b3fe-4cc5-adf9-33a24cefa8bc.png","logo":"https://werbot.netlify.app/assets/4a97f629-b3fe-4cc5-adf9-33a24cefa8bc.png","slogan":"Web, mobile & AI products, built right","areaServed":"Worldwide","knowsLanguage":["en","ar","he"],"sameAs":["https://instagram.com/webot2026"]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Heebo:wght@400;500;600;700;800&family=Sora:wght@300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Heebo:wght@400;500;600;700;800&family=Inter:wght@200;400;500;600&family=Playfair+Display:ital,wght@0,500;1,500;1,600&family=Sora:wght@300;600;700&display=swap" rel="stylesheet">
 <style id="wb-i18n">
   html[lang="ar"], html[lang="ar"] *{font-family:'Cairo','Noto Sans Arabic','Segoe UI',Tahoma,sans-serif !important}
   html[lang="he"], html[lang="he"] *{font-family:'Heebo','Noto Sans Hebrew','Segoe UI',Arial,sans-serif !important}
+  html[lang="ar"] .wb-svc-h2-serif, html[lang="he"] .wb-svc-h2-serif{font-style:normal !important}
   .wb-arrow{display:inline-block}
   [dir="rtl"] .wb-arrow{transform:scaleX(-1)}
   [dir="rtl"] .wb-mobile-sheet{right:auto !important;left:0 !important;box-shadow:20px 0 60px -20px rgba(20,21,26,.3) !important}
@@ -98,6 +99,85 @@
   .wb-country-opt[hidden]{display:none}
   .wb-country-empty{margin:0;padding:14px 12px;font-size:13.5px;color:#6b7077;text-align:center}
   [dir="rtl"] .wb-country-trigger{text-align:right}
+  /* about / quote + parallax reel */
+  .wb-about{background:transparent}
+  .wb-about-inner{max-width:42rem;margin:0 auto;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 6px}
+  .wb-about-icon{color:#0D212C;margin-bottom:24px}
+  .wb-about-quote{margin:0;font-family:'Sora',sans-serif;font-weight:600;font-size:clamp(32px,5vw,44px);line-height:1.1;letter-spacing:-.03em;color:#0D212C;max-width:36rem}
+  .wb-about-serif{font-family:'Playfair Display',Georgia,'Times New Roman',serif;font-style:italic;font-weight:600}
+  .wb-about-author{margin:24px 0 0;font-size:14px;font-style:italic;color:#273C46}
+  .wb-about-clients{margin-top:28px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:clamp(12px,2.5vw,20px)}
+  .wb-about-client{font-family:'Playfair Display',Georgia,serif;font-style:italic;font-weight:500;font-size:clamp(17px,2.4vw,22px);color:#53656F;letter-spacing:.01em}
+  .wb-about-client:not(:last-child)::after{content:'·';margin-inline-start:clamp(12px,2.5vw,20px);font-style:normal;color:rgba(13,33,44,.28)}
+  html[lang="ar"] .wb-about-client, html[lang="he"] .wb-about-client{font-style:normal;font-family:'Sora',sans-serif;font-weight:500}
+  .wb-about-video-wrap{margin-top:48px;width:100%;max-width:20rem;border-radius:16px;overflow:hidden;box-shadow:0 24px 48px -20px rgba(13,33,44,.28);will-change:transform}
+  .wb-about-video-wrap video{width:100%;height:auto;display:block;object-fit:cover;transform:scale(1.15);transform-origin:center center}
+  @keyframes wbFadeInUp{0%{opacity:0;transform:translateY(30px)}100%{opacity:1;transform:translateY(0)}}
+  .wb-animate-fade-in-up{animation:wbFadeInUp .8s ease-out forwards;opacity:0}
+  @media (prefers-reduced-motion:reduce){.wb-about-video-wrap{transform:none !important}.wb-about-video-wrap video{transform:none}}
+  /* partner / mouse-trail CTA */
+  .wb-partner{padding:clamp(48px,6vh,72px) clamp(18px,5vw,56px)}
+  .wb-partner-card{position:relative;max-width:80rem;margin:0 auto;padding:clamp(96px,12vh,192px) clamp(24px,5vw,48px);border-radius:40px;background:#fff;box-shadow:0 4px 30px rgba(0,0,0,.06);overflow:hidden}
+  .wb-partner-inner{position:relative;z-index:10;display:flex;flex-direction:column;align-items:center;text-align:center}
+  .wb-partner-h2{margin:0 0 48px;font-family:'Playfair Display',Georgia,'Times New Roman',serif;font-weight:600;font-style:italic;font-size:clamp(48px,8vw,80px);line-height:1.05;letter-spacing:-.02em;color:#0D212C}
+  .wb-partner-cta{display:inline-flex;align-items:center;gap:12px;padding:10px 22px 10px 10px;border-radius:999px;background:#051A24;color:#fff;font-family:'Inter',sans-serif;font-weight:600;font-size:15.5px;text-decoration:none;box-shadow:0 18px 40px -16px rgba(5,26,36,.55),0 2px 0 rgba(255,255,255,.12) inset,0 -1px 0 rgba(0,0,0,.25) inset;transition:transform .2s ease,box-shadow .2s ease}
+  .wb-partner-cta:hover{transform:translateY(-2px);box-shadow:0 22px 48px -14px rgba(5,26,36,.6),0 2px 0 rgba(255,255,255,.14) inset}
+  .wb-partner-avatar{width:40px;height:40px;border-radius:50%;object-fit:cover;flex:none;display:block;background:#0D212C}
+  .wb-partner-trail{position:absolute;height:8rem;width:10rem;border-radius:12px;object-fit:cover;box-shadow:0 16px 40px -12px rgba(0,0,0,.35);pointer-events:none;z-index:1;opacity:.9;--wb-rot:0deg;transform:translate(-50%,-50%) rotate(var(--wb-rot));animation:trailFade 1s ease-out forwards}
+  @keyframes trailFade{0%{opacity:.9;transform:translate(-50%,-50%) rotate(var(--wb-rot)) scale(1)}100%{opacity:0;transform:translate(-50%,-50%) rotate(var(--wb-rot)) scale(.6)}}
+  @media (prefers-reduced-motion:reduce){.wb-partner-trail{display:none !important}}
+  /* premium services — 4 cards (2×2) */
+  .wb-svc{position:relative;background:#fff;padding:clamp(88px,11vh,136px) clamp(18px,2.5vw,40px);overflow:hidden}
+  .wb-svc-gridbg{position:absolute;inset:-8% -4%;background-image:linear-gradient(rgba(13,33,44,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(13,33,44,.035) 1px,transparent 1px);background-size:52px 52px;-webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 40%,#000 10%,transparent 75%);mask-image:radial-gradient(ellipse 70% 60% at 50% 40%,#000 10%,transparent 75%);pointer-events:none;z-index:0}
+  .wb-svc-wrap{position:relative;z-index:2;max-width:1280px;margin:0 auto}
+  .wb-svc-label{font-family:Inter,system-ui,sans-serif;font-size:12px;font-weight:500;letter-spacing:.25em;text-transform:uppercase;color:#6B7B84}
+  .wb-svc-label:empty{display:none}
+  .wb-svc-h2{margin-top:16px;font-size:clamp(44px,7vw,80px);line-height:.96;letter-spacing:-.03em;color:#0D212C}
+  .wb-svc-h2-serif{font-family:'Playfair Display',Georgia,serif;font-weight:500;font-style:italic}
+  .wb-svc-h2-sans{font-family:Inter,system-ui,sans-serif;font-weight:500}
+  .wb-svc-lead{margin-top:24px;max-width:560px;font-family:Inter,system-ui,sans-serif;font-size:clamp(16px,1.8vw,19px);line-height:1.7;color:#53656F}
+  .wb-svc-grid{margin-top:64px;display:grid;grid-template-columns:1fr;gap:20px}
+  @media (min-width:900px){.wb-svc-grid{grid-template-columns:1fr 1fr;gap:22px}}
+  .wb-svc-card{position:relative;background:#FBFAF6;border-radius:28px;border:1px solid rgba(13,33,44,.07);box-shadow:0 12px 40px -28px rgba(13,33,44,.2);overflow:hidden;min-height:380px;padding:36px 28px 28px;display:flex;flex-direction:column;transition:transform .5s cubic-bezier(.22,.61,.36,1),box-shadow .5s cubic-bezier(.22,.61,.36,1),border-color .5s cubic-bezier(.22,.61,.36,1),background .5s cubic-bezier(.22,.61,.36,1);opacity:0;transform:translateY(40px)}
+  @media (max-width:640px){.wb-svc-card{min-height:0;padding:28px 24px 24px}}
+  .wb-svc-card.is-in{opacity:1;transform:translateY(0);transition:transform .85s cubic-bezier(.22,.61,.36,1),opacity .85s cubic-bezier(.22,.61,.36,1),box-shadow .5s cubic-bezier(.22,.61,.36,1),border-color .5s cubic-bezier(.22,.61,.36,1),background .5s cubic-bezier(.22,.61,.36,1)}
+  .wb-svc-card.is-in:hover{transform:translateY(-6px);box-shadow:0 28px 56px -24px rgba(13,33,44,.26);border-color:rgba(13,33,44,.12);background:#fff}
+  .wb-svc-glow{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .35s ease;background:radial-gradient(280px circle at var(--mx,50%) var(--my,50%),rgba(84,164,255,.12),transparent 70%);z-index:0}
+  .wb-svc-card:hover .wb-svc-glow{opacity:1}
+  .wb-svc-copy,.wb-svc-artwrap{position:relative;z-index:2}
+  .wb-svc-copy{flex:1}
+  .wb-svc-num{position:absolute;top:14px;left:20px;font-family:Inter,system-ui,sans-serif;font-size:64px;font-weight:200;color:rgba(13,33,44,.07);line-height:1;z-index:1;transition:color .5s cubic-bezier(.22,.61,.36,1);pointer-events:none}
+  [dir="rtl"] .wb-svc-num{left:auto;right:20px}
+  .wb-svc-card:hover .wb-svc-num{color:rgba(13,33,44,.14)}
+  .wb-svc-title-wrap{position:relative;display:inline-block;margin-top:36px}
+  .wb-svc-title{font-family:Inter,system-ui,sans-serif;font-size:clamp(22px,2.2vw,28px);font-weight:500;color:#0D212C;letter-spacing:-.02em;transition:transform .45s cubic-bezier(.22,.61,.36,1)}
+  .wb-svc-card.is-in:hover .wb-svc-title{transform:translateY(-3px)}
+  .wb-svc-uline{display:block;height:2px;width:0;margin-top:10px;background:#0D212C;transition:width .55s cubic-bezier(.22,.61,.36,1)}
+  .wb-svc-card.is-in .wb-svc-uline{width:36px}
+  .wb-svc-card.is-in:hover .wb-svc-uline{width:100%}
+  .wb-svc-desc{margin-top:14px;font-family:Inter,system-ui,sans-serif;font-size:clamp(15px,1.4vw,16.5px);line-height:1.65;color:#53656F;max-width:32ch}
+  .wb-svc-artwrap{margin-top:auto;padding-top:20px;display:flex;justify-content:flex-end}
+  [dir="rtl"] .wb-svc-artwrap{justify-content:flex-start}
+  .wb-svc-art{width:100%;max-width:168px;opacity:.9;display:block;transition:transform .55s cubic-bezier(.22,.61,.36,1);animation:wbSvcFloat 5.5s ease-in-out infinite}
+  .wb-svc-card.is-in:hover .wb-svc-art{transform:scale(1.04) rotate(4deg);animation-play-state:paused}
+  @keyframes wbSvcFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+  @media (max-width:640px){.wb-svc-art{max-width:140px}.wb-svc-artwrap{justify-content:center}}
+  @media (prefers-reduced-motion:reduce){.wb-svc-art{animation:none}.wb-svc-card,.wb-svc-card.is-in{opacity:1;transform:none}}
+  .wb-svc-intro .wb-svc-label,.wb-svc-intro .wb-svc-h2,.wb-svc-intro .wb-svc-lead{opacity:0;transform:translateY(24px);transition:opacity .85s cubic-bezier(.22,.61,.36,1),transform .85s cubic-bezier(.22,.61,.36,1)}
+  .wb-svc-intro.is-visible .wb-svc-label,.wb-svc-intro.is-visible .wb-svc-h2,.wb-svc-intro.is-visible .wb-svc-lead{opacity:1;transform:translateY(0)}
+  .wb-svc-intro.is-visible .wb-svc-h2{transition-delay:.08s}
+  .wb-svc-intro.is-visible .wb-svc-lead{transition-delay:.16s}
+  /* cookie consent */
+  .wb-cookie{position:fixed;left:16px;right:16px;bottom:16px;z-index:9999;max-width:760px;margin:0 auto;display:none;align-items:center;justify-content:space-between;gap:14px;padding:16px 18px;border-radius:18px;background:#0D212C;color:#FBFAF6;box-shadow:0 24px 60px -20px rgba(13,33,44,.55);font-family:Inter,system-ui,sans-serif}
+  .wb-cookie.is-on{display:flex}
+  .wb-cookie-logo{width:36px;height:36px;border-radius:10px;object-fit:cover;flex:none;background:#FBFAF6}
+  .wb-cookie-copy{flex:1;min-width:0}
+  .wb-cookie-text{margin:0;font-size:14px;line-height:1.55;color:rgba(251,250,246,.88)}
+  .wb-cookie-text a{color:#54A4FF;text-decoration:underline;text-underline-offset:2px}
+  .wb-cookie-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px;flex:none}
+  .wb-cookie-btn{appearance:none;border:0;cursor:pointer;border-radius:999px;padding:10px 18px;font-family:Inter,system-ui,sans-serif;font-weight:600;font-size:13.5px;background:#FBFAF6;color:#0D212C;transition:transform .2s ease,background .2s ease}
+  .wb-cookie-btn:hover{transform:translateY(-1px);background:#fff}
+  @media (max-width:640px){.wb-cookie{flex-wrap:wrap;left:12px;right:12px;bottom:12px}.wb-cookie-actions,.wb-cookie-btn{width:100%}}
 </style>
 <script>
 /* The hero video is rendered by the runtime, which drops the "muted"/"loop"
@@ -497,7 +577,7 @@
       <div style="display:flex;align-items:center;gap:clamp(16px,2.2vw,30px);font-size:15px;color:#4a4e55;font-weight:500">
         <a href="#services" style-hover="color:#3B4FFF" style="transition:color .2s">{{ navServices }}</a>
         <a href="#work" style-hover="color:#3B4FFF" style="transition:color .2s">{{ navWork }}</a>
-        <a href="#models" style-hover="color:#3B4FFF" style="transition:color .2s">{{ navModels }}</a>
+        <a href="#partner" style-hover="color:#3B4FFF" style="transition:color .2s">{{ navPartner }}</a>
       </div>
       <div role="group" aria-label="Language" style="display:flex;align-items:center;background:#fff;border:1px solid #ECEAE3;border-radius:999px;padding:3px;gap:2px">
         <button onclick="{{ setEn }}" aria-pressed="{{ enPressed }}" aria-label="English" style="border:0;cursor:pointer;font-family:'Inter';font-weight:700;font-size:12.5px;letter-spacing:.02em;padding:7px 10px;border-radius:999px;transition:all .2s ease;{{ enBtn }}">EN</button>
@@ -535,7 +615,7 @@
       </div>
       <a href="#services" onclick="{{ closeMenu }}" style="padding:13px 8px;font-size:17px;font-weight:600;border-bottom:1px solid #ECEAE3">{{ navServices }}</a>
       <a href="#work" onclick="{{ closeMenu }}" style="padding:13px 8px;font-size:17px;font-weight:600;border-bottom:1px solid #ECEAE3">{{ navWork }}</a>
-      <a href="#models" onclick="{{ closeMenu }}" style="padding:13px 8px;font-size:17px;font-weight:600;border-bottom:1px solid #ECEAE3">{{ navModels }}</a>
+      <a href="#partner" onclick="{{ closeMenu }}" style="padding:13px 8px;font-size:17px;font-weight:600;border-bottom:1px solid #ECEAE3">{{ navPartner }}</a>
       <a href="#contact" onclick="{{ closeMenu }}" style="margin-top:16px;text-align:center;background:#3B4FFF;color:#fff;font-weight:600;font-size:16px;padding:14px;border-radius:999px">{{ navStart }}</a>
     </div>
   </sc-if>
@@ -572,24 +652,46 @@
   </section>
 
   <!-- ===== SERVICES ===== -->
-  <section id="services" style="padding:clamp(64px,9vh,110px) clamp(18px,5vw,56px)">
-    <div style="max-width:1180px;margin:0 auto">
-      <div data-reveal="" style="max-width:640px">
-        <div style="font-size:13.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#3B4FFF">{{ servicesKicker }}</div>
-        <h2 style="margin-top:14px;font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(28px,4.2vw,46px);line-height:1.08;letter-spacing:-.02em">{{ servicesH2 }}</h2>
-        <p style="margin-top:14px;font-size:16px;line-height:1.6;color:#6B6F76;max-width:560px">{{ servicesSub }}</p>
+  <section id="services" data-services="" class="wb-svc">
+    <div class="wb-svc-gridbg" aria-hidden="true"></div>
+    <div class="wb-svc-wrap">
+      <div class="wb-svc-intro" data-svc-intro="">
+        <div class="wb-svc-label">{{ servicesKicker }}</div>
+        <h2 class="wb-svc-h2"><span class="wb-svc-h2-serif">{{ servicesH2a }}</span><span class="wb-svc-h2-sans">{{ servicesH2b }}</span></h2>
+        <p class="wb-svc-lead">{{ servicesSub }}</p>
       </div>
-      <div style="margin-top:46px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px">
+      <div class="wb-svc-grid">
         <sc-for list="{{ services }}" as="svc" hint-placeholder-count="4">
-          <div data-reveal="" data-delay="{{ svc.delay }}" style-hover="transform:translateY(-5px);box-shadow:0 22px 46px -22px rgba(20,21,26,.22)" style="position:relative;border-radius:20px;background:#fff;border:1px solid #ECEAE3;box-shadow:0 12px 40px -16px rgba(20,21,26,.12);transition:all .3s ease;overflow:hidden">
-            <image-slot id="{{ svc.slotId }}" src="{{ svc.img }}" placeholder="Drop an image" shape="rect" fit="cover" style="display:block;width:100%;height:150px;background:{{ svc.iconBg }}"></image-slot>
-            <div style="padding:0 26px 26px">
-              <div style="position:relative;margin-top:-26px;display:flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:14px;background:{{ svc.iconBg }};color:{{ svc.iconColor }};font-size:24px;border:3px solid #fff;box-shadow:0 8px 18px -8px rgba(20,21,26,.3)">{{ svc.icon }}</div>
-              <h3 style="margin-top:16px;font-family:'Sora',sans-serif;font-weight:600;font-size:20px;color:#14151A">{{ svc.title }}</h3>
-              <p style="margin-top:9px;font-size:14.5px;line-height:1.55;color:#6B6F76">{{ svc.desc }}</p>
+          <article class="wb-svc-card" data-svc-card="" data-delay="{{ svc.delay }}" data-num="{{ svc.no }}" data-key="{{ svc.key }}">
+            <div class="wb-svc-glow"></div>
+            <span class="wb-svc-num" data-svc-num="">00</span>
+            <div class="wb-svc-copy">
+              <div class="wb-svc-title-wrap">
+                <h3 class="wb-svc-title">{{ svc.title }}</h3>
+                <span class="wb-svc-uline"></span>
+              </div>
+              <p class="wb-svc-desc">{{ svc.desc }}</p>
             </div>
-          </div>
+            <div class="wb-svc-artwrap" data-svc-art=""></div>
+          </article>
         </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT / QUOTE ===== -->
+  <section id="about" data-about="" class="wb-about" style="padding:clamp(56px,8vh,96px) clamp(18px,5vw,56px)">
+    <div class="wb-about-inner">
+      <div data-about-reveal="" style="animation-delay:.1s"><svg class="wb-about-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21c3 0 7-1 7-8V5H3v8c0 4 1 7 4 7z"/><path d="M14 21c3 0 7-1 7-8V5h-8v8c0 4 1 7 4 7z"/></svg></div>
+      <h2 data-about-reveal="" style="animation-delay:.2s" class="wb-about-quote">{{ aboutQuoteBefore }}<span class="wb-about-serif">{{ aboutQuoteAccent }}</span>{{ aboutQuoteAfter }}</h2>
+      <p data-about-reveal="" style="animation-delay:.3s" class="wb-about-author">{{ aboutAuthor }}</p>
+      <div data-about-reveal="" style="animation-delay:.4s" class="wb-about-clients">
+        <sc-for list="{{ aboutClients }}" as="c" hint-placeholder-count="3">
+          <span class="wb-about-client">{{ c.name }}</span>
+        </sc-for>
+      </div>
+      <div data-about-reveal="" data-about-parallax="" style="animation-delay:.5s" class="wb-about-video-wrap">
+        <video src="/assets/webothero.mp4" autoplay muted playsinline loop preload="metadata" aria-label="Webot brand reel"></video>
       </div>
     </div>
   </section>
@@ -607,8 +709,8 @@
       <div style="margin-top:42px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px">
         <sc-for list="{{ portfolio }}" as="p" hint-placeholder-count="3">
           <a href="{{ p.url }}" target="_blank" rel="noopener" data-reveal="" data-delay="{{ p.delay }}" style-hover="transform:translateY(-5px);box-shadow:0 26px 54px -24px rgba(20,21,26,.26)" style="display:block;border-radius:20px;overflow:hidden;background:#fff;border:1px solid #ECEAE3;box-shadow:0 12px 40px -16px rgba(20,21,26,.12);transition:all .3s ease">
-            <div style="height:150px;background:{{ p.cover }};position:relative;display:flex;align-items:center;justify-content:center">
-              <span style="font-family:'Sora',sans-serif;font-weight:700;font-size:26px;color:rgba(255,255,255,.95)">{{ p.mark }}</span>
+            <div style="height:180px;position:relative;overflow:hidden;background:{{ p.cover }}">
+              <img src="{{ p.img }}" alt="{{ p.name }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block">
               <span style="position:absolute;top:12px;right:12px;font-size:11px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;color:#fff;background:rgba(20,21,26,.28);backdrop-filter:blur(4px);padding:5px 10px;border-radius:999px">{{ p.tag }}</span>
             </div>
             <div style="padding:20px">
@@ -641,66 +743,9 @@
 
   
 
-  <!-- ===== MOTION GALLERY ===== -->
-  <section data-gallery="" style="padding:clamp(56px,8vh,96px) 0;overflow:hidden">
-    <div data-reveal="" style="max-width:1180px;margin:0 auto;padding:0 clamp(18px,5vw,56px);text-align:center">
-      <div style="font-size:13.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#3B4FFF">{{ galleryKicker }}</div>
-      <h2 style="margin-top:14px;font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(28px,4.2vw,46px);line-height:1.08;letter-spacing:-.02em">{{ galleryH2 }}</h2>
-      <p style="margin-top:14px;font-size:16px;color:#6B6F76;max-width:520px;margin-left:auto;margin-right:auto">{{ gallerySub }}</p>
-    </div>
-    <div style="margin-top:46px;display:flex;flex-direction:column;gap:18px;direction:ltr">
-      <div style="overflow:hidden">
-        <div data-prx="" data-dir="1" style="display:flex;gap:18px;width:max-content;will-change:transform">
-          <sc-for list="{{ galleryRow1 }}" as="c" hint-placeholder-count="10">
-            <div style="flex:none;width:282px;background:#fff;border:1px solid #ECEAE3;border-radius:18px;box-shadow:0 16px 44px -24px rgba(20,21,26,.28);overflow:hidden">
-              <div style="display:flex;align-items:center;gap:6px;padding:11px 14px;border-bottom:1px solid #F1EFE9">
-                <span style="width:9px;height:9px;border-radius:50%;background:#FF6B57"></span>
-                <span style="width:9px;height:9px;border-radius:50%;background:#FFC542"></span>
-                <span style="width:9px;height:9px;border-radius:50%;background:#2ECC71"></span>
-                <span style="margin-left:8px;flex:1;height:15px;border-radius:5px;background:#F4F2EC"></span>
-              </div>
-              <div style="height:124px;background:{{ c.cover }};display:flex;align-items:center;justify-content:center">
-                <span style="font-family:'Sora',sans-serif;font-weight:700;font-size:21px;letter-spacing:-.01em;color:{{ c.labelColor }}">{{ c.label }}</span>
-              </div>
-              <div style="padding:15px;display:flex;flex-direction:column;gap:8px">
-                <span style="height:8px;border-radius:5px;background:#EDEBE4;width:80%"></span>
-                <span style="height:8px;border-radius:5px;background:#EDEBE4;width:55%"></span>
-                <div style="display:flex;gap:8px;margin-top:6px">
-                  <span style="width:66px;height:24px;border-radius:7px;background:{{ c.accent }}"></span>
-                  <span style="width:42px;height:24px;border-radius:7px;background:#F4F2EC"></span>
-                </div>
-              </div>
-            </div>
-          </sc-for>
-        </div>
-      </div>
-      <div style="overflow:hidden">
-        <div data-prx="" data-dir="-1" style="display:flex;gap:18px;width:max-content;will-change:transform">
-          <sc-for list="{{ galleryRow2 }}" as="c" hint-placeholder-count="10">
-            <div style="flex:none;width:282px;background:#fff;border:1px solid #ECEAE3;border-radius:18px;box-shadow:0 16px 44px -24px rgba(20,21,26,.28);overflow:hidden">
-              <div style="display:flex;align-items:center;gap:6px;padding:11px 14px;border-bottom:1px solid #F1EFE9">
-                <span style="width:9px;height:9px;border-radius:50%;background:#FF6B57"></span>
-                <span style="width:9px;height:9px;border-radius:50%;background:#FFC542"></span>
-                <span style="width:9px;height:9px;border-radius:50%;background:#2ECC71"></span>
-                <span style="margin-left:8px;flex:1;height:15px;border-radius:5px;background:#F4F2EC"></span>
-              </div>
-              <div style="height:124px;background:{{ c.cover }};display:flex;align-items:center;justify-content:center">
-                <span style="font-family:'Sora',sans-serif;font-weight:700;font-size:21px;letter-spacing:-.01em;color:{{ c.labelColor }}">{{ c.label }}</span>
-              </div>
-              <div style="padding:15px;display:flex;flex-direction:column;gap:8px">
-                <span style="height:8px;border-radius:5px;background:#EDEBE4;width:70%"></span>
-                <span style="height:8px;border-radius:5px;background:#EDEBE4;width:88%"></span>
-                <div style="display:flex;gap:8px;margin-top:6px">
-                  <span style="width:66px;height:24px;border-radius:7px;background:{{ c.accent }}"></span>
-                  <span style="width:42px;height:24px;border-radius:7px;background:#F4F2EC"></span>
-                </div>
-              </div>
-            </div>
-          </sc-for>
-        </div>
-      </div>
-    </div>
-  </section>
+  
+
+  
 
   
 
@@ -731,48 +776,7 @@
 
   
 
-  <!-- ===== PRICING ===== -->
-  <section id="models" style="padding:clamp(64px,9vh,110px) clamp(18px,5vw,56px)">
-    <div style="max-width:1180px;margin:0 auto">
-      <div data-reveal="" style="text-align:center;max-width:620px;margin:0 auto">
-        <div style="font-size:13.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#3B4FFF">{{ pricingKicker }}</div>
-        <h2 style="margin-top:14px;font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(28px,4.2vw,46px);line-height:1.08;letter-spacing:-.02em">{{ pricingH2 }}</h2>
-        <p style="margin-top:14px;font-size:16px;color:#6B6F76">{{ pricingSub }}</p>
-      </div>
-
-      <div style="margin-top:24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:20px;align-items:stretch">
-        <sc-for list="{{ tiers }}" as="tier" hint-placeholder-count="3">
-          <div data-reveal="" data-delay="{{ tier.delay }}" style="border-radius:22px;padding:1.5px;background:{{ tier.wrapBg }};background-size:300% 100%;box-shadow:{{ tier.wrapShadow }};{{ tier.wrapAnim }}">
-            <div style="position:relative;height:100%;display:flex;flex-direction:column;border-radius:20.5px;background:#fff;padding:30px 28px">
-              <sc-if value="{{ tier.popular }}" hint-placeholder-val="{{ false }}">
-                <span style="position:absolute;top:-13px;left:50%;transform:translateX(-50%);font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:#FF6B57;padding:6px 14px;border-radius:999px;box-shadow:0 8px 20px -8px rgba(255,107,87,.6)">{{ popularLabel }}</span>
-              </sc-if>
-              <div style="font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#6b7077">{{ tier.phase }}</div>
-              <div style="font-family:'Sora',sans-serif;font-weight:600;font-size:19px;color:#14151A">{{ tier.name }}</div>
-              <p style="margin-top:6px;font-size:14px;color:#6B6F76">{{ tier.sub }}</p>
-              <a href="#contact" style-hover="{{ tier.ctaHover }}" style="margin-top:22px;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:600;font-size:15px;padding:13px 20px;border-radius:999px;transition:all .25s ease;{{ tier.ctaStyle }}">{{ tier.cta }}</a>
-              <div style="margin-top:24px;height:1px;background:#ECEAE3"></div>
-              <div style="margin-top:22px;display:flex;flex-direction:column;gap:13px;flex:1">
-                <sc-for list="{{ tier.features }}" as="f" hint-placeholder-count="5">
-                  <div style="display:flex;align-items:flex-start;gap:11px;font-size:14.5px;line-height:1.45;color:#3a3d44">
-                    <span style="margin-top:1px;flex:none;display:flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:6px;background:rgba(59,79,255,.1);color:#3B4FFF;font-size:12px;font-weight:700">✓</span>
-                    <span>{{ f }}</span>
-                  </div>
-                </sc-for>
-              </div>
-            </div>
-          </div>
-        </sc-for>
-      </div>
-
-      <!-- single pricing CTA -->
-      <div data-reveal="" style="margin-top:36px;text-align:center">
-        <p style="font-size:16px;line-height:1.6;color:#6b7077;max-width:460px;margin:0 auto">{{ assistDesc }}</p>
-        <a href="#contact" style-hover="background:#2638f0;transform:translateY(-2px);box-shadow:0 16px 34px -12px rgba(59,79,255,.65)" style="display:inline-flex;align-items:center;gap:9px;background:#3B4FFF;color:#fff;font-weight:600;font-size:16px;padding:15px 30px;border-radius:999px;margin-top:20px;transition:all .25s ease;box-shadow:0 10px 26px -12px rgba(59,79,255,.55)">{{ assistCta }}</a>
-        <p style="margin-top:16px;font-size:12.5px;color:#6b7077">{{ disclaimer }}</p>
-      </div>
-    </div>
-  </section>
+  
 
   <!-- ===== TESTIMONIAL MARQUEE ===== -->
   <section style="padding:clamp(24px,4vh,48px) 0;overflow:hidden;border-top:1px solid #ECEAE3;border-bottom:1px solid #ECEAE3">
@@ -792,6 +796,19 @@
             </div>
           </div>
         </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PARTNER CTA ===== -->
+  <section id="partner" data-partner="" class="wb-partner">
+    <div data-partner-card="" class="wb-partner-card">
+      <div data-partner-reveal="" class="wb-partner-inner">
+        <h2 class="wb-partner-h2">{{ partnerHeading }}</h2>
+        <a href="#contact" class="wb-partner-cta">
+          <img class="wb-partner-avatar" src="/assets/wblogo.png" alt="Webot" width="40" height="40">
+          <span>{{ partnerCta }}</span>
+        </a>
       </div>
     </div>
   </section>
@@ -921,6 +938,16 @@
       </div>
     </div>
   </footer>
+
+  <div id="wb-cookie" class="wb-cookie" data-cookie="" role="dialog" aria-live="polite" aria-label="{{ cookieAria }}">
+    <img class="wb-cookie-logo" src="/assets/wblogo.png" alt="Webot" width="36" height="36">
+    <div class="wb-cookie-copy">
+      <p class="wb-cookie-text">{{ cookieText }} <a href="/privacy">{{ cookiePrivacy }}</a></p>
+    </div>
+    <div class="wb-cookie-actions">
+      <button type="button" class="wb-cookie-btn" data-cookie-accept="">{{ cookieAccept }}</button>
+    </div>
+  </div>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script="" data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:900},&quot;whatsappNumber&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;0549851769&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;email&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;hello@webot.studio&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;defaultBilling&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;oneoff&quot;,&quot;options&quot;:[&quot;oneoff&quot;,&quot;monthly&quot;],&quot;tsType&quot;:&quot;string&quot;}}">
@@ -972,7 +999,7 @@ class Component extends DCLogic {
         waText: `Hi Webot — I'd like to start a project.`,
         title: `Webot — Where your business runs online`,
         metaDesc: `Webot designs and builds fast websites, mobile apps and AI features for founders and teams — in English, Arabic and Hebrew, fully RTL-ready.`,
-        nav: { services: `Services`, work: `Work`, models: `Models`, start: `Start a project` },
+        nav: { services: `Services`, work: `Work`, models: `Partner`, start: `Start a project` },
         langName: { en: `English`, ar: `العربية`, he: `עברית` },
         hero: {
           badge: `Available for projects`,
@@ -991,13 +1018,14 @@ class Component extends DCLogic {
         marquee: `Every project comes with`,
         marqueeItems: [`Loads fast`, `Found on Google`, `3 languages`, `Perfect on phones`, `Fixed price — no surprises`, `Live in ~2 weeks`, `You own the code`, `Support after launch`],
         services: {
-          kicker: `What we do`, h2: `Everything it takes to launch and keep growing.`,
-          sub: `One senior team for the whole journey — websites, apps and AI, designed and engineered under one roof.`,
+          kicker: `Services`,
+          h2a: `What`, h2b: ` we do`,
+          sub: `Everything it takes to launch and keep growing. One senior team for the whole journey—websites, apps, online stores and AI, designed and engineered under one roof.`,
           items: [
-            { title: `Websites & web apps`, desc: `Marketing sites, dashboards and SaaS platforms that load fast, rank well and turn visitors into customers.` },
-            { title: `Mobile apps`, desc: `iOS + Android from one codebase — smooth, native-feeling, store-ready.` },
-            { title: `AI features`, desc: `Assistants, search and automation built into your product where it helps.` },
-            { title: `Online stores`, desc: `Conversion-first ecommerce — multi-currency, multi-language and fully RTL-ready.` },
+            { title: `Websites & Web Apps`, desc: `Marketing websites, SaaS platforms and custom dashboards engineered for speed, SEO and conversions.` },
+            { title: `Mobile Apps`, desc: `Beautiful iOS and Android applications from one modern codebase with native-quality performance.` },
+            { title: `Online Stores`, desc: `Conversion-focused ecommerce with smooth checkout, inventory and multilingual storefronts that sell.` },
+            { title: `AI Features`, desc: `Intelligent assistants, semantic search and workflow automation integrated naturally into your product.` },
           ],
         },
         showcases: [
@@ -1028,10 +1056,25 @@ class Component extends DCLogic {
         work: {
           kicker: `Selected work`, h2: `Products people actually use.`, sub: `A few recent builds — across healthcare, skincare and retail.`,
           items: [
-            { tag: `3 languages`, name: `Dr. Samhat`, desc: `A multilingual medical practice site — calm and easy to book.` },
-            { tag: `Skincare`, name: `Lalor Clinic`, desc: `A refined skincare brand with a soft, premium feel.` },
-            { tag: `Ecommerce · AI · RTL`, name: `Al-Malak`, desc: `Arabic RTL store with an AI gift assistant that helps shoppers choose.` },
+            { tag: `3 languages`, name: `Dr Samhat`, desc: `A multilingual medical practice site — calm and easy to book.` },
+            { tag: `Skincare`, name: `La Lor`, desc: `A refined skincare brand with a soft, premium feel.` },
+            { tag: `Ecommerce · AI · RTL`, name: `Almalak`, desc: `Arabic RTL store with an AI gift assistant that helps shoppers choose.` },
           ],
+        },
+        about: {
+          quoteBefore: `I build websites that make `,
+          quoteAccent: `businesses`,
+          quoteAfter: ` look as good online as they do in real life`,
+          author: `Webot`,
+          clients: [
+            { name: `Craft` },
+            { name: `Clarity` },
+            { name: `Care` },
+          ],
+        },
+        partner: {
+          heading: `Partner with us`,
+          cta: `Start a project with Webot`,
         },
         ai: {
           kicker: `AI, used well`, h2: `Intelligence where it counts.`, sub: `We add AI only where it saves your users real time — never as a gimmick. Here's where it tends to pay off.`,
@@ -1104,13 +1147,19 @@ class Component extends DCLogic {
         footer: {
           brand: `The web & mobile studio for businesses that want it built right — and built to grow.`,
           cols: [
-            { title: `Services`, links: [`Websites & web apps`, `Mobile apps`, `AI features`, `Online stores`] },
-            { title: `Company`, links: [`Work`, `Models`, `Process`, `Contact`] },
+            { title: `Services`, links: [`Websites & web apps`, `Mobile apps`, `Online stores`, `AI features`] },
+            { title: `Company`, links: [`Work`, `Partner`, `Process`, `Contact`] },
           ],
           touchTitle: `Get in touch`,
           copyright: `© 2026 Webot · Remote, worldwide`,
           made: `@webot2026`,
           privacy: `Privacy`, terms: `Terms`,
+        },
+        cookie: {
+          aria: `Cookie notice`,
+          text: `We use essential local storage only — to remember your language and that you accepted this notice. No ads. No tracking.`,
+          accept: `Got it`,
+          privacy: `Privacy policy`,
         },
       },
 
@@ -1119,7 +1168,7 @@ class Component extends DCLogic {
         waText: `مرحباً Webot — أودّ بدء مشروع.`,
         title: `Webot — نُطلق مشروعك على الإنترنت`,
         metaDesc: `تصمّم Webot وتبني مواقع سريعة وتطبيقات موبايل ومزايا ذكاء اصطناعي لأصحاب الأفكار والفرق — بالإنجليزية والعربية والعبرية، مع دعم كامل للكتابة من اليمين إلى اليسار.`,
-        nav: { services: `الخدمات`, work: `أعمالنا`, models: `النماذج`, start: `ابدأ مشروعك` },
+        nav: { services: `الخدمات`, work: `أعمالنا`, models: `شراكة`, start: `ابدأ مشروعك` },
         langName: { en: `English`, ar: `العربية`, he: `עברית` },
         hero: {
           badge: `متاحون للمشاريع`,
@@ -1138,13 +1187,14 @@ class Component extends DCLogic {
         marquee: `كل مشروع يشمل`,
         marqueeItems: [`سرعة فائقة`, `الظهور في Google`, `بثلاث لغات`, `مثالي على الموبايل`, `سعر ثابت دون مفاجآت`, `الإطلاق خلال أسبوعين تقريباً`, `الكود ملكك`, `دعم بعد الإطلاق`],
         services: {
-          kicker: `ما الذي نقدّمه`, h2: `كل ما يلزم لإطلاق منتجك — وإبقائه في نموٍّ مستمر.`,
-          sub: `فريق واحد متمرّس للرحلة كاملة — مواقع وتطبيقات وذكاء اصطناعي، مصمّمة ومطوّرة تحت سقف واحد.`,
+          kicker: `الخدمات`,
+          h2a: `ماذا`, h2b: ` نقدّم`,
+          sub: `كل ما يلزم لإطلاق مشروعك وإبقائه في نموٍّ مستمر. فريق واحد متمرّس للرحلة كاملة — مواقع وتطبيقات ومتاجر إلكترونية وذكاء اصطناعي، تحت سقف واحد.`,
           items: [
-            { title: `مواقع وتطبيقات ويب`, desc: `مواقع تعريفية ولوحات تحكّم ومنصّات SaaS تُحمَّل بسرعة وتتصدّر نتائج البحث.` },
-            { title: `تطبيقات الموبايل`, desc: `لنظامَي iOS وأندرويد من كودٍ واحد — سلسة وبإحساسٍ أصلي وجاهزة للنشر في المتاجر.` },
-            { title: `مزايا الذكاء الاصطناعي`, desc: `مساعدون وبحثٌ وأتمتة مدمجة في منتجك حيث تكون أكثر فائدة.` },
-            { title: `متاجر إلكترونية`, desc: `تجارة إلكترونية تركّز على التحويل — متعددة العملات واللغات وجاهزة للاتجاه من اليمين إلى اليسار.` },
+            { title: `مواقع وتطبيقات ويب`, desc: `مواقع تسويقية ومنصّات SaaS ولوحات تحكّم مخصّصة — بسرعة عالية وتحسين لمحركات البحث وتحويل أفضل.` },
+            { title: `تطبيقات الموبايل`, desc: `تطبيقات iOS وأندرويد جميلة من كودٍ حديث واحد، بأداءٍ يقترب من التطبيقات الأصلية.` },
+            { title: `متاجر إلكترونية`, desc: `تجارة إلكترونية تركّز على التحويل — دفع سلس ومخزون وواجهات متعددة اللغات تبيع فعلاً.` },
+            { title: `مزايا الذكاء الاصطناعي`, desc: `مساعدون أذكياء وبحث دلالي وأتمتة لسير العمل، مدمجة في منتجك بشكل طبيعي.` },
           ],
         },
         showcases: [
@@ -1175,10 +1225,25 @@ class Component extends DCLogic {
         work: {
           kicker: `أعمال مختارة`, h2: `منتجات يستخدمها الناس فعلاً.`, sub: `نماذج حديثة — في مجالات الصحة والعناية بالبشرة والتجزئة.`,
           items: [
-            { tag: `٣ لغات`, desc: `موقع لعيادة طبية متعدّد اللغات — واضح وهادئ وسهل الحجز.` },
-            { tag: `العناية بالبشرة`, desc: `موقع لعلامة عناية بالبشرة بلمسةٍ راقية وإحساسٍ فاخرٍ وناعم.` },
-            { tag: `تجارة إلكترونية · ذكاء اصطناعي · RTL`, desc: `متجر إلكتروني عربي بالاتجاه من اليمين إلى اليسار مع مساعد هدايا ذكي يساعد المتسوّقين على الاختيار.` },
+            { tag: `٣ لغات`, name: `د. سمحات`, desc: `موقع لعيادة طبية متعدّد اللغات — واضح وهادئ وسهل الحجز.` },
+            { tag: `العناية بالبشرة`, name: `لا لور`, desc: `موقع لعلامة عناية بالبشرة بلمسةٍ راقية وإحساسٍ فاخرٍ وناعم.` },
+            { tag: `تجارة إلكترونية · ذكاء اصطناعي · RTL`, name: `الملك`, desc: `متجر إلكتروني عربي بالاتجاه من اليمين إلى اليسار مع مساعد هدايا ذكي يساعد المتسوّقين على الاختيار.` },
           ],
+        },
+        about: {
+          quoteBefore: `أبني مواقع تجعل `,
+          quoteAccent: `الأعمال`,
+          quoteAfter: ` تبدو على الإنترنت بنفس روعة حضورها في الواقع.`,
+          author: `Webot`,
+          clients: [
+            { name: `إتقان` },
+            { name: `وضوح` },
+            { name: `عناية` },
+          ],
+        },
+        partner: {
+          heading: `شاركنا المشروع`,
+          cta: `ابدأ مشروعك مع Webot`,
         },
         ai: {
           kicker: `الذكاء الاصطناعي بحكمة`, h2: `ذكاءٌ في المكان الذي يهمّ.`, sub: `نُضيف الذكاء الاصطناعي فقط حيث يوفّر لمستخدميك وقتاً حقيقياً — لا كحيلةٍ تسويقية. وهذه أبرز المواضع التي يُثمر فيها.`,
@@ -1251,13 +1316,19 @@ class Component extends DCLogic {
         footer: {
           brand: `استوديو الويب والموبايل للأعمال التي تريد بناءً متقناً — وقابلاً للنمو.`,
           cols: [
-            { title: `الخدمات`, links: [`مواقع وتطبيقات ويب`, `تطبيقات الموبايل`, `مزايا الذكاء الاصطناعي`, `متاجر إلكترونية`] },
-            { title: `الشركة`, links: [`أعمالنا`, `آلية العمل`, `الأسعار`, `الأسئلة الشائعة`] },
+            { title: `الخدمات`, links: [`مواقع وتطبيقات ويب`, `تطبيقات الموبايل`, `متاجر إلكترونية`, `مزايا الذكاء الاصطناعي`] },
+            { title: `الشركة`, links: [`أعمالنا`, `شراكة`, `آلية العمل`, `تواصل`] },
           ],
           touchTitle: `تواصل معنا`,
           copyright: `© 2026 Webot. جميع الحقوق محفوظة.`,
           made: `تصميم وتطوير Webot · عن بُعد، حول العالم`,
           privacy: `الخصوصية`, terms: `الشروط`,
+        },
+        cookie: {
+          aria: `إشعار ملفات تعريف الارتباط`,
+          text: `نستخدم التخزين المحلي الضروري فقط — لتذكّر لغتك وأنك قبلت هذا الإشعار. بلا إعلانات. بلا تتبّع.`,
+          accept: `حسناً`,
+          privacy: `سياسة الخصوصية`,
         },
       },
 
@@ -1266,7 +1337,7 @@ class Component extends DCLogic {
         waText: `היי Webot — אשמח להתחיל פרויקט.`,
         title: `Webot — מביאים את העסק שלכם לאונליין`,
         metaDesc: `‏Webot מעצבת ובונה אתרים מהירים, אפליקציות מובייל ויכולות בינה מלאכותית ליזמים ולצוותים — באנגלית, ערבית ועברית, עם תמיכת RTL מלאה.`,
-        nav: { services: `שירותים`, work: `עבודות`, models: `מודלים`, start: `התחילו פרויקט` },
+        nav: { services: `שירותים`, work: `עבודות`, models: `שותפות`, start: `התחילו פרויקט` },
         langName: { en: `English`, ar: `العربية`, he: `עברית` },
         hero: {
           badge: `פנויים לפרויקטים`,
@@ -1285,13 +1356,14 @@ class Component extends DCLogic {
         marquee: `כל פרויקט כולל`,
         marqueeItems: [`נטען מהר`, `נמצאים בגוגל`, `ב-3 שפות`, `מושלם בנייד`, `מחיר קבוע — בלי הפתעות`, `באוויר תוך כשבועיים`, `הקוד שלכם`, `תמיכה אחרי ההשקה`],
         services: {
-          kicker: `מה אנחנו עושים`, h2: `כל מה שצריך כדי להעלות את המוצר לאוויר — ולהמשיך להצמיח אותו.`,
-          sub: `צוות בכיר אחד לכל המסע — אתרים, אפליקציות ובינה מלאכותית, מתוכננים ומפותחים תחת קורת גג אחת.`,
+          kicker: `שירותים`,
+          h2a: `מה`, h2b: ` אנחנו עושים`,
+          sub: `כל מה שצריך כדי להשיק ולהמשיך לצמוח. צוות בכיר אחד לכל המסע — אתרים, אפליקציות, חנויות אונליין ובינה מלאכותית, תחת קורת גג אחת.`,
           items: [
-            { title: `אתרים ואפליקציות ווב`, desc: `אתרי תדמית, דשבורדים ופלטפורמות SaaS שנטענים מהר ומדורגים גבוה.` },
-            { title: `אפליקציות מובייל`, desc: `ל-iOS ולאנדרואיד מאותו קוד — חלקות, בתחושת נייטיב ומוכנות לחנויות.` },
-            { title: `יכולות בינה מלאכותית`, desc: `עוזרים, חיפוש ואוטומציה משולבים במוצר בדיוק היכן שהם תורמים יותר.` },
-            { title: `חנויות אונליין`, desc: `מסחר אלקטרוני ממוקד המרות — רב-מטבעי, רב-לשוני ותומך RTL.` },
+            { title: `אתרים ואפליקציות ווב`, desc: `אתרי שיווק, פלטפורמות SaaS ודשבורדים מותאמים — מהירים, מותאמי SEO וממוקדי המרה.` },
+            { title: `אפליקציות מובייל`, desc: `אפליקציות iOS ואנדרואיד יפות מקוד מודרני אחד, עם ביצועים ברמת נייטיב.` },
+            { title: `חנויות אונליין`, desc: `מסחר אלקטרוני ממוקד המרה — תשלום חלק, מלאי וחנויות רב-לשוניות שבאמת מוכרות.` },
+            { title: `יכולות בינה מלאכותית`, desc: `עוזרים חכמים, חיפוש סמנטי ואוטומציה של תהליכים — משולבים במוצר באופן טבעי.` },
           ],
         },
         showcases: [
@@ -1322,10 +1394,25 @@ class Component extends DCLogic {
         work: {
           kicker: `עבודות נבחרות`, h2: `מוצרים שאנשים באמת משתמשים בהם.`, sub: `כמה פרויקטים אחרונים — בתחומי הבריאות, הטיפוח והקמעונאות.`,
           items: [
-            { tag: `3 שפות`, desc: `אתר למרפאה רב-לשוני — ברור, רגוע וקל לקביעת תור.` },
-            { tag: `טיפוח עור`, desc: `אתר מותג טיפוח מוקפד עם תחושה רכה ויוקרתית.` },
-            { tag: `מסחר · AI · RTL`, desc: `חנות אונליין בערבית (RTL) עם עוזר מתנות מבוסס AI שעוזר לקונים לבחור.` },
+            { tag: `3 שפות`, name: `ד"ר סמחאת`, desc: `אתר למרפאה רב-לשוני — ברור, רגוע וקל לקביעת תור.` },
+            { tag: `טיפוח עור`, name: `לה לור`, desc: `אתר מותג טיפוח מוקפד עם תחושה רכה ויוקרתית.` },
+            { tag: `מסחר · AI · RTL`, name: `אלמלאכ`, desc: `חנות אונליין בערבית (RTL) עם עוזר מתנות מבוסס AI שעוזר לקונים לבחור.` },
           ],
+        },
+        about: {
+          quoteBefore: `אני בונה אתרים שגורמים ל`,
+          quoteAccent: `עסקים`,
+          quoteAfter: ` להיראות באינטרנט טוב בדיוק כמו במציאות`,
+          author: `Webot`,
+          clients: [
+            { name: `מלאכה` },
+            { name: `בהירות` },
+            { name: `הקפדה` },
+          ],
+        },
+        partner: {
+          heading: `בואו נעבוד יחד`,
+          cta: `התחילו פרויקט עם Webot`,
         },
         ai: {
           kicker: `בינה מלאכותית, בתבונה`, h2: `אינטליגנציה במקום שבו זה משנה.`, sub: `אנחנו מוסיפים AI רק היכן שהוא חוסך למשתמשים זמן אמיתי — אף פעם לא כגימיק. הנה היכן זה משתלם.`,
@@ -1398,13 +1485,19 @@ class Component extends DCLogic {
         footer: {
           brand: `סטודיו הווב והמובייל לעסקים שרוצים שייבנה נכון — ושייבנה כדי לגדול.`,
           cols: [
-            { title: `שירותים`, links: [`אתרים ואפליקציות ווב`, `אפליקציות מובייל`, `יכולות AI`, `חנויות אונליין`] },
-            { title: `החברה`, links: [`עבודות`, `תהליך`, `מחירים`, `שאלות נפוצות`] },
+            { title: `שירותים`, links: [`אתרים ואפליקציות ווב`, `אפליקציות מובייל`, `חנויות אונליין`, `יכולות AI`] },
+            { title: `החברה`, links: [`עבודות`, `שותפות`, `תהליך`, `צור קשר`] },
           ],
           touchTitle: `צרו קשר`,
           copyright: `© 2026 Webot. כל הזכויות שמורות.`,
           made: `עוצב ונבנה על-ידי Webot · מרחוק, מכל העולם`,
           privacy: `פרטיות`, terms: `תנאים`,
+        },
+        cookie: {
+          aria: `הודעת עוגיות`,
+          text: `אנחנו משתמשים באחסון מקומי חיוני בלבד — כדי לזכור את השפה ואת זה שאישרתם את ההודעה. בלי פרסומות. בלי מעקב.`,
+          accept: `הבנתי`,
+          privacy: `מדיניות פרטיות`,
         },
       },
     };
@@ -1440,10 +1533,10 @@ class Component extends DCLogic {
     const galleryRow2 = rev.concat(rev);
 
     const svcVisual = [
-      { slotId: 'svc-web', img: 'data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20400%20150%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%233B4FFF%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%237C4DFF%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%22400%22%20height%3D%22150%22%20fill%3D%22url(%23g)%22%2F%3E%3Ccircle%20cx%3D%22332%22%20cy%3D%2232%22%20r%3D%2246%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.08%22%2F%3E%3Ccircle%20cx%3D%2264%22%20cy%3D%22132%22%20r%3D%2256%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.06%22%2F%3E%3Crect%20x%3D%22120%22%20y%3D%2232%22%20width%3D%22160%22%20height%3D%2296%22%20rx%3D%2212%22%20fill%3D%22%23ffffff%22%2F%3E%3Crect%20x%3D%22120%22%20y%3D%2232%22%20width%3D%22160%22%20height%3D%2222%22%20rx%3D%2212%22%20fill%3D%22%23EEF0FF%22%2F%3E%3Crect%20x%3D%22120%22%20y%3D%2246%22%20width%3D%22160%22%20height%3D%228%22%20fill%3D%22%23EEF0FF%22%2F%3E%3Ccircle%20cx%3D%22134%22%20cy%3D%2243%22%20r%3D%223.5%22%20fill%3D%22%23FF6B57%22%2F%3E%3Ccircle%20cx%3D%22146%22%20cy%3D%2243%22%20r%3D%223.5%22%20fill%3D%22%23FFC542%22%2F%3E%3Ccircle%20cx%3D%22158%22%20cy%3D%2243%22%20r%3D%223.5%22%20fill%3D%22%232ECC71%22%2F%3E%3Crect%20x%3D%22134%22%20y%3D%2268%22%20width%3D%2292%22%20height%3D%229%22%20rx%3D%224.5%22%20fill%3D%22%23C9D0FF%22%2F%3E%3Crect%20x%3D%22134%22%20y%3D%2286%22%20width%3D%22132%22%20height%3D%228%22%20rx%3D%224%22%20fill%3D%22%23E6E9F7%22%2F%3E%3Crect%20x%3D%22134%22%20y%3D%22102%22%20width%3D%2264%22%20height%3D%2214%22%20rx%3D%227%22%20fill%3D%22%233B4FFF%22%2F%3E%3C%2Fsvg%3E', icon: '🌐', iconBg: 'rgba(59,79,255,.1)', iconColor: '#3B4FFF', delay: '0' },
-      { slotId: 'svc-mobile', img: 'data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20400%20150%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23FF6B57%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23FF9472%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%22400%22%20height%3D%22150%22%20fill%3D%22url(%23g)%22%2F%3E%3Ccircle%20cx%3D%22322%22%20cy%3D%22120%22%20r%3D%2250%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.08%22%2F%3E%3Ccircle%20cx%3D%2278%22%20cy%3D%2228%22%20r%3D%2240%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.07%22%2F%3E%3Crect%20x%3D%22168%22%20y%3D%2220%22%20width%3D%2264%22%20height%3D%22110%22%20rx%3D%2214%22%20fill%3D%22%23ffffff%22%2F%3E%3Crect%20x%3D%22176%22%20y%3D%2236%22%20width%3D%2248%22%20height%3D%2258%22%20rx%3D%226%22%20fill%3D%22%23FFE7E1%22%2F%3E%3Crect%20x%3D%22184%22%20y%3D%2248%22%20width%3D%2232%22%20height%3D%226%22%20rx%3D%223%22%20fill%3D%22%23FFB9AB%22%2F%3E%3Crect%20x%3D%22184%22%20y%3D%2260%22%20width%3D%2224%22%20height%3D%226%22%20rx%3D%223%22%20fill%3D%22%23FFD0C7%22%2F%3E%3Crect%20x%3D%22184%22%20y%3D%2276%22%20width%3D%2240%22%20height%3D%2210%22%20rx%3D%225%22%20fill%3D%22%23FF6B57%22%2F%3E%3Crect%20x%3D%22182%22%20y%3D%22104%22%20width%3D%2236%22%20height%3D%226%22%20rx%3D%223%22%20fill%3D%22%23F0EFEA%22%2F%3E%3Ccircle%20cx%3D%22200%22%20cy%3D%22120%22%20r%3D%224%22%20fill%3D%22%23FFC0B5%22%2F%3E%3C%2Fsvg%3E', icon: '📱', iconBg: 'rgba(255,107,87,.12)', iconColor: '#FF6B57', delay: '70' },
-      { slotId: 'svc-ai', img: 'data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20400%20150%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%233B4FFF%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%235A3DFF%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%22400%22%20height%3D%22150%22%20fill%3D%22url(%23g)%22%2F%3E%3Cg%20stroke%3D%22%23ffffff%22%20stroke-width%3D%222%22%20opacity%3D%220.55%22%3E%3Cline%20x1%3D%22150%22%20y1%3D%2240%22%20x2%3D%22200%22%20y2%3D%2275%22%2F%3E%3Cline%20x1%3D%22250%22%20y1%3D%2240%22%20x2%3D%22200%22%20y2%3D%2275%22%2F%3E%3Cline%20x1%3D%22150%22%20y1%3D%22110%22%20x2%3D%22200%22%20y2%3D%2275%22%2F%3E%3Cline%20x1%3D%22250%22%20y1%3D%22110%22%20x2%3D%22200%22%20y2%3D%2275%22%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%22%23ffffff%22%3E%3Ccircle%20cx%3D%22150%22%20cy%3D%2240%22%20r%3D%229%22%2F%3E%3Ccircle%20cx%3D%22250%22%20cy%3D%2240%22%20r%3D%229%22%2F%3E%3Ccircle%20cx%3D%22150%22%20cy%3D%22110%22%20r%3D%229%22%2F%3E%3Ccircle%20cx%3D%22250%22%20cy%3D%22110%22%20r%3D%229%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%22200%22%20cy%3D%2275%22%20r%3D%2216%22%20fill%3D%22%23ffffff%22%2F%3E%3Ccircle%20cx%3D%22200%22%20cy%3D%2275%22%20r%3D%228%22%20fill%3D%22%233B4FFF%22%2F%3E%3Cpath%20d%3D%22M314%2034%20l4%2012%2012%204%20-12%204%20-4%2012%20-4%20-12%20-12%20-4%2012%20-4%20z%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.9%22%2F%3E%3C%2Fsvg%3E', icon: '✨', iconBg: 'rgba(59,79,255,.1)', iconColor: '#3B4FFF', delay: '140' },
-      { slotId: 'svc-store', img: 'data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20400%20150%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%230F6B4F%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%2319A87A%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%22400%22%20height%3D%22150%22%20fill%3D%22url(%23g)%22%2F%3E%3Ccircle%20cx%3D%22322%22%20cy%3D%2238%22%20r%3D%2246%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.08%22%2F%3E%3Ccircle%20cx%3D%2278%22%20cy%3D%22120%22%20r%3D%2248%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.06%22%2F%3E%3Cpath%20d%3D%22M166%2056%20h68%20l8%2070%20a6%206%200%200%201%20-6%207%20h-72%20a6%206%200%200%201%20-6%20-7%20z%22%20fill%3D%22%23ffffff%22%2F%3E%3Cpath%20d%3D%22M182%2058%20a18%2018%200%200%201%2036%200%22%20fill%3D%22none%22%20stroke%3D%22%23ffffff%22%20stroke-width%3D%226%22%20stroke-linecap%3D%22round%22%2F%3E%3Ccircle%20cx%3D%22186%22%20cy%3D%2292%22%20r%3D%226%22%20fill%3D%22%230F6B4F%22%2F%3E%3Ccircle%20cx%3D%22214%22%20cy%3D%2292%22%20r%3D%226%22%20fill%3D%22%230F6B4F%22%2F%3E%3Crect%20x%3D%22178%22%20y%3D%22108%22%20width%3D%2244%22%20height%3D%228%22%20rx%3D%224%22%20fill%3D%22%23CDEFE2%22%2F%3E%3C%2Fsvg%3E', icon: '🛒', iconBg: 'rgba(19,165,116,.12)', iconColor: '#0f6b4f', delay: '210' },
+      { key: 'web', no: '01', delay: '0' },
+      { key: 'mobile', no: '02', delay: '100' },
+      { key: 'store', no: '03', delay: '200' },
+      { key: 'ai', no: '04', delay: '300' },
     ];
     const services = T.services.items.map((it, i) => Object.assign({}, svcVisual[i], it));
 
@@ -1465,9 +1558,9 @@ class Component extends DCLogic {
     const process = T.process.items.map((it, i) => Object.assign({}, procVisual[i], it));
 
     const pfVisual = [
-      { name: 'Dr. Samhat', mark: 'DS', cover: 'linear-gradient(135deg,#3B4FFF,#6e7bff)', domain: 'drsamhat.com', url: 'https://drsamhat.com', delay: '0' },
-      { name: 'Lalor Clinic', mark: 'LC', cover: 'linear-gradient(135deg,#FF6B57,#ff9472)', domain: 'lalor-clinic.com', url: 'https://lalor-clinic.com', delay: '80' },
-      { name: 'Al-Malak', mark: 'AM', cover: 'linear-gradient(135deg,#0f6b4f,#19a87a)', domain: 'almalakstudio.com', url: 'https://almalakstudio.com', delay: '160' },
+      { name: 'Dr Samhat', img: '/assets/drsamhat.png', mark: 'DS', cover: '#EEF0FF', domain: 'drsamhat.com', url: 'https://drsamhat.com', delay: '0' },
+      { name: 'La Lor', img: '/assets/lalor.png', mark: 'LL', cover: '#FFF0EC', domain: 'lalor-clinic.com', url: 'https://lalor-clinic.com', delay: '80' },
+      { name: 'Almalak', img: '/assets/almalak.png', mark: 'AM', cover: '#E7F7F0', domain: 'almalakstudio.com', url: 'https://almalakstudio.com', delay: '160' },
     ];
     const portfolio = T.work.items.map((it, i) => Object.assign({}, pfVisual[i] || {}, it, { name: it.name || (pfVisual[i] && pfVisual[i].name) || '' }));
 
@@ -1510,8 +1603,8 @@ class Component extends DCLogic {
     });
 
     const colHrefs = [
-      ['#services', '#services', '#services', '#services'],
-      ['#work', '#models', '#process', '#contact'],
+      ['#services', '#services', '#services'],
+      ['#work', '#partner', '#process', '#contact'],
     ];
     const footerCols = T.footer.cols.map((col, ci) => ({
       title: col.title,
@@ -1551,7 +1644,7 @@ class Component extends DCLogic {
       langEn: T.langName.en, langAr: T.langName.ar, langHe: T.langName.he,
 
       // nav
-      navServices: T.nav.services, navWork: T.nav.work, navModels: T.nav.models, navStart: T.nav.start,
+      navServices: T.nav.services, navWork: T.nav.work, navPartner: T.nav.models, navStart: T.nav.start,
 
       // hero
       heroBadge: T.hero.badge, heroStudio: T.hero.studio, heroH1a: T.hero.h1a, heroH1hi: T.hero.h1hi, heroH1c: T.hero.h1c,
@@ -1564,10 +1657,13 @@ class Component extends DCLogic {
 
       marqueeLabel: T.marquee,
 
-      servicesKicker: T.services.kicker, servicesH2: T.services.h2, servicesSub: T.services.sub,
+      servicesKicker: T.services.kicker, servicesH2a: T.services.h2a, servicesH2b: T.services.h2b, servicesSub: T.services.sub,
       galleryKicker: T.gallery.kicker, galleryH2: T.gallery.h2, gallerySub: T.gallery.sub,
       processKicker: T.process.kicker, processH2: T.process.h2, processSub: T.process.sub,
       workKicker: T.work.kicker, workH2: T.work.h2, workSub: T.work.sub,
+      aboutQuoteBefore: T.about.quoteBefore, aboutQuoteAccent: T.about.quoteAccent, aboutQuoteAfter: T.about.quoteAfter,
+      aboutAuthor: T.about.author, aboutClients: T.about.clients,
+      partnerHeading: T.partner.heading, partnerCta: T.partner.cta,
       aiKicker: T.ai.kicker, aiH2: T.ai.h2, aiSub: T.ai.sub,
       pricingKicker: T.pricing.kicker, pricingH2: T.pricing.h2, pricingSub: T.pricing.sub,
       oneoffLabel: T.pricing.oneoffLabel, monthlyLabel: T.pricing.monthlyLabel, popularLabel: T.pricing.popular,
@@ -1579,6 +1675,7 @@ class Component extends DCLogic {
       footerBrand: T.footer.brand, copyright: T.footer.copyright, footerMade: T.footer.made,
       footTouchTitle: T.footer.touchTitle,
       footerPrivacy: T.footer.privacy, footerTerms: T.footer.terms,
+      cookieAria: T.cookie.aria, cookieText: T.cookie.text, cookieAccept: T.cookie.accept, cookiePrivacy: T.cookie.privacy,
 
       // lead-capture form
       formAction: LEAD_ENDPOINT, countries,
@@ -1637,6 +1734,10 @@ class Component extends DCLogic {
     this._setupNav();
     this._setupResponsive();
     this._setupGallery();
+    this._setupAbout();
+    this._setupPartner();
+    this._setupServices();
+    this._setupCookies();
     this._setupMenuA11y();
     this._setupForm();
     this._setupCountryPicker();
@@ -1830,6 +1931,222 @@ class Component extends DCLogic {
     this._galleryUpdate = update;
   }
 
+  _setupServices() {
+    const section = document.querySelector('[data-services]');
+    if (!section) return;
+
+    const ART = {
+      web: '<svg class="wb-svc-art" viewBox="0 0 220 160" fill="none" aria-hidden="true"><rect x="18" y="28" width="184" height="112" rx="10" stroke="#0D212C" stroke-width="1.5" opacity=".55"/><rect x="18" y="28" width="184" height="22" rx="10" stroke="#0D212C" stroke-width="1.5" opacity=".45"/><circle cx="34" cy="39" r="3" fill="#54A4FF"/><circle cx="46" cy="39" r="3" fill="#0D212C" opacity=".25"/><circle cx="58" cy="39" r="3" fill="#0D212C" opacity=".25"/><rect x="36" y="68" width="70" height="8" rx="4" fill="#0D212C" opacity=".18"/><rect x="36" y="84" width="98" height="6" rx="3" fill="#0D212C" opacity=".12"/><rect x="36" y="98" width="54" height="18" rx="9" fill="#54A4FF" opacity=".85"/><rect x="128" y="68" width="56" height="48" rx="8" stroke="#0D212C" stroke-width="1.4" opacity=".35"/></svg>',
+      mobile: '<svg class="wb-svc-art" viewBox="0 0 220 160" fill="none" aria-hidden="true"><rect x="78" y="12" width="64" height="136" rx="14" stroke="#0D212C" stroke-width="1.5" opacity=".55"/><rect x="86" y="28" width="48" height="88" rx="6" stroke="#0D212C" stroke-width="1.3" opacity=".35"/><rect x="94" y="40" width="32" height="6" rx="3" fill="#54A4FF" opacity=".9"/><rect x="94" y="54" width="24" height="5" rx="2.5" fill="#0D212C" opacity=".15"/><circle cx="110" cy="132" r="5" stroke="#0D212C" stroke-width="1.3" opacity=".4"/><path d="M54 48h18M54 60h14M148 48h18M148 60h14" stroke="#0D212C" stroke-width="1.2" opacity=".2" stroke-linecap="round"/></svg>',
+      store: '<svg class="wb-svc-art" viewBox="0 0 220 160" fill="none" aria-hidden="true"><rect x="36" y="48" width="148" height="88" rx="10" stroke="#0D212C" stroke-width="1.5" opacity=".5"/><path d="M52 48V38c0-10 10-18 22-18h72c12 0 22 8 22 18v10" stroke="#0D212C" stroke-width="1.5" opacity=".45"/><rect x="52" y="64" width="48" height="48" rx="6" stroke="#0D212C" stroke-width="1.3" opacity=".35"/><rect x="112" y="68" width="52" height="6" rx="3" fill="#0D212C" opacity=".16"/><rect x="112" y="82" width="40" height="5" rx="2.5" fill="#0D212C" opacity=".12"/><rect x="112" y="98" width="36" height="16" rx="8" fill="#54A4FF" opacity=".85"/><circle cx="168" cy="36" r="10" stroke="#54A4FF" stroke-width="1.5"/><path d="M164 36h8M168 32v8" stroke="#54A4FF" stroke-width="1.4" stroke-linecap="round"/></svg>',
+      ai: '<svg class="wb-svc-art" viewBox="0 0 220 160" fill="none" aria-hidden="true"><circle cx="110" cy="80" r="16" stroke="#54A4FF" stroke-width="1.8"/><circle cx="110" cy="80" r="6" fill="#54A4FF"/><circle cx="58" cy="42" r="8" stroke="#0D212C" stroke-width="1.4" opacity=".45"/><circle cx="162" cy="42" r="8" stroke="#0D212C" stroke-width="1.4" opacity=".45"/><circle cx="58" cy="118" r="8" stroke="#0D212C" stroke-width="1.4" opacity=".45"/><circle cx="162" cy="118" r="8" stroke="#0D212C" stroke-width="1.4" opacity=".45"/><path d="M66 48l30 24M154 48l-30 24M66 112l30-24M154 112l-30-24" stroke="#0D212C" stroke-width="1.3" opacity=".3"/><path d="M188 28l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#54A4FF" opacity=".85"/></svg>',
+    };
+
+    const cards = [...section.querySelectorAll('[data-svc-card]')];
+    cards.forEach((card) => {
+      const key = card.getAttribute('data-key');
+      const art = card.querySelector('[data-svc-art]');
+      if (art && ART[key] && !art.firstChild) art.innerHTML = ART[key];
+
+      const glow = card.querySelector('.wb-svc-glow');
+      if (glow && !card.__glowBound) {
+        card.__glowBound = true;
+        let raf = 0, mx = 0, my = 0;
+        card.addEventListener('mousemove', (e) => {
+          const r = card.getBoundingClientRect();
+          mx = e.clientX - r.left; my = e.clientY - r.top;
+          if (!raf) {
+            raf = requestAnimationFrame(() => {
+              glow.style.setProperty('--mx', mx + 'px');
+              glow.style.setProperty('--my', my + 'px');
+              raf = 0;
+            });
+          }
+        }, { passive: true });
+      }
+    });
+
+    if (section.__wbSvcIO) return;
+    section.__wbSvcIO = true;
+
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const intro = section.querySelector('[data-svc-intro]');
+    if (reduce) {
+      if (intro) intro.classList.add('is-visible');
+      cards.forEach((c) => {
+        c.classList.add('is-in');
+        const n = c.querySelector('[data-svc-num]');
+        if (n) n.textContent = c.getAttribute('data-num') || '01';
+      });
+      return;
+    }
+
+    const animateNum = (card) => {
+      const el = card.querySelector('[data-svc-num]');
+      if (!el || el.__done) return;
+      el.__done = true;
+      const target = card.getAttribute('data-num') || '01';
+      const end = parseInt(target, 10) || 1;
+      const start = performance.now();
+      const dur = 700;
+      const step = (now) => {
+        const t = Math.min(1, (now - start) / dur);
+        const eased = 1 - Math.pow(1 - t, 3);
+        el.textContent = String(Math.round(end * eased)).padStart(2, '0');
+        if (t < 1) requestAnimationFrame(step);
+        else el.textContent = target;
+      };
+      requestAnimationFrame(step);
+    };
+
+    this._servicesIO = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        if (intro) intro.classList.add('is-visible');
+        cards.forEach((card) => {
+          const delay = parseInt(card.getAttribute('data-delay') || '0', 10);
+          setTimeout(() => { card.classList.add('is-in'); animateNum(card); }, delay);
+        });
+        this._servicesIO.disconnect();
+      });
+    }, { threshold: 0.15 });
+    this._servicesIO.observe(section);
+  }
+
+  _setupCookies() {
+    const el = document.getElementById('wb-cookie');
+    if (!el) return;
+    let accepted = false;
+    try { accepted = localStorage.getItem('webot_cookie_consent') === '1'; } catch (e) {}
+    if (accepted) {
+      el.classList.remove('is-on');
+      el.setAttribute('hidden', '');
+      return;
+    }
+    el.removeAttribute('hidden');
+    el.classList.add('is-on');
+    const btn = el.querySelector('[data-cookie-accept]');
+    if (btn && !btn.__wbBound) {
+      btn.__wbBound = true;
+      btn.addEventListener('click', () => {
+        try { localStorage.setItem('webot_cookie_consent', '1'); } catch (e) {}
+        el.classList.remove('is-on');
+        el.setAttribute('hidden', '');
+      });
+    }
+  }
+
+  _setupPartner() {
+    const section = document.querySelector('[data-partner]');
+    const card = document.querySelector('[data-partner-card]');
+    if (!section || !card) return;
+
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const reveal = section.querySelector('[data-partner-reveal]');
+    if (reveal && !reveal.classList.contains('wb-animate-fade-in-up')) {
+      if (reduce) {
+        reveal.classList.add('wb-animate-fade-in-up');
+      } else if (!this._partnerIO) {
+        this._partnerIO = new IntersectionObserver((entries) => {
+          entries.forEach((e) => {
+            if (!e.isIntersecting) return;
+            e.target.classList.add('wb-animate-fade-in-up');
+            this._partnerIO.unobserve(e.target);
+          });
+        }, { threshold: 0.1 });
+        this._partnerIO.observe(reveal);
+      }
+    }
+
+    if (card.__wbTrail || reduce) return;
+    card.__wbTrail = true;
+
+    const images = [
+      '/assets/drsamhat.png',
+      '/assets/lalor.png',
+      '/assets/almalak.png',
+      '/assets/wblogo.png',
+    ];
+    let lastSpawn = 0;
+    let imgIdx = 0;
+
+    const onMove = (e) => {
+      const now = Date.now();
+      if (now - lastSpawn < 80) return;
+      lastSpawn = now;
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const img = document.createElement('img');
+      img.className = 'wb-partner-trail';
+      img.src = images[imgIdx % images.length];
+      imgIdx++;
+      img.alt = '';
+      const rot = (Math.random() * 20) - 10;
+      img.style.left = x + 'px';
+      img.style.top = y + 'px';
+      img.style.setProperty('--wb-rot', rot + 'deg');
+      card.appendChild(img);
+      setTimeout(() => { if (img.parentNode) img.parentNode.removeChild(img); }, 1000);
+    };
+
+    card.addEventListener('mousemove', onMove, { passive: true });
+    this._partnerTrailMove = onMove;
+    this._partnerTrailCard = card;
+  }
+
+  _setupAbout() {
+    const section = document.querySelector('[data-about]');
+    if (!section) return;
+
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const items = [...section.querySelectorAll('[data-about-reveal]')].filter((el) => !el.classList.contains('wb-animate-fade-in-up'));
+    if (items.length) {
+      if (reduce) {
+        items.forEach((el) => el.classList.add('wb-animate-fade-in-up'));
+      } else if (!this._aboutIO) {
+        this._aboutIO = new IntersectionObserver((entries) => {
+          entries.forEach((e) => {
+            if (!e.isIntersecting) return;
+            e.target.classList.add('wb-animate-fade-in-up');
+            this._aboutIO.unobserve(e.target);
+          });
+        }, { threshold: 0.1 });
+      }
+      if (!reduce) items.forEach((el) => this._aboutIO.observe(el));
+    }
+
+    const wrap = section.querySelector('[data-about-parallax]');
+    const video = wrap && wrap.querySelector('video');
+    if (video) {
+      video.muted = true;
+      video.loop = true;
+      const play = () => { const p = video.play(); if (p && p.catch) p.catch(() => {}); };
+      play();
+      video.addEventListener('loadeddata', play);
+    }
+
+    if (!wrap || reduce || wrap.__wbParallax) return;
+    wrap.__wbParallax = true;
+    const MAX = 200;
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      const rect = section.getBoundingClientRect();
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      const progress = ((rect.top + rect.height * 0.5) - vh * 0.5) / (vh * 0.5);
+      const clamped = Math.max(-1, Math.min(1, progress));
+      wrap.style.transform = 'translateY(' + (clamped * MAX) + 'px)';
+    };
+    const onScroll = () => {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    };
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    this._aboutParallaxScroll = onScroll;
+  }
+
   _setupReveal() {
     const items = document.querySelectorAll('[data-reveal]');
     const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1935,6 +2252,10 @@ class Component extends DCLogic {
     this._setupForm();
     this._setupCountryPicker();
     if (this._applyResponsive) this._applyResponsive();
+    this._setupAbout();
+    this._setupPartner();
+    this._setupServices();
+    this._setupCookies();
     if (this._revealCheck) this._revealCheck();
     if (this._revealItems) {
       this._revealItems.forEach(el => {
@@ -1944,9 +2265,15 @@ class Component extends DCLogic {
   }
 
   componentWillUnmount() {
-    ['_revealCheck', '_onScroll', '_applyResponsive', '_galleryUpdate'].forEach(k => {
+    ['_revealCheck', '_onScroll', '_applyResponsive', '_galleryUpdate', '_aboutParallaxScroll'].forEach(k => {
       if (this[k]) { window.removeEventListener('scroll', this[k]); window.removeEventListener('resize', this[k]); }
     });
+    if (this._aboutIO) this._aboutIO.disconnect();
+    if (this._partnerIO) this._partnerIO.disconnect();
+    if (this._servicesIO) this._servicesIO.disconnect();
+    if (this._partnerTrailCard && this._partnerTrailMove) {
+      this._partnerTrailCard.removeEventListener('mousemove', this._partnerTrailMove);
+    }
     if (this._onMenuKey) document.removeEventListener('keydown', this._onMenuKey);
   }
 }

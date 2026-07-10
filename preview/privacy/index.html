@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,20 +8,31 @@
 <meta name="robots" content="index,follow">
 <link rel="icon" href="/favicon.svg">
 <link rel="canonical" href="https://werbot.netlify.app/privacy">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Heebo:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
-  body{background:#FBFAF6;color:#14151A;font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased}
+  body{background:#FBFAF6;color:#14151A;font-family:Inter,system-ui,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased}
+  html[lang="ar"] body{font-family:Cairo,'Noto Sans Arabic',sans-serif}
+  html[lang="he"] body{font-family:Heebo,'Noto Sans Hebrew',sans-serif}
   a{color:#3B4FFF;text-decoration:none}
   a:hover{text-decoration:underline}
   .wrap{max-width:760px;margin:0 auto;padding:30px 22px 80px}
-  header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:24px;margin-bottom:26px;border-bottom:1px solid #ECEAE3}
-  .brand{display:inline-flex;align-items:center;gap:10px;font-weight:800;font-size:20px;color:#14151A}
-  .brand .logo{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:9px;background:#14151A;color:#fff;font-weight:800;font-size:17px}
-  h1{font-size:clamp(26px,5vw,34px);letter-spacing:-.5px;margin-bottom:6px}
+  header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-bottom:24px;margin-bottom:26px;border-bottom:1px solid #ECEAE3}
+  .brand{display:inline-flex;align-items:center;gap:10px;font-family:Sora,sans-serif;font-weight:700;font-size:20px;color:#14151A;text-decoration:none}
+  .brand img{width:40px;height:40px;border-radius:11px;object-fit:cover;display:block;background:#14151A}
+  .top-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .lang{display:inline-flex;align-items:center;gap:4px;padding:4px;border-radius:999px;background:#ECEAE3}
+  .lang button{appearance:none;border:0;cursor:pointer;border-radius:999px;padding:7px 11px;font-family:inherit;font-weight:700;font-size:12.5px;letter-spacing:.02em;color:#53656F;background:transparent;transition:background .15s ease,color .15s ease}
+  .lang button[aria-pressed="true"]{background:#0D212C;color:#FBFAF6}
+  .back{font-size:14px;font-weight:600;color:#3B4FFF;white-space:nowrap}
+  h1{font-family:Sora,sans-serif;font-size:clamp(26px,5vw,34px);letter-spacing:-.5px;margin-bottom:6px}
   .updated{color:#6b7077;font-size:14px;margin-bottom:26px}
-  h2{font-size:19px;margin:26px 0 8px}
+  h2{font-size:19px;margin:26px 0 8px;color:#0D212C}
   p,li{color:#3a3d44;font-size:15.5px}
   ul{margin:8px 0 8px 22px}
+  [dir="rtl"] ul{margin:8px 22px 8px 0}
   li{margin:5px 0}
   .foot{margin-top:40px;padding-top:20px;border-top:1px solid #ECEAE3;color:#6b7077;font-size:13.5px}
 </style>
@@ -29,12 +40,19 @@
 <body>
 <div class="wrap">
   <header class="top">
-    <a class="brand" href="/"><span class="logo">W</span> Webot</a>
-    <a href="/">← Back to site</a>
+    <a class="brand" href="/"><img src="/assets/wblogo.png" alt="Webot" width="40" height="40"> Webot</a>
+    <div class="top-actions">
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-lang="ar" aria-pressed="false">AR</button>
+        <button type="button" data-lang="he" aria-pressed="false">HE</button>
+      </div>
+      <a class="back" data-back href="/">← Back to site</a>
+    </div>
   </header>
-  <h1>Privacy Policy</h1>
-  <p class="updated">Last updated: June 2026</p>
-  
+  <h1 data-title>Privacy Policy</h1>
+  <p class="updated"><span data-updated-label>Last updated</span>: <span data-updated>July 2026</span></p>
+  <div data-sections>
   <p>Webot ("we", "us") designs and builds websites, mobile apps and AI features. We respect your privacy. This policy explains what we collect through this website and how we use it.</p>
   <h2>What we collect</h2>
   <p>When you submit the contact form, we collect the details you provide: your <strong>name, phone number, email address and the country</strong> you select. To keep the form secure and prevent spam, we also record basic technical data with each submission — your IP address, browser user-agent, the page URL and a timestamp.</p>
@@ -42,16 +60,65 @@
   <p>We use your details only to respond to your enquiry and discuss your project. We do <strong>not</strong> sell or rent your data, and we do <strong>not</strong> share it with advertisers or marketers.</p>
   <h2>Where it is stored</h2>
   <p>Submissions are stored in our own database, and may be emailed to our team so we can reply. We keep them only as long as needed to handle your enquiry or our working relationship.</p>
-  <h2>Cookies & local storage</h2>
-  <p>We do not use advertising or tracking cookies. The site saves your language preference in your browser's local storage so it is remembered on your next visit.</p>
+  <h2>Cookies &amp; local storage</h2>
+  <p>We do not use advertising or tracking cookies. We only store small preferences in your browser:</p>
+  <ul>
+    <li><strong>Language preference</strong> — so the site opens in the language you last chose.</li>
+    <li><strong>Cookie notice choice</strong> — so we know you have seen and accepted the cookie notice, and we do not show it again.</li>
+  </ul>
+  <p>These are essential for the site to work as expected. You can clear them anytime in your browser settings.</p>
   <h2>Third-party services</h2>
   <p>The site loads web fonts from Google Fonts and JavaScript libraries from a public CDN (unpkg). These providers may receive your IP address as part of delivering those files. Our hosting and database provider processes the data you submit on our behalf.</p>
   <h2>Your rights</h2>
   <p>You can ask us to access, correct or delete the personal data you have given us at any time — just message us on <a href="https://ig.me/m/webot2026" target="_blank" rel="noopener">Instagram @webot2026</a>.</p>
   <h2>Changes</h2>
-  <p>We may update this policy from time to time; the "last updated" date above reflects the current version.</p>
-
-  <div class="foot">Questions? message us on <a href="https://ig.me/m/webot2026" target="_blank" rel="noopener">Instagram @webot2026</a>.</div>
+  <p>We may update this policy from time to time; the "last updated" date above reflects the current version.</p></div>
+  <div class="foot"><span data-foot>Questions? message us on</span> <a href="https://ig.me/m/webot2026" target="_blank" rel="noopener">Instagram @webot2026</a>.</div>
 </div>
+<script>
+(function(){
+  var PACK = {"en":{"dir":"ltr","htmlLang":"en","title":"Privacy Policy","updatedLabel":"Last updated","updated":"July 2026","back":"← Back to site","langLabel":"Language","sections":"\n  <p>Webot (\"we\", \"us\") designs and builds websites, mobile apps and AI features. We respect your privacy. This policy explains what we collect through this website and how we use it.<\/p>\n  <h2>What we collect<\/h2>\n  <p>When you submit the contact form, we collect the details you provide: your <strong>name, phone number, email address and the country<\/strong> you select. To keep the form secure and prevent spam, we also record basic technical data with each submission — your IP address, browser user-agent, the page URL and a timestamp.<\/p>\n  <h2>How we use it<\/h2>\n  <p>We use your details only to respond to your enquiry and discuss your project. We do <strong>not<\/strong> sell or rent your data, and we do <strong>not<\/strong> share it with advertisers or marketers.<\/p>\n  <h2>Where it is stored<\/h2>\n  <p>Submissions are stored in our own database, and may be emailed to our team so we can reply. We keep them only as long as needed to handle your enquiry or our working relationship.<\/p>\n  <h2>Cookies &amp; local storage<\/h2>\n  <p>We do not use advertising or tracking cookies. We only store small preferences in your browser:<\/p>\n  <ul>\n    <li><strong>Language preference<\/strong> — so the site opens in the language you last chose.<\/li>\n    <li><strong>Cookie notice choice<\/strong> — so we know you have seen and accepted the cookie notice, and we do not show it again.<\/li>\n  <\/ul>\n  <p>These are essential for the site to work as expected. You can clear them anytime in your browser settings.<\/p>\n  <h2>Third-party services<\/h2>\n  <p>The site loads web fonts from Google Fonts and JavaScript libraries from a public CDN (unpkg). These providers may receive your IP address as part of delivering those files. Our hosting and database provider processes the data you submit on our behalf.<\/p>\n  <h2>Your rights<\/h2>\n  <p>You can ask us to access, correct or delete the personal data you have given us at any time — just message us on <a href=\"https://ig.me/m/webot2026\" target=\"_blank\" rel=\"noopener\">Instagram @webot2026<\/a>.<\/p>\n  <h2>Changes<\/h2>\n  <p>We may update this policy from time to time; the \"last updated\" date above reflects the current version.<\/p>","foot":"Questions? message us on"},"ar":{"dir":"rtl","htmlLang":"ar","title":"سياسة الخصوصية","updatedLabel":"آخر تحديث","updated":"يوليو 2026","back":"العودة إلى الموقع ←","langLabel":"اللغة","sections":"\n  <p>Webot («نحن») تصمّم وتبني مواقع وتطبيقات موبايل ومزايا ذكاء اصطناعي. نحترم خصوصيتك. توضّح هذه السياسة ما نجمعه عبر هذا الموقع وكيف نستخدمه.<\/p>\n  <h2>ما الذي نجمعه<\/h2>\n  <p>عند إرسال نموذج التواصل، نجمع التفاصيل التي تقدّمها: <strong>الاسم ورقم الهاتف والبريد الإلكتروني والدولة<\/strong> التي تختارها. لحماية النموذج ومنع الرسائل المزعجة، نسجّل أيضاً بيانات تقنية أساسية مع كل إرسال — عنوان IP ومتصفّحك ورابط الصفحة والطابع الزمني.<\/p>\n  <h2>كيف نستخدمها<\/h2>\n  <p>نستخدم تفاصيلك فقط للرد على استفسارك ومناقشة مشروعك. <strong>لا<\/strong> نبيع بياناتك ولا نؤجّرها، و<strong>لا<\/strong> نشاركها مع معلنين أو جهات تسويقية.<\/p>\n  <h2>أين تُحفظ<\/h2>\n  <p>تُحفظ الطلبات في قاعدة بياناتنا، وقد تُرسل بالبريد إلى فريقنا للرد. نحتفظ بها فقط طالما لزم الأمر لمعالجة استفسارك أو علاقتنا العملية.<\/p>\n  <h2>ملفات تعريف الارتباط والتخزين المحلي<\/h2>\n  <p>لا نستخدم ملفات تعريف ارتباط إعلانية أو تتبّعية. نخزّن فقط تفضيلات صغيرة في متصفّحك:<\/p>\n  <ul>\n    <li><strong>تفضيل اللغة<\/strong> — ليفتح الموقع باللغة التي اخترتها آخر مرة.<\/li>\n    <li><strong>اختيار إشعار الكوكيز<\/strong> — لنعرف أنك رأيت الإشعار وقبلته، فلا نعرضه مجدداً.<\/li>\n  <\/ul>\n  <p>هذه ضرورية لعمل الموقع كما يُفترض. يمكنك مسحها في أي وقت من إعدادات المتصفّح.<\/p>\n  <h2>خدمات طرف ثالث<\/h2>\n  <p>يحمّل الموقع خطوطاً من Google Fonts ومكتبات JavaScript من CDN عام (unpkg). قد تتلقّى هذه الجهات عنوان IP الخاص بك ضمن تقديم تلك الملفات. يعالج مزوّد الاستضافة وقاعدة البيانات البيانات التي ترسلها نيابةً عنّا.<\/p>\n  <h2>حقوقك<\/h2>\n  <p>يمكنك طلب الوصول إلى بياناتك الشخصية أو تصحيحها أو حذفها في أي وقت — راسلنا على <a href=\"https://ig.me/m/webot2026\" target=\"_blank\" rel=\"noopener\">Instagram @webot2026<\/a>.<\/p>\n  <h2>التغييرات<\/h2>\n  <p>قد نحدّث هذه السياسة من وقت لآخر؛ تاريخ «آخر تحديث» أعلاه يعكس النسخة الحالية.<\/p>","foot":"أسئلة؟ راسلنا على"},"he":{"dir":"rtl","htmlLang":"he","title":"מדיניות פרטיות","updatedLabel":"עודכן לאחרונה","updated":"יולי 2026","back":"חזרה לאתר ←","langLabel":"שפה","sections":"\n  <p>‏Webot (\"אנחנו\") מעצבת ובונה אתרים, אפליקציות מובייל ויכולות בינה מלאכותית. אנחנו מכבדים את הפרטיות שלכם. מדיניות זו מסבירה מה אנחנו אוספים באתר הזה וכיצד אנחנו משתמשים בכך.<\/p>\n  <h2>מה אנחנו אוספים<\/h2>\n  <p>כשאתם שולחים את טופס יצירת הקשר, אנחנו אוספים את הפרטים שסיפקתם: <strong>שם, מספר טלפון, כתובת אימייל והמדינה<\/strong> שבחרתם. כדי לאבטח את הטופס ולמנוע ספאם, אנחנו גם רושמים נתונים טכניים בסיסיים עם כל שליחה — כתובת IP, סוכן הדפדפן, כתובת העמוד וחותמת זמן.<\/p>\n  <h2>איך אנחנו משתמשים בזה<\/h2>\n  <p>אנחנו משתמשים בפרטים שלכם רק כדי להשיב לפנייה ולדון בפרויקט. אנחנו <strong>לא<\/strong> מוכרים או משכירים את הנתונים, ו<strong>לא<\/strong> משתפים אותם עם מפרסמים או משווקים.<\/p>\n  <h2>איפה זה נשמר<\/h2>\n  <p>פניות נשמרות במסד הנתונים שלנו, ועשויות להישלח באימייל לצוות כדי שנוכל להשיב. אנחנו שומרים אותן רק כל עוד נדרש לטיפול בפנייה או בקשר העבודה.<\/p>\n  <h2>עוגיות ואחסון מקומי<\/h2>\n  <p>אנחנו לא משתמשים בעוגיות פרסום או מעקב. אנחנו שומרים רק העדפות קטנות בדפדפן שלכם:<\/p>\n  <ul>\n    <li><strong>העדפת שפה<\/strong> — כדי שהאתר ייפתח בשפה שבחרתם לאחרונה.<\/li>\n    <li><strong>בחירת הודעת העוגיות<\/strong> — כדי שנדע שראיתם ואישרתם את ההודעה, ולא נציג אותה שוב.<\/li>\n  <\/ul>\n  <p>אלה חיוניים לתפקוד התקין של האתר. אפשר למחוק אותם בכל עת בהגדרות הדפדפן.<\/p>\n  <h2>שירותי צד שלישי<\/h2>\n  <p>האתר טוען גופנים מ-Google Fonts וספריות JavaScript מ-CDN ציבורי (unpkg). ספקים אלה עשויים לקבל את כתובת ה-IP שלכם כחלק ממסירת הקבצים. ספק האחסון ומסד הנתונים מעבדים את הנתונים ששלחתם בשמנו.<\/p>\n  <h2>הזכויות שלכם<\/h2>\n  <p>אפשר לבקש גישה, תיקון או מחיקה של הנתונים האישיים שמסרתם בכל עת — פשוט שלחו לנו הודעה ב-<a href=\"https://ig.me/m/webot2026\" target=\"_blank\" rel=\"noopener\">Instagram @webot2026<\/a>.<\/p>\n  <h2>שינויים<\/h2>\n  <p>אנחנו עשויים לעדכן מדיניות זו מעת לעת; תאריך \"עודכן לאחרונה\" למעלה משקף את הגרסה הנוכחית.<\/p>","foot":"שאלות? שלחו לנו הודעה ב-"}};
+  var html = document.documentElement;
+  var titleEl = document.querySelector('[data-title]');
+  var updatedLabel = document.querySelector('[data-updated-label]');
+  var updatedEl = document.querySelector('[data-updated]');
+  var sectionsEl = document.querySelector('[data-sections]');
+  var footEl = document.querySelector('[data-foot]');
+  var backEl = document.querySelector('[data-back]');
+  var buttons = document.querySelectorAll('.lang button');
+  function apply(lang){
+    var L = PACK[lang] || PACK.en;
+    html.setAttribute('lang', L.htmlLang);
+    html.setAttribute('dir', L.dir);
+    document.title = L.title + ' — Webot';
+    if (titleEl) titleEl.textContent = L.title;
+    if (updatedLabel) updatedLabel.textContent = L.updatedLabel;
+    if (updatedEl) updatedEl.textContent = L.updated;
+    if (sectionsEl) sectionsEl.innerHTML = L.sections;
+    if (footEl) footEl.textContent = L.foot;
+    if (backEl) backEl.textContent = L.back;
+    buttons.forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-lang') === lang ? 'true' : 'false'); });
+    try { localStorage.setItem('webot_lang', lang); } catch (e) {}
+    try {
+      var u = new URL(window.location.href);
+      if (lang === 'en') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang);
+      window.history.replaceState({}, '', u.pathname + u.search);
+    } catch (e) {}
+  }
+  buttons.forEach(function(b){
+    b.addEventListener('click', function(){ apply(b.getAttribute('data-lang')); });
+  });
+  var start = 'en';
+  try {
+    var q = new URLSearchParams(window.location.search).get('lang');
+    if (q && PACK[q]) start = q;
+    else {
+      var saved = localStorage.getItem('webot_lang');
+      if (saved && PACK[saved]) start = saved;
+    }
+  } catch (e) {}
+  apply(start);
+})();
+</script>
 </body>
 </html>

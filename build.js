@@ -122,10 +122,11 @@ function headMetaFor(lang) {
 
 const FONT_STYLE = `<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Heebo:wght@400;500;600;700;800&family=Sora:wght@300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Heebo:wght@400;500;600;700;800&family=Inter:wght@200;400;500;600&family=Playfair+Display:ital,wght@0,500;1,500;1,600&family=Sora:wght@300;600;700&display=swap" rel="stylesheet">
 <style id="wb-i18n">
   html[lang="ar"], html[lang="ar"] *{font-family:'Cairo','Noto Sans Arabic','Segoe UI',Tahoma,sans-serif !important}
   html[lang="he"], html[lang="he"] *{font-family:'Heebo','Noto Sans Hebrew','Segoe UI',Arial,sans-serif !important}
+  html[lang="ar"] .wb-svc-h2-serif, html[lang="he"] .wb-svc-h2-serif{font-style:normal !important}
   .wb-arrow{display:inline-block}
   [dir="rtl"] .wb-arrow{transform:scaleX(-1)}
   [dir="rtl"] .wb-mobile-sheet{right:auto !important;left:0 !important;box-shadow:20px 0 60px -20px rgba(20,21,26,.3) !important}
@@ -191,6 +192,85 @@ const FONT_STYLE = `<link rel="preconnect" href="https://fonts.googleapis.com">
   .wb-country-opt[hidden]{display:none}
   .wb-country-empty{margin:0;padding:14px 12px;font-size:13.5px;color:#6b7077;text-align:center}
   [dir="rtl"] .wb-country-trigger{text-align:right}
+  /* about / quote + parallax reel */
+  .wb-about{background:transparent}
+  .wb-about-inner{max-width:42rem;margin:0 auto;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 6px}
+  .wb-about-icon{color:#0D212C;margin-bottom:24px}
+  .wb-about-quote{margin:0;font-family:'Sora',sans-serif;font-weight:600;font-size:clamp(32px,5vw,44px);line-height:1.1;letter-spacing:-.03em;color:#0D212C;max-width:36rem}
+  .wb-about-serif{font-family:'Playfair Display',Georgia,'Times New Roman',serif;font-style:italic;font-weight:600}
+  .wb-about-author{margin:24px 0 0;font-size:14px;font-style:italic;color:#273C46}
+  .wb-about-clients{margin-top:28px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:clamp(12px,2.5vw,20px)}
+  .wb-about-client{font-family:'Playfair Display',Georgia,serif;font-style:italic;font-weight:500;font-size:clamp(17px,2.4vw,22px);color:#53656F;letter-spacing:.01em}
+  .wb-about-client:not(:last-child)::after{content:'·';margin-inline-start:clamp(12px,2.5vw,20px);font-style:normal;color:rgba(13,33,44,.28)}
+  html[lang="ar"] .wb-about-client, html[lang="he"] .wb-about-client{font-style:normal;font-family:'Sora',sans-serif;font-weight:500}
+  .wb-about-video-wrap{margin-top:48px;width:100%;max-width:20rem;border-radius:16px;overflow:hidden;box-shadow:0 24px 48px -20px rgba(13,33,44,.28);will-change:transform}
+  .wb-about-video-wrap video{width:100%;height:auto;display:block;object-fit:cover;transform:scale(1.15);transform-origin:center center}
+  @keyframes wbFadeInUp{0%{opacity:0;transform:translateY(30px)}100%{opacity:1;transform:translateY(0)}}
+  .wb-animate-fade-in-up{animation:wbFadeInUp .8s ease-out forwards;opacity:0}
+  @media (prefers-reduced-motion:reduce){.wb-about-video-wrap{transform:none !important}.wb-about-video-wrap video{transform:none}}
+  /* partner / mouse-trail CTA */
+  .wb-partner{padding:clamp(48px,6vh,72px) clamp(18px,5vw,56px)}
+  .wb-partner-card{position:relative;max-width:80rem;margin:0 auto;padding:clamp(96px,12vh,192px) clamp(24px,5vw,48px);border-radius:40px;background:#fff;box-shadow:0 4px 30px rgba(0,0,0,.06);overflow:hidden}
+  .wb-partner-inner{position:relative;z-index:10;display:flex;flex-direction:column;align-items:center;text-align:center}
+  .wb-partner-h2{margin:0 0 48px;font-family:'Playfair Display',Georgia,'Times New Roman',serif;font-weight:600;font-style:italic;font-size:clamp(48px,8vw,80px);line-height:1.05;letter-spacing:-.02em;color:#0D212C}
+  .wb-partner-cta{display:inline-flex;align-items:center;gap:12px;padding:10px 22px 10px 10px;border-radius:999px;background:#051A24;color:#fff;font-family:'Inter',sans-serif;font-weight:600;font-size:15.5px;text-decoration:none;box-shadow:0 18px 40px -16px rgba(5,26,36,.55),0 2px 0 rgba(255,255,255,.12) inset,0 -1px 0 rgba(0,0,0,.25) inset;transition:transform .2s ease,box-shadow .2s ease}
+  .wb-partner-cta:hover{transform:translateY(-2px);box-shadow:0 22px 48px -14px rgba(5,26,36,.6),0 2px 0 rgba(255,255,255,.14) inset}
+  .wb-partner-avatar{width:40px;height:40px;border-radius:50%;object-fit:cover;flex:none;display:block;background:#0D212C}
+  .wb-partner-trail{position:absolute;height:8rem;width:10rem;border-radius:12px;object-fit:cover;box-shadow:0 16px 40px -12px rgba(0,0,0,.35);pointer-events:none;z-index:1;opacity:.9;--wb-rot:0deg;transform:translate(-50%,-50%) rotate(var(--wb-rot));animation:trailFade 1s ease-out forwards}
+  @keyframes trailFade{0%{opacity:.9;transform:translate(-50%,-50%) rotate(var(--wb-rot)) scale(1)}100%{opacity:0;transform:translate(-50%,-50%) rotate(var(--wb-rot)) scale(.6)}}
+  @media (prefers-reduced-motion:reduce){.wb-partner-trail{display:none !important}}
+  /* premium services — 4 cards (2×2) */
+  .wb-svc{position:relative;background:#fff;padding:clamp(88px,11vh,136px) clamp(18px,2.5vw,40px);overflow:hidden}
+  .wb-svc-gridbg{position:absolute;inset:-8% -4%;background-image:linear-gradient(rgba(13,33,44,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(13,33,44,.035) 1px,transparent 1px);background-size:52px 52px;-webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 40%,#000 10%,transparent 75%);mask-image:radial-gradient(ellipse 70% 60% at 50% 40%,#000 10%,transparent 75%);pointer-events:none;z-index:0}
+  .wb-svc-wrap{position:relative;z-index:2;max-width:1280px;margin:0 auto}
+  .wb-svc-label{font-family:Inter,system-ui,sans-serif;font-size:12px;font-weight:500;letter-spacing:.25em;text-transform:uppercase;color:#6B7B84}
+  .wb-svc-label:empty{display:none}
+  .wb-svc-h2{margin-top:16px;font-size:clamp(44px,7vw,80px);line-height:.96;letter-spacing:-.03em;color:#0D212C}
+  .wb-svc-h2-serif{font-family:'Playfair Display',Georgia,serif;font-weight:500;font-style:italic}
+  .wb-svc-h2-sans{font-family:Inter,system-ui,sans-serif;font-weight:500}
+  .wb-svc-lead{margin-top:24px;max-width:560px;font-family:Inter,system-ui,sans-serif;font-size:clamp(16px,1.8vw,19px);line-height:1.7;color:#53656F}
+  .wb-svc-grid{margin-top:64px;display:grid;grid-template-columns:1fr;gap:20px}
+  @media (min-width:900px){.wb-svc-grid{grid-template-columns:1fr 1fr;gap:22px}}
+  .wb-svc-card{position:relative;background:#FBFAF6;border-radius:28px;border:1px solid rgba(13,33,44,.07);box-shadow:0 12px 40px -28px rgba(13,33,44,.2);overflow:hidden;min-height:380px;padding:36px 28px 28px;display:flex;flex-direction:column;transition:transform .5s cubic-bezier(.22,.61,.36,1),box-shadow .5s cubic-bezier(.22,.61,.36,1),border-color .5s cubic-bezier(.22,.61,.36,1),background .5s cubic-bezier(.22,.61,.36,1);opacity:0;transform:translateY(40px)}
+  @media (max-width:640px){.wb-svc-card{min-height:0;padding:28px 24px 24px}}
+  .wb-svc-card.is-in{opacity:1;transform:translateY(0);transition:transform .85s cubic-bezier(.22,.61,.36,1),opacity .85s cubic-bezier(.22,.61,.36,1),box-shadow .5s cubic-bezier(.22,.61,.36,1),border-color .5s cubic-bezier(.22,.61,.36,1),background .5s cubic-bezier(.22,.61,.36,1)}
+  .wb-svc-card.is-in:hover{transform:translateY(-6px);box-shadow:0 28px 56px -24px rgba(13,33,44,.26);border-color:rgba(13,33,44,.12);background:#fff}
+  .wb-svc-glow{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .35s ease;background:radial-gradient(280px circle at var(--mx,50%) var(--my,50%),rgba(84,164,255,.12),transparent 70%);z-index:0}
+  .wb-svc-card:hover .wb-svc-glow{opacity:1}
+  .wb-svc-copy,.wb-svc-artwrap{position:relative;z-index:2}
+  .wb-svc-copy{flex:1}
+  .wb-svc-num{position:absolute;top:14px;left:20px;font-family:Inter,system-ui,sans-serif;font-size:64px;font-weight:200;color:rgba(13,33,44,.07);line-height:1;z-index:1;transition:color .5s cubic-bezier(.22,.61,.36,1);pointer-events:none}
+  [dir="rtl"] .wb-svc-num{left:auto;right:20px}
+  .wb-svc-card:hover .wb-svc-num{color:rgba(13,33,44,.14)}
+  .wb-svc-title-wrap{position:relative;display:inline-block;margin-top:36px}
+  .wb-svc-title{font-family:Inter,system-ui,sans-serif;font-size:clamp(22px,2.2vw,28px);font-weight:500;color:#0D212C;letter-spacing:-.02em;transition:transform .45s cubic-bezier(.22,.61,.36,1)}
+  .wb-svc-card.is-in:hover .wb-svc-title{transform:translateY(-3px)}
+  .wb-svc-uline{display:block;height:2px;width:0;margin-top:10px;background:#0D212C;transition:width .55s cubic-bezier(.22,.61,.36,1)}
+  .wb-svc-card.is-in .wb-svc-uline{width:36px}
+  .wb-svc-card.is-in:hover .wb-svc-uline{width:100%}
+  .wb-svc-desc{margin-top:14px;font-family:Inter,system-ui,sans-serif;font-size:clamp(15px,1.4vw,16.5px);line-height:1.65;color:#53656F;max-width:32ch}
+  .wb-svc-artwrap{margin-top:auto;padding-top:20px;display:flex;justify-content:flex-end}
+  [dir="rtl"] .wb-svc-artwrap{justify-content:flex-start}
+  .wb-svc-art{width:100%;max-width:168px;opacity:.9;display:block;transition:transform .55s cubic-bezier(.22,.61,.36,1);animation:wbSvcFloat 5.5s ease-in-out infinite}
+  .wb-svc-card.is-in:hover .wb-svc-art{transform:scale(1.04) rotate(4deg);animation-play-state:paused}
+  @keyframes wbSvcFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+  @media (max-width:640px){.wb-svc-art{max-width:140px}.wb-svc-artwrap{justify-content:center}}
+  @media (prefers-reduced-motion:reduce){.wb-svc-art{animation:none}.wb-svc-card,.wb-svc-card.is-in{opacity:1;transform:none}}
+  .wb-svc-intro .wb-svc-label,.wb-svc-intro .wb-svc-h2,.wb-svc-intro .wb-svc-lead{opacity:0;transform:translateY(24px);transition:opacity .85s cubic-bezier(.22,.61,.36,1),transform .85s cubic-bezier(.22,.61,.36,1)}
+  .wb-svc-intro.is-visible .wb-svc-label,.wb-svc-intro.is-visible .wb-svc-h2,.wb-svc-intro.is-visible .wb-svc-lead{opacity:1;transform:translateY(0)}
+  .wb-svc-intro.is-visible .wb-svc-h2{transition-delay:.08s}
+  .wb-svc-intro.is-visible .wb-svc-lead{transition-delay:.16s}
+  /* cookie consent */
+  .wb-cookie{position:fixed;left:16px;right:16px;bottom:16px;z-index:9999;max-width:760px;margin:0 auto;display:none;align-items:center;justify-content:space-between;gap:14px;padding:16px 18px;border-radius:18px;background:#0D212C;color:#FBFAF6;box-shadow:0 24px 60px -20px rgba(13,33,44,.55);font-family:Inter,system-ui,sans-serif}
+  .wb-cookie.is-on{display:flex}
+  .wb-cookie-logo{width:36px;height:36px;border-radius:10px;object-fit:cover;flex:none;background:#FBFAF6}
+  .wb-cookie-copy{flex:1;min-width:0}
+  .wb-cookie-text{margin:0;font-size:14px;line-height:1.55;color:rgba(251,250,246,.88)}
+  .wb-cookie-text a{color:#54A4FF;text-decoration:underline;text-underline-offset:2px}
+  .wb-cookie-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px;flex:none}
+  .wb-cookie-btn{appearance:none;border:0;cursor:pointer;border-radius:999px;padding:10px 18px;font-family:Inter,system-ui,sans-serif;font-weight:600;font-size:13.5px;background:#FBFAF6;color:#0D212C;transition:transform .2s ease,background .2s ease}
+  .wb-cookie-btn:hover{transform:translateY(-1px);background:#fff}
+  @media (max-width:640px){.wb-cookie{flex-wrap:wrap;left:12px;right:12px;bottom:12px}.wb-cookie-actions,.wb-cookie-btn{width:100%}}
 </style>
 <script>
 /* The hero video is rendered by the runtime, which drops the "muted"/"loop"
@@ -298,8 +378,35 @@ replaceRange('<!-- ===== INTENT CARDS ===== -->', '</section>', '');
 sub('Built with tools you can trust', '{{ marqueeLabel }}', 1);
 // chips are longer phrases now — slow the loop so it stays readable
 sub('animation:wb-marquee 26s linear infinite', 'animation:wb-marquee 46s linear infinite', 1);
-sub('>What we do</div>', '>{{ servicesKicker }}</div>', 1);
-sub('Everything to get your product live — and keep it growing.', '{{ servicesH2 }}', 1);
+// ---- 6b) Premium services section (4 cards) ----
+const servicesSection = `<!-- ===== SERVICES ===== -->
+  <section id="services" data-services="" class="wb-svc">
+    <div class="wb-svc-gridbg" aria-hidden="true"></div>
+    <div class="wb-svc-wrap">
+      <div class="wb-svc-intro" data-svc-intro="">
+        <div class="wb-svc-label">{{ servicesKicker }}</div>
+        <h2 class="wb-svc-h2"><span class="wb-svc-h2-serif">{{ servicesH2a }}</span><span class="wb-svc-h2-sans">{{ servicesH2b }}</span></h2>
+        <p class="wb-svc-lead">{{ servicesSub }}</p>
+      </div>
+      <div class="wb-svc-grid">
+        <sc-for list="{{ services }}" as="svc" hint-placeholder-count="4">
+          <article class="wb-svc-card" data-svc-card="" data-delay="{{ svc.delay }}" data-num="{{ svc.no }}" data-key="{{ svc.key }}">
+            <div class="wb-svc-glow"></div>
+            <span class="wb-svc-num" data-svc-num="">00</span>
+            <div class="wb-svc-copy">
+              <div class="wb-svc-title-wrap">
+                <h3 class="wb-svc-title">{{ svc.title }}</h3>
+                <span class="wb-svc-uline"></span>
+              </div>
+              <p class="wb-svc-desc">{{ svc.desc }}</p>
+            </div>
+            <div class="wb-svc-artwrap" data-svc-art=""></div>
+          </article>
+        </sc-for>
+      </div>
+    </div>
+  </section>`;
+replaceRange('<!-- ===== SERVICES ===== -->', '</section>', servicesSection);
 sub('>Our craft</div>', '>{{ galleryKicker }}</div>', 1);
 sub('Sites &amp; apps we love building.', '{{ galleryH2 }}', 1);
 sub('A glimpse of the range — from bold storefronts to calm, clean dashboards.', '{{ gallerySub }}', 1);
@@ -312,39 +419,56 @@ sub('>AI, used well</div>', '>{{ aiKicker }}</div>', 1);
 sub('Intelligence where it counts.', '{{ aiH2 }}', 1);
 sub(`We add AI only where it saves your users real time — never as a gimmick. Here's where it tends to pay off.`, '{{ aiSub }}', 1);
 
-// ---- 7) Models (pricing section) ----
-sub('id="pricing"', 'id="models"', 1);
-sub('>Pricing</div>', '>{{ pricingKicker }}</div>', 1);
-sub('Simple packages. Pick how you pay.', '{{ pricingH2 }}', 1);
-sub('One-off build or an ongoing monthly partnership — same team either way.', '{{ pricingSub }}', 1);
-// Pricing is shown privately (quote on request), so the one-off/monthly pay-toggle is removed.
-replaceRange('<!-- toggle -->',
-  '<div style="margin-top:38px;display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:20px;align-items:stretch">',
-  '<div style="margin-top:24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:20px;align-items:stretch">');
-sub('>Most popular</span>', '>{{ popularLabel }}</span>', 1);
+// ---- 7) Replace Models/pricing with Partner mouse-trail CTA ----
+const partnerSection = `<!-- ===== PARTNER CTA ===== -->
+  <section id="partner" data-partner="" class="wb-partner">
+    <div data-partner-card="" class="wb-partner-card">
+      <div data-partner-reveal="" class="wb-partner-inner">
+        <h2 class="wb-partner-h2">{{ partnerHeading }}</h2>
+        <a href="#contact" class="wb-partner-cta">
+          <img class="wb-partner-avatar" src="/assets/wblogo.png" alt="Webot" width="40" height="40">
+          <span>{{ partnerCta }}</span>
+        </a>
+      </div>
+    </div>
+  </section>`;
+replaceRange('<!-- ===== PRICING ===== -->', '</section>', partnerSection);
 
-// Tier cards: phase label, hide price row, keep per-tier CTA
-sub('<div style="font-family:\'Sora\',sans-serif;font-weight:600;font-size:19px;color:#14151A">{{ tier.name }}</div>',
-  '<div style="font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#6b7077">{{ tier.phase }}</div>\n              <div style="font-family:\'Sora\',sans-serif;font-weight:600;font-size:19px;color:#14151A">{{ tier.name }}</div>', 1);
-sub(`<div style="margin-top:20px;display:flex;align-items:baseline;gap:7px">
-                <span style="font-family:'Sora',sans-serif;font-weight:800;font-size:40px;letter-spacing:-.02em;color:#14151A">{{ tier.price }}</span>
-                <span style="font-size:14px;color:#9a9ea6">{{ tier.period }}</span>
-              </div>
-              `, '', 1);
-
-// Replace the assist block with a single clean CTA
-replaceRange('<!-- assist block -->',
-  'Prices in USD, excluding taxes. Final quote confirmed in writing before any work begins.</p>',
-  `<!-- single pricing CTA -->
-      <div data-reveal="" style="margin-top:36px;text-align:center">
-        <p style="font-size:16px;line-height:1.6;color:#6b7077;max-width:460px;margin:0 auto">{{ assistDesc }}</p>
-        <a href="#contact" style-hover="background:#2638f0;transform:translateY(-2px);box-shadow:0 16px 34px -12px rgba(59,79,255,.65)" style="display:inline-flex;align-items:center;gap:9px;background:#3B4FFF;color:#fff;font-weight:600;font-size:16px;padding:15px 30px;border-radius:999px;margin-top:20px;transition:all .25s ease;box-shadow:0 10px 26px -12px rgba(59,79,255,.55)">{{ assistCta }}</a>
-        <p style="margin-top:16px;font-size:12.5px;color:#6b7077">{{ disclaimer }}</p>
-      </div>`);
+// Nav: Models → Partner
+template = template.split('href="#models"').join('href="#partner"');
+template = template.split('{{ navModels }}').join('{{ navPartner }}');
 
 // portfolio diagonal arrow — flip in RTL
 sub('<span style="color:#3B4FFF;font-size:15px;font-weight:600">↗</span>',
     '<span class="wb-arrow" style="color:#3B4FFF;font-size:15px;font-weight:600">↗</span>', 1);
+
+// portfolio cards — real client screenshots from imgwebot/
+sub(`<div style="height:150px;background:{{ p.cover }};position:relative;display:flex;align-items:center;justify-content:center">
+              <span style="font-family:'Sora',sans-serif;font-weight:700;font-size:26px;color:rgba(255,255,255,.95)">{{ p.mark }}</span>`,
+  `<div style="height:180px;position:relative;overflow:hidden;background:{{ p.cover }}">
+              <img src="{{ p.img }}" alt="{{ p.name }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block">`, 1);
+
+// ---- 7b) About / quote section with parallax brand reel ----
+const ABOUT_QUOTE_ICON = `<svg class="wb-about-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21c3 0 7-1 7-8V5H3v8c0 4 1 7 4 7z"/><path d="M14 21c3 0 7-1 7-8V5h-8v8c0 4 1 7 4 7z"/></svg>`;
+const aboutSection = `<!-- ===== ABOUT / QUOTE ===== -->
+  <section id="about" data-about="" class="wb-about" style="padding:clamp(56px,8vh,96px) clamp(18px,5vw,56px)">
+    <div class="wb-about-inner">
+      <div data-about-reveal="" style="animation-delay:.1s">${ABOUT_QUOTE_ICON}</div>
+      <h2 data-about-reveal="" style="animation-delay:.2s" class="wb-about-quote">{{ aboutQuoteBefore }}<span class="wb-about-serif">{{ aboutQuoteAccent }}</span>{{ aboutQuoteAfter }}</h2>
+      <p data-about-reveal="" style="animation-delay:.3s" class="wb-about-author">{{ aboutAuthor }}</p>
+      <div data-about-reveal="" style="animation-delay:.4s" class="wb-about-clients">
+        <sc-for list="{{ aboutClients }}" as="c" hint-placeholder-count="3">
+          <span class="wb-about-client">{{ c.name }}</span>
+        </sc-for>
+      </div>
+      <div data-about-reveal="" data-about-parallax="" style="animation-delay:.5s" class="wb-about-video-wrap">
+        <video src="/assets/webothero.mp4" autoplay muted playsinline loop preload="metadata" aria-label="Webot brand reel"></video>
+      </div>
+    </div>
+  </section>`;
+const galleryMarker = '<!-- ===== MOTION GALLERY ===== -->';
+if (template.indexOf(galleryMarker) < 0) throw new Error('gallery marker not found');
+template = template.replace(galleryMarker, aboutSection + '\n\n  ' + galleryMarker);
 
 // ---- 8) Testimonials + FAQ + final CTA + footer ----
 sub('>What clients say</div>', '>{{ testiLabel }}</div>', 1);
@@ -372,12 +496,7 @@ sub('The web &amp; mobile studio for businesses that want it built right — and
 sub('© 2026 Webot. All rights reserved.', '{{ copyright }}', 1);
 sub('Designed &amp; built by Webot · Remote, worldwide', '{{ footerMade }}', 1);
 
-// Services + process intro copy
-sub(`<h2 style="margin-top:14px;font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(28px,4.2vw,46px);line-height:1.08;letter-spacing:-.02em">{{ servicesH2 }}</h2>
-      </div>`,
-  `<h2 style="margin-top:14px;font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(28px,4.2vw,46px);line-height:1.08;letter-spacing:-.02em">{{ servicesH2 }}</h2>
-        <p style="margin-top:14px;font-size:16px;line-height:1.6;color:#6B6F76;max-width:560px">{{ servicesSub }}</p>
-      </div>`, 1);
+// Process intro copy (services already includes servicesSub in its section)
 sub(`<h2 style="margin-top:14px;font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(28px,4.2vw,46px);line-height:1.08;letter-spacing:-.02em">{{ processH2 }}</h2>
       </div>`,
   `<h2 style="margin-top:14px;font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(28px,4.2vw,46px);line-height:1.08;letter-spacing:-.02em">{{ processH2 }}</h2>
@@ -386,6 +505,27 @@ sub(`<h2 style="margin-top:14px;font-family:'Sora',sans-serif;font-weight:700;fo
 // footer legal links → /privacy and /terms (served as static pages)
 sub('<span>{{ footerMade }}</span>',
     '<span style="display:flex;flex-wrap:wrap;gap:16px"><a href="/privacy" style-hover="color:#3B4FFF" style="transition:color .2s">{{ footerPrivacy }}</a><a href="/terms" style-hover="color:#3B4FFF" style="transition:color .2s">{{ footerTerms }}</a></span><span>{{ footerMade }}</span>', 1);
+
+// Cookie consent banner (shown until accepted; preference stored locally)
+const cookieBanner = `
+  <div id="wb-cookie" class="wb-cookie" data-cookie="" role="dialog" aria-live="polite" aria-label="{{ cookieAria }}">
+    <img class="wb-cookie-logo" src="/assets/wblogo.png" alt="Webot" width="36" height="36">
+    <div class="wb-cookie-copy">
+      <p class="wb-cookie-text">{{ cookieText }} <a href="/privacy">{{ cookiePrivacy }}</a></p>
+    </div>
+    <div class="wb-cookie-actions">
+      <button type="button" class="wb-cookie-btn" data-cookie-accept="">{{ cookieAccept }}</button>
+    </div>
+  </div>`;
+{
+  const footMarker = '<!-- ===== FOOTER ===== -->';
+  const fs = template.indexOf(footMarker);
+  if (fs < 0) throw new Error('footer marker not found');
+  const fe = template.indexOf('</footer>', fs);
+  if (fe < 0) throw new Error('footer close not found');
+  const insertAt = fe + '</footer>'.length;
+  template = template.slice(0, insertAt) + '\n' + cookieBanner + template.slice(insertAt);
+}
 
 // ---- 8b) RTL fill fix for horizontal strips (gallery + the two marquees) ----
 // Force the strip containers to lay out LTR so they fill the viewport like English.
@@ -419,10 +559,10 @@ sub(`</sc-for>
       <div style="margin-top:44px`, 1);
 
 // ---- 8b3) Section order = the sales argument order ----
-// attention (hero) → what we do (services) → PROOF (real work + numbers) →
-// range (gallery) → how (process) → offer (models) → trust (testimonials) →
-// doubts (FAQ) → action (contact).
-// Drops the two sections that repeated the services cards (showcases, AI).
+// hero → services → work + stats → about (voice) → process →
+// testimonials → partner CTA → FAQ → contact.
+// Drop showcases/AI (repeat services) and the fake motion gallery
+// (placeholder mockups that undercut real client work).
 function cutSection(marker) {
   const s = template.indexOf(marker);
   if (s < 0) throw new Error('section marker not found: ' + marker);
@@ -431,13 +571,21 @@ function cutSection(marker) {
   template = template.slice(0, s) + template.slice(e);
   return html;
 }
-cutSection('<!-- ===== SHOWCASES ===== -->');   // repeated the Web/Mobile/AI service cards
-cutSection('<!-- ===== AI SECTION ===== -->');  // ditto — AI already lives in Services
+cutSection('<!-- ===== SHOWCASES ===== -->');
+cutSection('<!-- ===== AI SECTION ===== -->');
+cutSection('<!-- ===== MOTION GALLERY ===== -->');
+// Swap: quote section takes Work's old spot (right after Services); Work moves down after Stats
+const aboutHtml = cutSection('<!-- ===== ABOUT / QUOTE ===== -->');
 const workHtml = cutSection('<!-- ===== PORTFOLIO / WORK ===== -->');
 const statsHtml = cutSection('<!-- ===== STATS BAND ===== -->');
 const servicesClose = template.indexOf('</section>', template.indexOf('<!-- ===== SERVICES ===== -->')) + '</section>'.length;
-template = template.slice(0, servicesClose) + '\n\n  ' + workHtml + '\n\n  ' + statsHtml + template.slice(servicesClose);
-// FAQ keeps its natural home between testimonials and the contact form.
+// Quote → Work → Stats (stats sit under Selected work)
+template = template.slice(0, servicesClose) + '\n\n  ' + aboutHtml + '\n\n  ' + workHtml + '\n\n  ' + statsHtml + template.slice(servicesClose);
+
+// Partner CTA belongs after social proof, before FAQ — not mid-process.
+const partnerHtml = cutSection('<!-- ===== PARTNER CTA ===== -->');
+const testiClose = template.indexOf('</section>', template.indexOf('<!-- ===== TESTIMONIAL MARQUEE ===== -->')) + '</section>'.length;
+template = template.slice(0, testiClose) + '\n\n  ' + partnerHtml + template.slice(testiClose);
 
 // ---- 8c) Accessibility: lift muted text to meet WCAG AA contrast on the cream bg ----
 template = template.split('#9a9ea6').join('#6b7077');   // captions/disclaimer/footer meta: 2.6:1 -> 4.8:1
@@ -525,6 +673,21 @@ replaceRange('<script type="text/x-dc"', '</script>', newScript);
 const extOf = { 'image/png': 'png', 'text/javascript': 'js', 'font/woff2': 'woff2' };
 fs.mkdirSync(path.join(DIR, 'preview', 'assets'), { recursive: true });
 
+// Copy brand media from imgwebot/ (client logos, showreel, etc.)
+const IMG_SRC = path.join(DIR, 'imgwebot');
+const mediaFiles = [
+  ['webothero.MP4', 'assets/webothero.mp4'],
+  ['almalalk.png', 'assets/almalak.png'],
+  ['lalor.png', 'assets/lalor.png'],
+  ['drsamhat.png', 'assets/drsamhat.png'],
+  ['wblogo.png', 'assets/wblogo.png'],
+];
+for (const [srcName, destRel] of mediaFiles) {
+  const from = path.join(IMG_SRC, srcName);
+  if (fs.existsSync(from)) fs.copyFileSync(from, path.join(DIR, 'preview', destRel));
+  else console.warn('[build] missing media:', srcName);
+}
+
 // Unpack assets once; reference them with absolute /assets/ so sub-path pages (/ar) resolve them.
 const assetMap = {};
 for (const [uuid, e] of Object.entries(manifest)) {
@@ -585,52 +748,15 @@ fs.writeFileSync(path.join(DIR, 'preview', 'sitemap.xml'), sitemap);
 fs.writeFileSync(path.join(DIR, 'preview', 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}sitemap.xml\n`);
 fs.writeFileSync(path.join(DIR, 'preview', 'favicon.svg'), faviconSvg);
 
-// ---- Legal pages: /privacy and /terms (clean standalone, branded) ----
-function legalPage(title, updated, sections) {
-  return `<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${esc(title)} — Webot</title>
-<meta name="description" content="${esc(title)} for Webot — web, mobile and AI product studio.">
-<meta name="robots" content="index,follow">
-<link rel="icon" href="${FAVICON}">
-<link rel="canonical" href="${SITE_URL}${title.toLowerCase().split(' ')[0]}">
-<style>
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{background:#FBFAF6;color:#14151A;font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased}
-  a{color:#3B4FFF;text-decoration:none}
-  a:hover{text-decoration:underline}
-  .wrap{max-width:760px;margin:0 auto;padding:30px 22px 80px}
-  header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:24px;margin-bottom:26px;border-bottom:1px solid #ECEAE3}
-  .brand{display:inline-flex;align-items:center;gap:10px;font-weight:800;font-size:20px;color:#14151A}
-  .brand .logo{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:9px;background:#14151A;color:#fff;font-weight:800;font-size:17px}
-  h1{font-size:clamp(26px,5vw,34px);letter-spacing:-.5px;margin-bottom:6px}
-  .updated{color:#6b7077;font-size:14px;margin-bottom:26px}
-  h2{font-size:19px;margin:26px 0 8px}
-  p,li{color:#3a3d44;font-size:15.5px}
-  ul{margin:8px 0 8px 22px}
-  li{margin:5px 0}
-  .foot{margin-top:40px;padding-top:20px;border-top:1px solid #ECEAE3;color:#6b7077;font-size:13.5px}
-</style>
-</head>
-<body>
-<div class="wrap">
-  <header class="top">
-    <a class="brand" href="/"><span class="logo">W</span> Webot</a>
-    <a href="/">← Back to site</a>
-  </header>
-  <h1>${esc(title)}</h1>
-  <p class="updated">Last updated: ${updated}</p>
-  ${sections}
-  <div class="foot">Questions? message us on <a href="https://ig.me/m/webot2026" target="_blank" rel="noopener">Instagram @webot2026</a>.</div>
-</div>
-</body>
-</html>`;
-}
-
-const PRIVACY = legalPage('Privacy Policy', 'June 2026', `
+// ---- Legal pages: /privacy and /terms (logo + EN/AR/HE switcher) ----
+const LEGAL_I18N = {
+  en: {
+    dir: 'ltr', htmlLang: 'en', back: '← Back to site', updatedLabel: 'Last updated',
+    langLabel: 'Language',
+    privacy: {
+      title: 'Privacy Policy',
+      updated: 'July 2026',
+      sections: `
   <p>Webot ("we", "us") designs and builds websites, mobile apps and AI features. We respect your privacy. This policy explains what we collect through this website and how we use it.</p>
   <h2>What we collect</h2>
   <p>When you submit the contact form, we collect the details you provide: your <strong>name, phone number, email address and the country</strong> you select. To keep the form secure and prevent spam, we also record basic technical data with each submission — your IP address, browser user-agent, the page URL and a timestamp.</p>
@@ -638,17 +764,25 @@ const PRIVACY = legalPage('Privacy Policy', 'June 2026', `
   <p>We use your details only to respond to your enquiry and discuss your project. We do <strong>not</strong> sell or rent your data, and we do <strong>not</strong> share it with advertisers or marketers.</p>
   <h2>Where it is stored</h2>
   <p>Submissions are stored in our own database, and may be emailed to our team so we can reply. We keep them only as long as needed to handle your enquiry or our working relationship.</p>
-  <h2>Cookies & local storage</h2>
-  <p>We do not use advertising or tracking cookies. The site saves your language preference in your browser's local storage so it is remembered on your next visit.</p>
+  <h2>Cookies &amp; local storage</h2>
+  <p>We do not use advertising or tracking cookies. We only store small preferences in your browser:</p>
+  <ul>
+    <li><strong>Language preference</strong> — so the site opens in the language you last chose.</li>
+    <li><strong>Cookie notice choice</strong> — so we know you have seen and accepted the cookie notice, and we do not show it again.</li>
+  </ul>
+  <p>These are essential for the site to work as expected. You can clear them anytime in your browser settings.</p>
   <h2>Third-party services</h2>
   <p>The site loads web fonts from Google Fonts and JavaScript libraries from a public CDN (unpkg). These providers may receive your IP address as part of delivering those files. Our hosting and database provider processes the data you submit on our behalf.</p>
   <h2>Your rights</h2>
   <p>You can ask us to access, correct or delete the personal data you have given us at any time — just message us on <a href="https://ig.me/m/webot2026" target="_blank" rel="noopener">Instagram @webot2026</a>.</p>
   <h2>Changes</h2>
-  <p>We may update this policy from time to time; the "last updated" date above reflects the current version.</p>
-`);
-
-const TERMS = legalPage('Terms of Service', 'June 2026', `
+  <p>We may update this policy from time to time; the "last updated" date above reflects the current version.</p>`,
+      foot: 'Questions? message us on',
+    },
+    terms: {
+      title: 'Terms of Service',
+      updated: 'July 2026',
+      sections: `
   <p>These terms govern your use of the Webot website. By using the site, you agree to them.</p>
   <h2>Our services</h2>
   <p>This website provides information about Webot's design and development services. Any project we take on is governed by a separate written proposal or agreement — submitting the contact form is a request to get in touch, not a binding contract.</p>
@@ -658,15 +792,242 @@ const TERMS = legalPage('Terms of Service', 'June 2026', `
   <p>Please don't misuse the site — for example by attempting to disrupt it, access it in unauthorised ways, or submit abusive or fraudulent information through the form.</p>
   <h2>Intellectual property</h2>
   <p>The Webot name, brand, design and content on this site belong to Webot unless stated otherwise. Code we deliver to clients is owned by the client as set out in the relevant project agreement.</p>
-  <h2>No warranty & liability</h2>
+  <h2>No warranty &amp; liability</h2>
   <p>The site is provided "as is", without warranties of any kind. To the extent permitted by law, Webot is not liable for any loss arising from your use of the site.</p>
   <h2>Contact</h2>
-  <p>Questions about these terms? message us on <a href="https://ig.me/m/webot2026" target="_blank" rel="noopener">Instagram @webot2026</a>.</p>
-`);
+  <p>Questions about these terms? message us on <a href="https://ig.me/m/webot2026" target="_blank" rel="noopener">Instagram @webot2026</a>.</p>`,
+      foot: 'Questions? message us on',
+    },
+  },
+  ar: {
+    dir: 'rtl', htmlLang: 'ar', back: 'العودة إلى الموقع ←', updatedLabel: 'آخر تحديث',
+    langLabel: 'اللغة',
+    privacy: {
+      title: 'سياسة الخصوصية',
+      updated: 'يوليو 2026',
+      sections: `
+  <p>Webot («نحن») تصمّم وتبني مواقع وتطبيقات موبايل ومزايا ذكاء اصطناعي. نحترم خصوصيتك. توضّح هذه السياسة ما نجمعه عبر هذا الموقع وكيف نستخدمه.</p>
+  <h2>ما الذي نجمعه</h2>
+  <p>عند إرسال نموذج التواصل، نجمع التفاصيل التي تقدّمها: <strong>الاسم ورقم الهاتف والبريد الإلكتروني والدولة</strong> التي تختارها. لحماية النموذج ومنع الرسائل المزعجة، نسجّل أيضاً بيانات تقنية أساسية مع كل إرسال — عنوان IP ومتصفّحك ورابط الصفحة والطابع الزمني.</p>
+  <h2>كيف نستخدمها</h2>
+  <p>نستخدم تفاصيلك فقط للرد على استفسارك ومناقشة مشروعك. <strong>لا</strong> نبيع بياناتك ولا نؤجّرها، و<strong>لا</strong> نشاركها مع معلنين أو جهات تسويقية.</p>
+  <h2>أين تُحفظ</h2>
+  <p>تُحفظ الطلبات في قاعدة بياناتنا، وقد تُرسل بالبريد إلى فريقنا للرد. نحتفظ بها فقط طالما لزم الأمر لمعالجة استفسارك أو علاقتنا العملية.</p>
+  <h2>ملفات تعريف الارتباط والتخزين المحلي</h2>
+  <p>لا نستخدم ملفات تعريف ارتباط إعلانية أو تتبّعية. نخزّن فقط تفضيلات صغيرة في متصفّحك:</p>
+  <ul>
+    <li><strong>تفضيل اللغة</strong> — ليفتح الموقع باللغة التي اخترتها آخر مرة.</li>
+    <li><strong>اختيار إشعار الكوكيز</strong> — لنعرف أنك رأيت الإشعار وقبلته، فلا نعرضه مجدداً.</li>
+  </ul>
+  <p>هذه ضرورية لعمل الموقع كما يُفترض. يمكنك مسحها في أي وقت من إعدادات المتصفّح.</p>
+  <h2>خدمات طرف ثالث</h2>
+  <p>يحمّل الموقع خطوطاً من Google Fonts ومكتبات JavaScript من CDN عام (unpkg). قد تتلقّى هذه الجهات عنوان IP الخاص بك ضمن تقديم تلك الملفات. يعالج مزوّد الاستضافة وقاعدة البيانات البيانات التي ترسلها نيابةً عنّا.</p>
+  <h2>حقوقك</h2>
+  <p>يمكنك طلب الوصول إلى بياناتك الشخصية أو تصحيحها أو حذفها في أي وقت — راسلنا على <a href="https://ig.me/m/webot2026" target="_blank" rel="noopener">Instagram @webot2026</a>.</p>
+  <h2>التغييرات</h2>
+  <p>قد نحدّث هذه السياسة من وقت لآخر؛ تاريخ «آخر تحديث» أعلاه يعكس النسخة الحالية.</p>`,
+      foot: 'أسئلة؟ راسلنا على',
+    },
+    terms: {
+      title: 'شروط الخدمة',
+      updated: 'يوليو 2026',
+      sections: `
+  <p>تحكم هذه الشروط استخدامك لموقع Webot. باستخدامك الموقع، فإنك توافق عليها.</p>
+  <h2>خدماتنا</h2>
+  <p>يقدّم هذا الموقع معلومات عن خدمات التصميم والتطوير لدى Webot. أي مشروع ننفّذه يخضع لعرض أو اتفاق مكتوب منفصل — إرسال نموذج التواصل طلب للتواصل وليس عقداً ملزماً.</p>
+  <h2>الأسعار</h2>
+  <p>أي أسعار تظهر على الموقع هي نقاط بداية إرشادية. يُؤكَّد عرض السعر النهائي كتابياً قبل بدء أي عمل.</p>
+  <h2>الاستخدام المقبول</h2>
+  <p>يرجى عدم إساءة استخدام الموقع — مثلاً بمحاولة تعطيله أو الوصول غير المصرّح به أو إرسال معلومات مسيئة أو احتيالية عبر النموذج.</p>
+  <h2>الملكية الفكرية</h2>
+  <p>اسم Webot وعلامتها وتصميمها ومحتوى هذا الموقع ملك لـ Webot ما لم يُذكر خلاف ذلك. الكود الذي نسلّمه للعملاء ملك للعميل وفق اتفاق المشروع ذي الصلة.</p>
+  <h2>عدم الضمان والمسؤولية</h2>
+  <p>يُقدَّم الموقع «كما هو» دون ضمانات من أي نوع. في حدود ما يسمح به القانون، لا تتحمّل Webot المسؤولية عن أي خسارة ناتجة عن استخدامك للموقع.</p>
+  <h2>التواصل</h2>
+  <p>أسئلة حول هذه الشروط؟ راسلنا على <a href="https://ig.me/m/webot2026" target="_blank" rel="noopener">Instagram @webot2026</a>.</p>`,
+      foot: 'أسئلة؟ راسلنا على',
+    },
+  },
+  he: {
+    dir: 'rtl', htmlLang: 'he', back: 'חזרה לאתר ←', updatedLabel: 'עודכן לאחרונה',
+    langLabel: 'שפה',
+    privacy: {
+      title: 'מדיניות פרטיות',
+      updated: 'יולי 2026',
+      sections: `
+  <p>‏Webot ("אנחנו") מעצבת ובונה אתרים, אפליקציות מובייל ויכולות בינה מלאכותית. אנחנו מכבדים את הפרטיות שלכם. מדיניות זו מסבירה מה אנחנו אוספים באתר הזה וכיצד אנחנו משתמשים בכך.</p>
+  <h2>מה אנחנו אוספים</h2>
+  <p>כשאתם שולחים את טופס יצירת הקשר, אנחנו אוספים את הפרטים שסיפקתם: <strong>שם, מספר טלפון, כתובת אימייל והמדינה</strong> שבחרתם. כדי לאבטח את הטופס ולמנוע ספאם, אנחנו גם רושמים נתונים טכניים בסיסיים עם כל שליחה — כתובת IP, סוכן הדפדפן, כתובת העמוד וחותמת זמן.</p>
+  <h2>איך אנחנו משתמשים בזה</h2>
+  <p>אנחנו משתמשים בפרטים שלכם רק כדי להשיב לפנייה ולדון בפרויקט. אנחנו <strong>לא</strong> מוכרים או משכירים את הנתונים, ו<strong>לא</strong> משתפים אותם עם מפרסמים או משווקים.</p>
+  <h2>איפה זה נשמר</h2>
+  <p>פניות נשמרות במסד הנתונים שלנו, ועשויות להישלח באימייל לצוות כדי שנוכל להשיב. אנחנו שומרים אותן רק כל עוד נדרש לטיפול בפנייה או בקשר העבודה.</p>
+  <h2>עוגיות ואחסון מקומי</h2>
+  <p>אנחנו לא משתמשים בעוגיות פרסום או מעקב. אנחנו שומרים רק העדפות קטנות בדפדפן שלכם:</p>
+  <ul>
+    <li><strong>העדפת שפה</strong> — כדי שהאתר ייפתח בשפה שבחרתם לאחרונה.</li>
+    <li><strong>בחירת הודעת העוגיות</strong> — כדי שנדע שראיתם ואישרתם את ההודעה, ולא נציג אותה שוב.</li>
+  </ul>
+  <p>אלה חיוניים לתפקוד התקין של האתר. אפשר למחוק אותם בכל עת בהגדרות הדפדפן.</p>
+  <h2>שירותי צד שלישי</h2>
+  <p>האתר טוען גופנים מ-Google Fonts וספריות JavaScript מ-CDN ציבורי (unpkg). ספקים אלה עשויים לקבל את כתובת ה-IP שלכם כחלק ממסירת הקבצים. ספק האחסון ומסד הנתונים מעבדים את הנתונים ששלחתם בשמנו.</p>
+  <h2>הזכויות שלכם</h2>
+  <p>אפשר לבקש גישה, תיקון או מחיקה של הנתונים האישיים שמסרתם בכל עת — פשוט שלחו לנו הודעה ב-<a href="https://ig.me/m/webot2026" target="_blank" rel="noopener">Instagram @webot2026</a>.</p>
+  <h2>שינויים</h2>
+  <p>אנחנו עשויים לעדכן מדיניות זו מעת לעת; תאריך "עודכן לאחרונה" למעלה משקף את הגרסה הנוכחית.</p>`,
+      foot: 'שאלות? שלחו לנו הודעה ב-',
+    },
+    terms: {
+      title: 'תנאי שימוש',
+      updated: 'יולי 2026',
+      sections: `
+  <p>תנאים אלה חלים על השימוש שלכם באתר Webot. בשימוש באתר, אתם מסכימים להם.</p>
+  <h2>השירותים שלנו</h2>
+  <p>אתר זה מספק מידע על שירותי העיצוב והפיתוח של Webot. כל פרויקט שאנחנו לוקחים עלינו כפוף להצעה או הסכם בכתב נפרד — שליחת טופס יצירת הקשר היא בקשה ליצירת קשר, לא חוזה מחייב.</p>
+  <h2>תמחור</h2>
+  <p>כל מחירים שמוצגים באתר הם נקודות התחלה אינדיקטיביות. הצעת המחיר הסופית מאושרת בכתב לפני שמתחילים בעבודה.</p>
+  <h2>שימוש מקובל</h2>
+  <p>נא לא לעשות שימוש לרעה באתר — למשל ניסיון לשבש אותו, גישה לא מורשית, או שליחת מידע פוגעני או הונאתי דרך הטופס.</p>
+  <h2>קניין רוחני</h2>
+  <p>השם Webot, המותג, העיצוב והתוכן באתר זה שייכים ל-Webot אלא אם צוין אחרת. קוד שאנחנו מוסרים ללקוחות שייך ללקוח לפי הסכם הפרויקט הרלוונטי.</p>
+  <h2>היעדר אחריות</h2>
+  <p>האתר מסופק "כפי שהוא", ללא אחריות מכל סוג. במידה המותרת בחוק, Webot אינה אחראית לכל נזק הנובע מהשימוש שלכם באתר.</p>
+  <h2>יצירת קשר</h2>
+  <p>שאלות לגבי תנאים אלה? שלחו לנו הודעה ב-<a href="https://ig.me/m/webot2026" target="_blank" rel="noopener">Instagram @webot2026</a>.</p>`,
+      foot: 'שאלות? שלחו לנו הודעה ב-',
+    },
+  },
+};
 
-for (const [slug, htmlOut] of [['privacy', PRIVACY], ['terms', TERMS]]) {
+function legalPage(kind) {
+  // kind: 'privacy' | 'terms'
+  const pack = {};
+  for (const lang of ['en', 'ar', 'he']) {
+    const L = LEGAL_I18N[lang];
+    const doc = L[kind];
+    pack[lang] = {
+      dir: L.dir,
+      htmlLang: L.htmlLang,
+      title: doc.title,
+      updatedLabel: L.updatedLabel,
+      updated: doc.updated,
+      back: L.back,
+      langLabel: L.langLabel,
+      sections: doc.sections,
+      foot: doc.foot,
+    };
+  }
+  const en = pack.en;
+  const homeHref = kind === 'privacy' ? '/' : '/';
+  return `<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${esc(en.title)} — Webot</title>
+<meta name="description" content="${esc(en.title)} for Webot — web, mobile and AI product studio.">
+<meta name="robots" content="index,follow">
+<link rel="icon" href="${FAVICON}">
+<link rel="canonical" href="${SITE_URL}${kind}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Heebo:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#FBFAF6;color:#14151A;font-family:Inter,system-ui,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased}
+  html[lang="ar"] body{font-family:Cairo,'Noto Sans Arabic',sans-serif}
+  html[lang="he"] body{font-family:Heebo,'Noto Sans Hebrew',sans-serif}
+  a{color:#3B4FFF;text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:760px;margin:0 auto;padding:30px 22px 80px}
+  header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-bottom:24px;margin-bottom:26px;border-bottom:1px solid #ECEAE3}
+  .brand{display:inline-flex;align-items:center;gap:10px;font-family:Sora,sans-serif;font-weight:700;font-size:20px;color:#14151A;text-decoration:none}
+  .brand img{width:40px;height:40px;border-radius:11px;object-fit:cover;display:block;background:#14151A}
+  .top-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .lang{display:inline-flex;align-items:center;gap:4px;padding:4px;border-radius:999px;background:#ECEAE3}
+  .lang button{appearance:none;border:0;cursor:pointer;border-radius:999px;padding:7px 11px;font-family:inherit;font-weight:700;font-size:12.5px;letter-spacing:.02em;color:#53656F;background:transparent;transition:background .15s ease,color .15s ease}
+  .lang button[aria-pressed="true"]{background:#0D212C;color:#FBFAF6}
+  .back{font-size:14px;font-weight:600;color:#3B4FFF;white-space:nowrap}
+  h1{font-family:Sora,sans-serif;font-size:clamp(26px,5vw,34px);letter-spacing:-.5px;margin-bottom:6px}
+  .updated{color:#6b7077;font-size:14px;margin-bottom:26px}
+  h2{font-size:19px;margin:26px 0 8px;color:#0D212C}
+  p,li{color:#3a3d44;font-size:15.5px}
+  ul{margin:8px 0 8px 22px}
+  [dir="rtl"] ul{margin:8px 22px 8px 0}
+  li{margin:5px 0}
+  .foot{margin-top:40px;padding-top:20px;border-top:1px solid #ECEAE3;color:#6b7077;font-size:13.5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="${homeHref}"><img src="/assets/wblogo.png" alt="Webot" width="40" height="40"> Webot</a>
+    <div class="top-actions">
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-lang="ar" aria-pressed="false">AR</button>
+        <button type="button" data-lang="he" aria-pressed="false">HE</button>
+      </div>
+      <a class="back" data-back href="/">${esc(en.back)}</a>
+    </div>
+  </header>
+  <h1 data-title>${esc(en.title)}</h1>
+  <p class="updated"><span data-updated-label>${esc(en.updatedLabel)}</span>: <span data-updated>${esc(en.updated)}</span></p>
+  <div data-sections>${en.sections}</div>
+  <div class="foot"><span data-foot>${esc(en.foot)}</span> <a href="https://ig.me/m/webot2026" target="_blank" rel="noopener">Instagram @webot2026</a>.</div>
+</div>
+<script>
+(function(){
+  var PACK = ${JSON.stringify(pack).split('</').join('<\\/')};
+  var html = document.documentElement;
+  var titleEl = document.querySelector('[data-title]');
+  var updatedLabel = document.querySelector('[data-updated-label]');
+  var updatedEl = document.querySelector('[data-updated]');
+  var sectionsEl = document.querySelector('[data-sections]');
+  var footEl = document.querySelector('[data-foot]');
+  var backEl = document.querySelector('[data-back]');
+  var buttons = document.querySelectorAll('.lang button');
+  function apply(lang){
+    var L = PACK[lang] || PACK.en;
+    html.setAttribute('lang', L.htmlLang);
+    html.setAttribute('dir', L.dir);
+    document.title = L.title + ' — Webot';
+    if (titleEl) titleEl.textContent = L.title;
+    if (updatedLabel) updatedLabel.textContent = L.updatedLabel;
+    if (updatedEl) updatedEl.textContent = L.updated;
+    if (sectionsEl) sectionsEl.innerHTML = L.sections;
+    if (footEl) footEl.textContent = L.foot;
+    if (backEl) backEl.textContent = L.back;
+    buttons.forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-lang') === lang ? 'true' : 'false'); });
+    try { localStorage.setItem('webot_lang', lang); } catch (e) {}
+    try {
+      var u = new URL(window.location.href);
+      if (lang === 'en') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang);
+      window.history.replaceState({}, '', u.pathname + u.search);
+    } catch (e) {}
+  }
+  buttons.forEach(function(b){
+    b.addEventListener('click', function(){ apply(b.getAttribute('data-lang')); });
+  });
+  var start = 'en';
+  try {
+    var q = new URLSearchParams(window.location.search).get('lang');
+    if (q && PACK[q]) start = q;
+    else {
+      var saved = localStorage.getItem('webot_lang');
+      if (saved && PACK[saved]) start = saved;
+    }
+  } catch (e) {}
+  apply(start);
+})();
+</script>
+</body>
+</html>`;
+}
+
+for (const slug of ['privacy', 'terms']) {
   fs.mkdirSync(path.join(DIR, 'preview', slug), { recursive: true });
-  fs.writeFileSync(path.join(DIR, 'preview', slug, 'index.html'), htmlOut);
+  fs.writeFileSync(path.join(DIR, 'preview', slug, 'index.html'), legalPage(slug));
 }
 
 // ---- 11) Re-bundle the single self-contained file ----
