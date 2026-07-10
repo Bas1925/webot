@@ -125,8 +125,6 @@ class Component extends DCLogic {
               features: [`Custom landing & core pages`, `Mobile-first, SEO-ready`, `Live in about 2 weeks`] },
             { phase: `Phase 2`, name: `Growth`, sub: `Web, mobile & AI in sync.`, cta: `Scope Your Product`,
               features: [`Web app + iOS/Android`, `Cart, accounts & checkout`, `AI where it moves the numbers`] },
-            { phase: `Phase 3`, name: `Scale`, sub: `Your business, one platform.`, cta: `Partner With Us`,
-              features: [`Custom admin & analytics`, `Integrations, APIs & automations`, `Dedicated team & SLAs`] },
           ],
           assistTitle: `Not sure which fits?`, assistDesc: `Tell us what you're building and we'll recommend the right model.`, assistCta: `Start a project`,
           disclaimer: `Every project is scoped and quoted individually — usually within 24 hours.`,
@@ -183,8 +181,8 @@ class Component extends DCLogic {
           cols: [
             { title: `Services`, links: [`Websites & web apps`, `Mobile apps`, `AI features`, `Online stores`] },
             { title: `Company`, links: [`Work`, `Models`, `Process`, `Contact`] },
-            { title: `Get in touch`, links: [`Start a project`, `__EMAIL__`, `Book a call`] },
           ],
+          touchTitle: `Get in touch`,
           copyright: `© 2026 Webot · Remote, worldwide`,
           made: `@webot2026`,
           privacy: `Privacy`, terms: `Terms`,
@@ -274,8 +272,6 @@ class Component extends DCLogic {
               features: [`صفحات رئيسية وأساسية مخصّصة`, `يبدأ بالموبايل وجاهز لمحركات البحث`, `الإطلاق خلال أسبوعين تقريباً`] },
             { phase: `المرحلة الثانية`, name: `النمو`, sub: `ويب وموبايل وذكاء اصطناعي بتناغم.`, cta: `حدّد نطاق منتجك`,
               features: [`تطبيق ويب + iOS وأندرويد`, `سلة وحسابات ودفع إلكتروني`, `ذكاء اصطناعي حيث يصنع الفرق`] },
-            { phase: `المرحلة الثالثة`, name: `التوسّع`, sub: `عملك كلّه على منصة واحدة.`, cta: `كن شريكنا`,
-              features: [`لوحة تحكّم وتحليلات مخصّصة`, `تكاملات وواجهات برمجية وأتمتة`, `فريق مخصّص واتفاقيات مستوى خدمة`] },
           ],
           assistTitle: `لست متأكداً أيّها يناسبك؟`, assistDesc: `أخبرنا بما تريد بناءه وسنرشّح لك النموذج الأنسب.`, assistCta: `ابدأ مشروعك`,
           disclaimer: `كل مشروع يُحدَّد نطاقه ويُسعَّر على حدة — عادةً خلال ٢٤ ساعة.`,
@@ -332,8 +328,8 @@ class Component extends DCLogic {
           cols: [
             { title: `الخدمات`, links: [`مواقع وتطبيقات ويب`, `تطبيقات الموبايل`, `مزايا الذكاء الاصطناعي`, `متاجر إلكترونية`] },
             { title: `الشركة`, links: [`أعمالنا`, `آلية العمل`, `الأسعار`, `الأسئلة الشائعة`] },
-            { title: `تواصل معنا`, links: [`ابدأ مشروعك`, `__EMAIL__`, `احجز مكالمة`] },
           ],
+          touchTitle: `تواصل معنا`,
           copyright: `© 2026 Webot. جميع الحقوق محفوظة.`,
           made: `تصميم وتطوير Webot · عن بُعد، حول العالم`,
           privacy: `الخصوصية`, terms: `الشروط`,
@@ -423,8 +419,6 @@ class Component extends DCLogic {
               features: [`דף נחיתה ועמודי ליבה בהתאמה אישית`, `‏Mobile-first ומוכן ל-SEO`, `באוויר תוך כשבועיים`] },
             { phase: `שלב 2`, name: `Growth`, sub: `ווב, מובייל ו-AI בסנכרון.`, cta: `הגדירו את המוצר`,
               features: [`אפליקציית ווב + iOS/אנדרואיד`, `עגלה, חשבונות ותשלום`, `‏AI היכן שהוא מזיז את המספרים`] },
-            { phase: `שלב 3`, name: `Scale`, sub: `העסק שלכם, פלטפורמה אחת.`, cta: `בואו נהיה שותפים`,
-              features: [`אדמין ואנליטיקה בהתאמה אישית`, `אינטגרציות, APIs ואוטומציות`, `צוות ייעודי ו-SLA`] },
           ],
           assistTitle: `לא בטוחים מה מתאים?`, assistDesc: `ספרו לנו מה אתם בונים ונמליץ על המודל הנכון.`, assistCta: `התחילו פרויקט`,
           disclaimer: `כל פרויקט מוגדר ומתומחר אישית — בדרך כלל תוך 24 שעות.`,
@@ -481,8 +475,8 @@ class Component extends DCLogic {
           cols: [
             { title: `שירותים`, links: [`אתרים ואפליקציות ווב`, `אפליקציות מובייל`, `יכולות AI`, `חנויות אונליין`] },
             { title: `החברה`, links: [`עבודות`, `תהליך`, `מחירים`, `שאלות נפוצות`] },
-            { title: `צרו קשר`, links: [`התחילו פרויקט`, `__EMAIL__`, `לקביעת שיחה`] },
           ],
+          touchTitle: `צרו קשר`,
           copyright: `© 2026 Webot. כל הזכויות שמורות.`,
           made: `עוצב ונבנה על-ידי Webot · מרחוק, מכל העולם`,
           privacy: `פרטיות`, terms: `תנאים`,
@@ -593,7 +587,6 @@ class Component extends DCLogic {
     const colHrefs = [
       ['#services', '#services', '#services', '#services'],
       ['#work', '#models', '#process', '#contact'],
-      ['#contact', IG_URL, '#contact'],
     ];
     const footerCols = T.footer.cols.map((col, ci) => ({
       title: col.title,
@@ -659,6 +652,7 @@ class Component extends DCLogic {
       faqKicker: T.faq.kicker, faqH2: T.faq.h2, faqStill: T.faq.still, faqStillCta: T.faq.stillCta,
       ctaH2: T.finalCta.h2, ctaSub: T.finalCta.sub, ctaStart: T.finalCta.start, ctaEmail: T.finalCta.email,
       footerBrand: T.footer.brand, copyright: T.footer.copyright, footerMade: T.footer.made,
+      footTouchTitle: T.footer.touchTitle,
       footerPrivacy: T.footer.privacy, footerTerms: T.footer.terms,
 
       // lead-capture form

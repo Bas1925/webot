@@ -162,9 +162,6 @@ const FONT_STYLE = `<link rel="preconnect" href="https://fonts.googleapis.com">
   .wb-vhero-qbar{flex:none;width:3px;border-radius:3px;background:linear-gradient(180deg,#3B4FFF,#FF6B57)}
   .wb-vhero-qaccent{color:#3B4FFF;font-weight:600}
   @media (prefers-reduced-motion:reduce){ .wb-vhero-media video{display:none} }
-  /* floating Instagram DM button — the low-friction chat channel */
-  .wb-ig-fab{position:fixed;bottom:18px;inset-inline-end:18px;z-index:60;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;background:radial-gradient(circle at 30% 110%,#fdf497 0%,#fd5949 45%,#d6249f 60%,#285AEB 90%);box-shadow:0 12px 30px -10px rgba(214,36,159,.55);transition:transform .2s ease}
-  .wb-ig-fab:hover{transform:translateY(-3px) scale(1.05)}
   /* lead form */
   #contact{scroll-margin-top:84px}
   .wb-input::placeholder{color:#9aa0ab}
@@ -386,11 +383,6 @@ sub(`<h2 style="margin-top:14px;font-family:'Sora',sans-serif;font-weight:700;fo
 sub('<span>{{ footerMade }}</span>',
     '<span style="display:flex;flex-wrap:wrap;gap:16px"><a href="/privacy" style-hover="color:#3B4FFF" style="transition:color .2s">{{ footerPrivacy }}</a><a href="/terms" style-hover="color:#3B4FFF" style="transition:color .2s">{{ footerTerms }}</a></span><span>{{ footerMade }}</span>', 1);
 
-// Footer socials: keep only Instagram, with the real Instagram glyph (inline SVG
-// using currentColor so it picks up the hover colour). Replaces the whole loop.
-replaceRange('<sc-for list="{{ socials }}"', '</sc-for>',
-  '<a href="https://instagram.com/webot2026" target="_blank" rel="noopener" aria-label="Instagram — @webot2026" style-hover="border-color:#3B4FFF;color:#3B4FFF;transform:translateY(-2px)" style="display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:11px;border:1px solid #ECEAE3;background:#fff;color:#6B6F76;transition:all .2s ease"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg></a>');
-
 // ---- 8b) RTL fill fix for horizontal strips (gallery + the two marquees) ----
 // Force the strip containers to lay out LTR so they fill the viewport like English.
 sub('margin-top:46px;display:flex;flex-direction:column;gap:18px"',
@@ -401,10 +393,36 @@ sub('#000 8%,#000 92%,transparent)">', '#000 8%,#000 92%,transparent);direction:
 sub('<div style="display:flex;width:max-content;gap:20px;padding:0 10px;animation:wb-marquee-rev 44s linear infinite">',
     '<div class="wb-rtl-text" style="display:flex;width:max-content;gap:20px;padding:0 10px;animation:wb-marquee-rev 44s linear infinite">', 1);
 
-// ---- 8b2) Floating Instagram DM button (fixed, bottom inline-end, all pages) ----
-sub('<footer',
-    `<a href="https://ig.me/m/webot2026" target="_blank" rel="noopener" aria-label="Message Webot on Instagram" class="wb-ig-fab"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"></rect><circle cx="12" cy="12" r="4.5"></circle><circle cx="17.4" cy="6.6" r="1.3" fill="currentColor" stroke="none"></circle></svg></a>
-  <footer`, 1);
+// ---- 8b2) Footer contact: one Instagram icon in the "Get in touch" column ----
+// The socials row under the brand blurb is removed (was a duplicate), and the
+// "Get in touch" column is hard-coded: Start a project + the Instagram logo
+// linking to the profile. No username text, no "Book a call".
+replaceRange('<div style="margin-top:18px;display:flex;gap:10px">', `</sc-for>
+          </div>`, '');
+const IG_ICON_SVG = '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"></rect><circle cx="12" cy="12" r="4.5"></circle><circle cx="17.4" cy="6.6" r="1.3" fill="currentColor" stroke="none"></circle></svg>';
+sub(`</sc-for>
+      </div>
+      <div style="margin-top:44px`,
+    `</sc-for>
+        <div>
+          <div style="font-size:13px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:#14151A">{{ footTouchTitle }}</div>
+          <div style="margin-top:15px;display:flex;flex-direction:column;gap:12px;align-items:flex-start">
+            <a href="#contact" style-hover="color:#3B4FFF" style="font-size:14.5px;color:#6B6F76;transition:color .2s">{{ navStart }}</a>
+            <a href="https://instagram.com/webot2026" target="_blank" rel="noopener" aria-label="Instagram" style-hover="border-color:#3B4FFF;color:#3B4FFF;transform:translateY(-2px)" style="display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:11px;border:1px solid #ECEAE3;background:#fff;color:#6B6F76;transition:all .2s ease">${IG_ICON_SVG}</a>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:44px`, 1);
+
+// ---- 8b3) Move the FAQ up to replace the Web/Mobile/AI showcase trio, which
+// repeated the services cards almost word for word ----
+const faqSecStart = template.indexOf('<section id="faq"');
+const faqSecEnd = template.indexOf('</section>', faqSecStart) + '</section>'.length;
+const faqSecHtml = template.slice(faqSecStart, faqSecEnd);
+template = template.slice(0, faqSecStart) + template.slice(faqSecEnd);
+const shStart = template.indexOf('<!-- ===== SHOWCASES ===== -->');
+const shEnd = template.indexOf('</section>', shStart) + '</section>'.length;
+template = template.slice(0, shStart) + faqSecHtml + template.slice(shEnd);
 
 // ---- 8c) Accessibility: lift muted text to meet WCAG AA contrast on the cream bg ----
 template = template.split('#9a9ea6').join('#6b7077');   // captions/disclaimer/footer meta: 2.6:1 -> 4.8:1

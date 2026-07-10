@@ -69,9 +69,6 @@
   .wb-vhero-qbar{flex:none;width:3px;border-radius:3px;background:linear-gradient(180deg,#3B4FFF,#FF6B57)}
   .wb-vhero-qaccent{color:#3B4FFF;font-weight:600}
   @media (prefers-reduced-motion:reduce){ .wb-vhero-media video{display:none} }
-  /* floating Instagram DM button — the low-friction chat channel */
-  .wb-ig-fab{position:fixed;bottom:18px;inset-inline-end:18px;z-index:60;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;background:radial-gradient(circle at 30% 110%,#fdf497 0%,#fd5949 45%,#d6249f 60%,#285AEB 90%);box-shadow:0 12px 30px -10px rgba(214,36,159,.55);transition:transform .2s ease}
-  .wb-ig-fab:hover{transform:translateY(-3px) scale(1.05)}
   /* lead form */
   #contact{scroll-margin-top:84px}
   .wb-input::placeholder{color:#9aa0ab}
@@ -597,42 +594,26 @@
     </div>
   </section>
 
-  <!-- ===== SHOWCASES ===== -->
-  <section style="padding:clamp(24px,4vh,48px) clamp(18px,5vw,56px) clamp(40px,6vh,72px)">
-    <div style="max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:clamp(48px,8vh,92px)">
-      <sc-for list="{{ showcases }}" as="sh" hint-placeholder-count="3">
-        <div data-reveal="" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(28px,5vw,60px);align-items:center">
-          <div style="order:{{ sh.textOrder }}">
-            <div style="display:inline-block;font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:{{ sh.accent }}">{{ sh.kicker }}</div>
-            <h3 style="margin-top:12px;font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(24px,3.4vw,38px);line-height:1.1;letter-spacing:-.02em;color:#14151A">{{ sh.title }}</h3>
-            <p style="margin-top:14px;font-size:16px;line-height:1.6;color:#6B6F76;max-width:440px">{{ sh.desc }}</p>
-            <div style="margin-top:20px;display:flex;flex-direction:column;gap:11px">
-              <sc-for list="{{ sh.points }}" as="p" hint-placeholder-count="3">
-                <div style="display:flex;align-items:flex-start;gap:11px;font-size:15px;color:#3a3d44">
-                  <span style="margin-top:1px;flex:none;display:flex;align-items:center;justify-content:center;width:21px;height:21px;border-radius:7px;background:{{ sh.tintBg }};color:{{ sh.accent }};font-size:12px;font-weight:700">✓</span>
-                  <span>{{ p }}</span>
-                </div>
-              </sc-for>
+  <section id="faq" style="padding:clamp(64px,9vh,110px) clamp(18px,5vw,56px)">
+    <div style="max-width:840px;margin:0 auto">
+      <div data-reveal="" style="text-align:center;max-width:560px;margin:0 auto">
+        <div style="font-size:13.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#3B4FFF">{{ faqKicker }}</div>
+        <h2 style="margin-top:14px;font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(28px,4.2vw,46px);line-height:1.08;letter-spacing:-.02em">{{ faqH2 }}</h2>
+      </div>
+      <div data-reveal="" style="margin-top:38px;display:flex;flex-direction:column;gap:12px">
+        <sc-for list="{{ faqs }}" as="item" hint-placeholder-count="6">
+          <div style="border:1px solid #ECEAE3;border-radius:16px;background:#fff;overflow:hidden">
+            <button onclick="{{ item.onToggle }}" aria-expanded="{{ item.open }}" style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;text-align:left;padding:20px 22px;background:none;border:0;cursor:pointer;font-family:'Sora',sans-serif;font-weight:600;font-size:clamp(16px,1.8vw,18px);color:#14151A">
+              <span>{{ item.q }}</span>
+              <span style="flex:none;display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:8px;background:{{ item.iconBg }};color:{{ item.iconColor }};font-size:18px;transition:transform .25s ease;transform:{{ item.iconRot }}">+</span>
+            </button>
+            <div style="max-height:{{ item.maxH }};overflow:hidden;transition:max-height .32s ease">
+              <p style="padding:0 22px 20px;font-size:15px;line-height:1.6;color:#6B6F76">{{ item.a }}</p>
             </div>
           </div>
-          <div style="order:{{ sh.visualOrder }};position:relative;min-height:260px;border-radius:22px;background:{{ sh.panelBg }};border:1px solid #ECEAE3;box-shadow:0 18px 50px -24px rgba(20,21,26,.2);overflow:hidden;display:flex;align-items:center;justify-content:center;padding:28px">
-            <div style="position:absolute;width:240px;height:240px;border:1px dashed rgba(20,21,26,.12);border-radius:50%;animation:wb-spin 40s linear infinite"></div>
-            <div style="position:relative;width:100%;max-width:280px;background:#fff;border-radius:16px;box-shadow:0 16px 40px -18px rgba(20,21,26,.28);padding:16px;display:flex;flex-direction:column;gap:10px">
-              <div style="display:flex;align-items:center;gap:8px">
-                <span style="width:30px;height:30px;border-radius:9px;background:{{ sh.accent }};display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px">{{ sh.icon }}</span>
-                <span style="flex:1;height:9px;border-radius:5px;background:#EDEBE4"></span>
-              </div>
-              <span style="height:9px;border-radius:5px;background:#EDEBE4;width:90%"></span>
-              <span style="height:9px;border-radius:5px;background:#EDEBE4;width:70%"></span>
-              <div style="height:60px;border-radius:11px;background:{{ sh.tintBg }};margin-top:2px"></div>
-              <div style="display:flex;gap:8px">
-                <span style="flex:1;height:30px;border-radius:8px;background:{{ sh.accent }}"></span>
-                <span style="width:54px;height:30px;border-radius:8px;background:#F4F2EC"></span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </sc-for>
+        </sc-for>
+        <p data-reveal="" style="margin-top:26px;text-align:center;font-size:15px;color:#6b7077">{{ faqStill }} <a href="#contact" style="color:#3B4FFF;font-weight:600">{{ faqStillCta }}</a></p>
+      </div>
     </div>
   </section>
 
@@ -853,28 +834,7 @@
   </section>
 
   <!-- ===== FAQ ===== -->
-  <section id="faq" style="padding:clamp(64px,9vh,110px) clamp(18px,5vw,56px)">
-    <div style="max-width:840px;margin:0 auto">
-      <div data-reveal="" style="text-align:center;max-width:560px;margin:0 auto">
-        <div style="font-size:13.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#3B4FFF">{{ faqKicker }}</div>
-        <h2 style="margin-top:14px;font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(28px,4.2vw,46px);line-height:1.08;letter-spacing:-.02em">{{ faqH2 }}</h2>
-      </div>
-      <div data-reveal="" style="margin-top:38px;display:flex;flex-direction:column;gap:12px">
-        <sc-for list="{{ faqs }}" as="item" hint-placeholder-count="6">
-          <div style="border:1px solid #ECEAE3;border-radius:16px;background:#fff;overflow:hidden">
-            <button onclick="{{ item.onToggle }}" aria-expanded="{{ item.open }}" style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;text-align:left;padding:20px 22px;background:none;border:0;cursor:pointer;font-family:'Sora',sans-serif;font-weight:600;font-size:clamp(16px,1.8vw,18px);color:#14151A">
-              <span>{{ item.q }}</span>
-              <span style="flex:none;display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:8px;background:{{ item.iconBg }};color:{{ item.iconColor }};font-size:18px;transition:transform .25s ease;transform:{{ item.iconRot }}">+</span>
-            </button>
-            <div style="max-height:{{ item.maxH }};overflow:hidden;transition:max-height .32s ease">
-              <p style="padding:0 22px 20px;font-size:15px;line-height:1.6;color:#6B6F76">{{ item.a }}</p>
-            </div>
-          </div>
-        </sc-for>
-        <p data-reveal="" style="margin-top:26px;text-align:center;font-size:15px;color:#6b7077">{{ faqStill }} <a href="#contact" style="color:#3B4FFF;font-weight:600">{{ faqStillCta }}</a></p>
-      </div>
-    </div>
-  </section>
+  
 
   <!-- ===== CONTACT / LEAD FORM ===== -->
   <section id="contact" style="padding:clamp(48px,7vh,96px) clamp(18px,5vw,56px) clamp(40px,6vh,72px)">
@@ -942,7 +902,6 @@
   </section>
 
   <!-- ===== FOOTER ===== -->
-  <a href="https://ig.me/m/webot2026" target="_blank" rel="noopener" aria-label="Message Webot on Instagram" class="wb-ig-fab"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"></rect><circle cx="12" cy="12" r="4.5"></circle><circle cx="17.4" cy="6.6" r="1.3" fill="currentColor" stroke="none"></circle></svg></a>
   <footer style="padding:clamp(50px,7vw,80px) clamp(18px,5vw,56px) 36px;border-top:1px solid #ECEAE3">
     <div style="max-width:1180px;margin:0 auto">
       <div style="display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:36px;align-items:start">
@@ -952,9 +911,7 @@
             <span style="font-family:'Sora',sans-serif;font-weight:700;font-size:19px">Webot</span>
           </div>
           <p style="margin-top:15px;font-size:14.5px;line-height:1.6;color:#6B6F76;max-width:280px">{{ footerBrand }}</p>
-          <div style="margin-top:18px;display:flex;gap:10px">
-            <a href="https://instagram.com/webot2026" target="_blank" rel="noopener" aria-label="Instagram — @webot2026" style-hover="border-color:#3B4FFF;color:#3B4FFF;transform:translateY(-2px)" style="display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:11px;border:1px solid #ECEAE3;background:#fff;color:#6B6F76;transition:all .2s ease"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg></a>
-          </div>
+          
         </div>
         <sc-for list="{{ footerCols }}" as="col" hint-placeholder-count="3">
           <div>
@@ -966,6 +923,13 @@
             </div>
           </div>
         </sc-for>
+        <div>
+          <div style="font-size:13px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:#14151A">{{ footTouchTitle }}</div>
+          <div style="margin-top:15px;display:flex;flex-direction:column;gap:12px;align-items:flex-start">
+            <a href="#contact" style-hover="color:#3B4FFF" style="font-size:14.5px;color:#6B6F76;transition:color .2s">{{ navStart }}</a>
+            <a href="https://instagram.com/webot2026" target="_blank" rel="noopener" aria-label="Instagram" style-hover="border-color:#3B4FFF;color:#3B4FFF;transform:translateY(-2px)" style="display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:11px;border:1px solid #ECEAE3;background:#fff;color:#6B6F76;transition:all .2s ease"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"></rect><circle cx="12" cy="12" r="4.5"></circle><circle cx="17.4" cy="6.6" r="1.3" fill="currentColor" stroke="none"></circle></svg></a>
+          </div>
+        </div>
       </div>
       <div style="margin-top:44px;padding-top:22px;border-top:1px solid #ECEAE3;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;font-size:13px;color:#6b7077">
         <span>{{ copyright }}</span>
@@ -1102,8 +1066,6 @@ class Component extends DCLogic {
               features: [`Custom landing & core pages`, `Mobile-first, SEO-ready`, `Live in about 2 weeks`] },
             { phase: `Phase 2`, name: `Growth`, sub: `Web, mobile & AI in sync.`, cta: `Scope Your Product`,
               features: [`Web app + iOS/Android`, `Cart, accounts & checkout`, `AI where it moves the numbers`] },
-            { phase: `Phase 3`, name: `Scale`, sub: `Your business, one platform.`, cta: `Partner With Us`,
-              features: [`Custom admin & analytics`, `Integrations, APIs & automations`, `Dedicated team & SLAs`] },
           ],
           assistTitle: `Not sure which fits?`, assistDesc: `Tell us what you're building and we'll recommend the right model.`, assistCta: `Start a project`,
           disclaimer: `Every project is scoped and quoted individually — usually within 24 hours.`,
@@ -1160,8 +1122,8 @@ class Component extends DCLogic {
           cols: [
             { title: `Services`, links: [`Websites & web apps`, `Mobile apps`, `AI features`, `Online stores`] },
             { title: `Company`, links: [`Work`, `Models`, `Process`, `Contact`] },
-            { title: `Get in touch`, links: [`Start a project`, `__EMAIL__`, `Book a call`] },
           ],
+          touchTitle: `Get in touch`,
           copyright: `© 2026 Webot · Remote, worldwide`,
           made: `@webot2026`,
           privacy: `Privacy`, terms: `Terms`,
@@ -1251,8 +1213,6 @@ class Component extends DCLogic {
               features: [`صفحات رئيسية وأساسية مخصّصة`, `يبدأ بالموبايل وجاهز لمحركات البحث`, `الإطلاق خلال أسبوعين تقريباً`] },
             { phase: `المرحلة الثانية`, name: `النمو`, sub: `ويب وموبايل وذكاء اصطناعي بتناغم.`, cta: `حدّد نطاق منتجك`,
               features: [`تطبيق ويب + iOS وأندرويد`, `سلة وحسابات ودفع إلكتروني`, `ذكاء اصطناعي حيث يصنع الفرق`] },
-            { phase: `المرحلة الثالثة`, name: `التوسّع`, sub: `عملك كلّه على منصة واحدة.`, cta: `كن شريكنا`,
-              features: [`لوحة تحكّم وتحليلات مخصّصة`, `تكاملات وواجهات برمجية وأتمتة`, `فريق مخصّص واتفاقيات مستوى خدمة`] },
           ],
           assistTitle: `لست متأكداً أيّها يناسبك؟`, assistDesc: `أخبرنا بما تريد بناءه وسنرشّح لك النموذج الأنسب.`, assistCta: `ابدأ مشروعك`,
           disclaimer: `كل مشروع يُحدَّد نطاقه ويُسعَّر على حدة — عادةً خلال ٢٤ ساعة.`,
@@ -1309,8 +1269,8 @@ class Component extends DCLogic {
           cols: [
             { title: `الخدمات`, links: [`مواقع وتطبيقات ويب`, `تطبيقات الموبايل`, `مزايا الذكاء الاصطناعي`, `متاجر إلكترونية`] },
             { title: `الشركة`, links: [`أعمالنا`, `آلية العمل`, `الأسعار`, `الأسئلة الشائعة`] },
-            { title: `تواصل معنا`, links: [`ابدأ مشروعك`, `__EMAIL__`, `احجز مكالمة`] },
           ],
+          touchTitle: `تواصل معنا`,
           copyright: `© 2026 Webot. جميع الحقوق محفوظة.`,
           made: `تصميم وتطوير Webot · عن بُعد، حول العالم`,
           privacy: `الخصوصية`, terms: `الشروط`,
@@ -1400,8 +1360,6 @@ class Component extends DCLogic {
               features: [`דף נחיתה ועמודי ליבה בהתאמה אישית`, `‏Mobile-first ומוכן ל-SEO`, `באוויר תוך כשבועיים`] },
             { phase: `שלב 2`, name: `Growth`, sub: `ווב, מובייל ו-AI בסנכרון.`, cta: `הגדירו את המוצר`,
               features: [`אפליקציית ווב + iOS/אנדרואיד`, `עגלה, חשבונות ותשלום`, `‏AI היכן שהוא מזיז את המספרים`] },
-            { phase: `שלב 3`, name: `Scale`, sub: `העסק שלכם, פלטפורמה אחת.`, cta: `בואו נהיה שותפים`,
-              features: [`אדמין ואנליטיקה בהתאמה אישית`, `אינטגרציות, APIs ואוטומציות`, `צוות ייעודי ו-SLA`] },
           ],
           assistTitle: `לא בטוחים מה מתאים?`, assistDesc: `ספרו לנו מה אתם בונים ונמליץ על המודל הנכון.`, assistCta: `התחילו פרויקט`,
           disclaimer: `כל פרויקט מוגדר ומתומחר אישית — בדרך כלל תוך 24 שעות.`,
@@ -1458,8 +1416,8 @@ class Component extends DCLogic {
           cols: [
             { title: `שירותים`, links: [`אתרים ואפליקציות ווב`, `אפליקציות מובייל`, `יכולות AI`, `חנויות אונליין`] },
             { title: `החברה`, links: [`עבודות`, `תהליך`, `מחירים`, `שאלות נפוצות`] },
-            { title: `צרו קשר`, links: [`התחילו פרויקט`, `__EMAIL__`, `לקביעת שיחה`] },
           ],
+          touchTitle: `צרו קשר`,
           copyright: `© 2026 Webot. כל הזכויות שמורות.`,
           made: `עוצב ונבנה על-ידי Webot · מרחוק, מכל העולם`,
           privacy: `פרטיות`, terms: `תנאים`,
@@ -1570,7 +1528,6 @@ class Component extends DCLogic {
     const colHrefs = [
       ['#services', '#services', '#services', '#services'],
       ['#work', '#models', '#process', '#contact'],
-      ['#contact', IG_URL, '#contact'],
     ];
     const footerCols = T.footer.cols.map((col, ci) => ({
       title: col.title,
@@ -1636,6 +1593,7 @@ class Component extends DCLogic {
       faqKicker: T.faq.kicker, faqH2: T.faq.h2, faqStill: T.faq.still, faqStillCta: T.faq.stillCta,
       ctaH2: T.finalCta.h2, ctaSub: T.finalCta.sub, ctaStart: T.finalCta.start, ctaEmail: T.finalCta.email,
       footerBrand: T.footer.brand, copyright: T.footer.copyright, footerMade: T.footer.made,
+      footTouchTitle: T.footer.touchTitle,
       footerPrivacy: T.footer.privacy, footerTerms: T.footer.terms,
 
       // lead-capture form
