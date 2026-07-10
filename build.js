@@ -414,15 +414,26 @@ sub(`</sc-for>
       </div>
       <div style="margin-top:44px`, 1);
 
-// ---- 8b3) Move the FAQ up to replace the Web/Mobile/AI showcase trio, which
-// repeated the services cards almost word for word ----
-const faqSecStart = template.indexOf('<section id="faq"');
-const faqSecEnd = template.indexOf('</section>', faqSecStart) + '</section>'.length;
-const faqSecHtml = template.slice(faqSecStart, faqSecEnd);
-template = template.slice(0, faqSecStart) + template.slice(faqSecEnd);
-const shStart = template.indexOf('<!-- ===== SHOWCASES ===== -->');
-const shEnd = template.indexOf('</section>', shStart) + '</section>'.length;
-template = template.slice(0, shStart) + faqSecHtml + template.slice(shEnd);
+// ---- 8b3) Section order = the sales argument order ----
+// attention (hero) → what we do (services) → PROOF (real work + numbers) →
+// range (gallery) → how (process) → offer (models) → trust (testimonials) →
+// doubts (FAQ) → action (contact).
+// Drops the two sections that repeated the services cards (showcases, AI).
+function cutSection(marker) {
+  const s = template.indexOf(marker);
+  if (s < 0) throw new Error('section marker not found: ' + marker);
+  const e = template.indexOf('</section>', s) + '</section>'.length;
+  const html = template.slice(s, e);
+  template = template.slice(0, s) + template.slice(e);
+  return html;
+}
+cutSection('<!-- ===== SHOWCASES ===== -->');   // repeated the Web/Mobile/AI service cards
+cutSection('<!-- ===== AI SECTION ===== -->');  // ditto — AI already lives in Services
+const workHtml = cutSection('<!-- ===== PORTFOLIO / WORK ===== -->');
+const statsHtml = cutSection('<!-- ===== STATS BAND ===== -->');
+const servicesClose = template.indexOf('</section>', template.indexOf('<!-- ===== SERVICES ===== -->')) + '</section>'.length;
+template = template.slice(0, servicesClose) + '\n\n  ' + workHtml + '\n\n  ' + statsHtml + template.slice(servicesClose);
+// FAQ keeps its natural home between testimonials and the contact form.
 
 // ---- 8c) Accessibility: lift muted text to meet WCAG AA contrast on the cream bg ----
 template = template.split('#9a9ea6').join('#6b7077');   // captions/disclaimer/footer meta: 2.6:1 -> 4.8:1
