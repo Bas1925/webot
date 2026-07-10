@@ -141,7 +141,7 @@ const FONT_STYLE = `<link rel="preconnect" href="https://fonts.googleapis.com">
   .wb-vhero{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;padding:clamp(90px,14vh,140px) clamp(18px,5vw,56px) clamp(26px,4vh,44px)}
   .wb-vhero-media{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;overflow:hidden;background:#E9E7E0}
   .wb-vhero-media video{width:100%;height:100%;object-fit:cover;display:block}
-  .wb-vhero-veil{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(251,250,246,.5) 0%,rgba(251,250,246,.08) 28%,rgba(251,250,246,.08) 55%,rgba(251,250,246,.9) 100%)}
+  .wb-vhero-veil{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(251,250,246,.68) 0%,rgba(251,250,246,.44) 30%,rgba(251,250,246,.48) 60%,rgba(251,250,246,.96) 100%)}
   @media (min-width:768px){ .wb-vhero-media{top:50%;left:50%;width:90%;height:87%;transform:translate(-50%,-50%);border-radius:24px} }
   .wb-vhero-copy{position:relative;z-index:2;width:100%;max-width:1180px;margin:0 auto}
   .wb-vhero-kicker{display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:600;color:rgba(20,21,26,.62)}
@@ -268,7 +268,9 @@ sub('</button>\n  </nav>', '</button>\n    </div>\n  </nav>', 1);
 // ---- 4) Hero — full-bleed video hero (ported from the webot-motion concept) ----
 // Replaces the old blob + app-window-mock hero entirely. The copy lives in
 // T.hero (studio/l1/l2/start/work/qa..qc) so all three languages render it.
-const HERO_VIDEO_SRC = 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260508_215831_c6a8989c-d716-4d8d-8745-e972a2eec711.mp4';
+// Self-hosted brand video (the animated WB robot mark). It's a busy clip, so
+// the veil below washes it into a living texture and the copy stays readable.
+const HERO_VIDEO_SRC = '/webothero.mp4';
 const VIDEO_HERO = `<!-- ===== HERO ===== -->
   <header id="top" class="wb-vhero">
     <div class="wb-vhero-media" aria-hidden="true">
