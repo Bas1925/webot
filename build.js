@@ -37,8 +37,13 @@ function replaceRange(startMarker, endMarker, repl) {
 
 // ---- SEO building blocks (shared by the static wrapper <head> and the app <head>) ----
 // NOTE: SITE_URL / OG image are placeholders — update them to the real domain on deploy.
-const SITE_URL = 'https://webot.studio/';
-const OG_IMG = SITE_URL + 'og-image.png';
+// The real live address — swap for the custom domain when it's bought, so
+// canonicals/hreflang/sitemap/OG all point at a URL that actually serves the site.
+const SITE_URL = 'https://werbot.netlify.app/';
+// Interim share image: the WB logo asset (exists on the live site). Replace with
+// a proper 1200x630 og-image when the brand domain lands. NOTE: the bare asset
+// UUID is used because the asset pipeline rewrites it to "/assets/<uuid>.png".
+const OG_IMG = SITE_URL.replace(/\/$/, '') + '4a97f629-b3fe-4cc5-adf9-33a24cefa8bc';
 const SEO_TITLE = 'Webot — Where your business runs online';
 const SEO_DESC = 'Webot designs and builds fast websites, mobile apps and AI features for founders and teams — in English, Arabic and Hebrew, fully RTL-ready.';
 const SEO_DESC_SHORT = 'Fast websites, mobile apps and AI — built right, in English, Arabic and Hebrew.';
@@ -55,7 +60,6 @@ const JSONLD = JSON.stringify({
   url: SITE_URL,
   image: OG_IMG,
   logo: OG_IMG,
-  email: 'hello@webot.studio',
   slogan: 'Web, mobile & AI products, built right',
   areaServed: 'Worldwide',
   knowsLanguage: ['en', 'ar', 'he'],
@@ -158,6 +162,9 @@ const FONT_STYLE = `<link rel="preconnect" href="https://fonts.googleapis.com">
   .wb-vhero-qbar{flex:none;width:3px;border-radius:3px;background:linear-gradient(180deg,#3B4FFF,#FF6B57)}
   .wb-vhero-qaccent{color:#3B4FFF;font-weight:600}
   @media (prefers-reduced-motion:reduce){ .wb-vhero-media video{display:none} }
+  /* floating Instagram DM button — the low-friction chat channel */
+  .wb-ig-fab{position:fixed;bottom:18px;inset-inline-end:18px;z-index:60;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;background:radial-gradient(circle at 30% 110%,#fdf497 0%,#fd5949 45%,#d6249f 60%,#285AEB 90%);box-shadow:0 12px 30px -10px rgba(214,36,159,.55);transition:transform .2s ease}
+  .wb-ig-fab:hover{transform:translateY(-3px) scale(1.05)}
   /* lead form */
   #contact{scroll-margin-top:84px}
   .wb-input::placeholder{color:#9aa0ab}
@@ -344,6 +351,16 @@ sub('>What clients say</div>', '>{{ testiLabel }}</div>', 1);
 sub('<div style="color:#FF6B57;font-size:15px;letter-spacing:2px">★★★★★</div>',
     '<div style="color:#FF6B57;font-size:15px;letter-spacing:2px">{{ q.stars }}</div>', 1);
 sub('>FAQ</div>', '>{{ faqKicker }}</div>', 1);
+// closing line under the FAQ list — catches fence-sitters and points them at the form
+sub(`{{ item.a }}</p>
+            </div>
+          </div>
+        </sc-for>`,
+    `{{ item.a }}</p>
+            </div>
+          </div>
+        </sc-for>
+        <p data-reveal="" style="margin-top:26px;text-align:center;font-size:15px;color:#6b7077">{{ faqStill }} <a href="#contact" style="color:#3B4FFF;font-weight:600">{{ faqStillCta }}</a></p>`, 1);
 sub('Good questions, straight answers.', '{{ faqH2 }}', 1);
 sub(`Let's build the thing.`, '{{ ctaH2 }}', 1);
 sub(`Send us a message with your idea. You'll get a clear plan, a fixed price and a first preview in under two weeks.`, '{{ ctaSub }}', 1);
@@ -383,6 +400,11 @@ sub('#000 8%,#000 92%,transparent)">', '#000 8%,#000 92%,transparent);direction:
 // testimonial strip carries translated text → re-assert RTL on its content via class
 sub('<div style="display:flex;width:max-content;gap:20px;padding:0 10px;animation:wb-marquee-rev 44s linear infinite">',
     '<div class="wb-rtl-text" style="display:flex;width:max-content;gap:20px;padding:0 10px;animation:wb-marquee-rev 44s linear infinite">', 1);
+
+// ---- 8b2) Floating Instagram DM button (fixed, bottom inline-end, all pages) ----
+sub('<footer',
+    `<a href="https://ig.me/m/webot2026" target="_blank" rel="noopener" aria-label="Message Webot on Instagram" class="wb-ig-fab"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"></rect><circle cx="12" cy="12" r="4.5"></circle><circle cx="17.4" cy="6.6" r="1.3" fill="currentColor" stroke="none"></circle></svg></a>
+  <footer`, 1);
 
 // ---- 8c) Accessibility: lift muted text to meet WCAG AA contrast on the cream bg ----
 template = template.split('#9a9ea6').join('#6b7077');   // captions/disclaimer/footer meta: 2.6:1 -> 4.8:1
@@ -490,7 +512,7 @@ function noscriptFor(lang) {
 <div style="max-width:760px;margin:9vh auto;padding:0 24px;font-family:-apple-system,Segoe UI,Roboto,sans-serif;color:#14151A;direction:${L.dir};text-align:start">
 <h1 style="font-size:30px;line-height:1.2;letter-spacing:-.5px">${L.nsH1}</h1>
 <p style="font-size:17px;line-height:1.6;color:#4a4e55;margin-top:12px">${L.nsSub}</p>
-<p style="margin-top:16px"><a href="mailto:hello@webot.studio" style="color:#3B4FFF;font-weight:600">hello@webot.studio</a></p>
+<p style="margin-top:16px"><a href="https://ig.me/m/webot2026" target="_blank" rel="noopener" style="color:#3B4FFF;font-weight:600">Instagram · @webot2026</a></p>
 </div>
 </noscript>`;
 }
@@ -569,7 +591,7 @@ function legalPage(title, updated, sections) {
   <h1>${esc(title)}</h1>
   <p class="updated">Last updated: ${updated}</p>
   ${sections}
-  <div class="foot">Questions? Email <a href="mailto:hello@webot.studio">hello@webot.studio</a>.</div>
+  <div class="foot">Questions? message us on <a href="https://ig.me/m/webot2026" target="_blank" rel="noopener">Instagram @webot2026</a>.</div>
 </div>
 </body>
 </html>`;
@@ -588,7 +610,7 @@ const PRIVACY = legalPage('Privacy Policy', 'June 2026', `
   <h2>Third-party services</h2>
   <p>The site loads web fonts from Google Fonts and JavaScript libraries from a public CDN (unpkg). These providers may receive your IP address as part of delivering those files. Our hosting and database provider processes the data you submit on our behalf.</p>
   <h2>Your rights</h2>
-  <p>You can ask us to access, correct or delete the personal data you have given us at any time — just email <a href="mailto:hello@webot.studio">hello@webot.studio</a>.</p>
+  <p>You can ask us to access, correct or delete the personal data you have given us at any time — just message us on <a href="https://ig.me/m/webot2026" target="_blank" rel="noopener">Instagram @webot2026</a>.</p>
   <h2>Changes</h2>
   <p>We may update this policy from time to time; the "last updated" date above reflects the current version.</p>
 `);
@@ -606,7 +628,7 @@ const TERMS = legalPage('Terms of Service', 'June 2026', `
   <h2>No warranty & liability</h2>
   <p>The site is provided "as is", without warranties of any kind. To the extent permitted by law, Webot is not liable for any loss arising from your use of the site.</p>
   <h2>Contact</h2>
-  <p>Questions about these terms? Email <a href="mailto:hello@webot.studio">hello@webot.studio</a>.</p>
+  <p>Questions about these terms? message us on <a href="https://ig.me/m/webot2026" target="_blank" rel="noopener">Instagram @webot2026</a>.</p>
 `);
 
 for (const [slug, htmlOut] of [['privacy', PRIVACY], ['terms', TERMS]]) {
@@ -637,7 +659,7 @@ const noscriptFallback = `<noscript>
     <style>#__bundler_loading{display:none}#__bundler_thumbnail{display:none}</style>
     <div style="max-width:560px;margin:14vh auto;padding:0 24px;font-family:-apple-system,Segoe UI,Roboto,sans-serif;color:#14151A;text-align:center">
       <h1 style="font-size:28px;line-height:1.2;margin-bottom:12px">Webot — Web, mobile &amp; AI products, built right</h1>
-      <p style="font-size:16px;line-height:1.6;color:#4a4e55">We design and build fast websites, mobile apps and AI features for founders and teams — in English, Arabic and Hebrew. This interactive page needs JavaScript; reach us directly at <a href="mailto:hello@webot.studio" style="color:#3B4FFF">hello@webot.studio</a>.</p>
+      <p style="font-size:16px;line-height:1.6;color:#4a4e55">We design and build fast websites, mobile apps and AI features for founders and teams — in English, Arabic and Hebrew. This interactive page needs JavaScript; reach us on <a href="https://ig.me/m/webot2026" style="color:#3B4FFF">Instagram @webot2026</a>.</p>
     </div>
   </noscript>`;
 outHtml = outHtml.replace(/<noscript>[\s\S]*?<\/noscript>/, noscriptFallback);

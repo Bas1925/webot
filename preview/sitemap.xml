@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://webot.studio/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://webot.studio/"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://webot.studio/ar"/>
-    <xhtml:link rel="alternate" hreflang="he" href="https://webot.studio/he"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://webot.studio/"/>
+    <loc>https://werbot.netlify.app/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://werbot.netlify.app/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://werbot.netlify.app/ar"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://werbot.netlify.app/he"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://werbot.netlify.app/"/>
   </url>
   <url>
-    <loc>https://webot.studio/ar</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://webot.studio/"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://webot.studio/ar"/>
-    <xhtml:link rel="alternate" hreflang="he" href="https://webot.studio/he"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://webot.studio/"/>
+    <loc>https://werbot.netlify.app/ar</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://werbot.netlify.app/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://werbot.netlify.app/ar"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://werbot.netlify.app/he"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://werbot.netlify.app/"/>
   </url>
   <url>
-    <loc>https://webot.studio/he</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://webot.studio/"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://webot.studio/ar"/>
-    <xhtml:link rel="alternate" hreflang="he" href="https://webot.studio/he"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://webot.studio/"/>
+    <loc>https://werbot.netlify.app/he</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://werbot.netlify.app/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://werbot.netlify.app/ar"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://werbot.netlify.app/he"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://werbot.netlify.app/"/>
   </url>
   <url>
-    <loc>https://webot.studio/neuralkinetics.html</loc>
+    <loc>https://werbot.netlify.app/neuralkinetics.html</loc>
   </url>
 </urlset>
